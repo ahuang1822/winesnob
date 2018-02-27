@@ -6,7 +6,9 @@ const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
 
-const defaultUser = {}
+const initialState = {
+  loggedInUser: {}
+}
 
 
 const getUser = user => ({ type: GET_USER, user })
@@ -17,20 +19,34 @@ export const me = () =>
   dispatch =>
     axios.get('/auth/me')
       .then(res =>
-        dispatch(getUser(res.data || defaultUser)))
+        dispatch(getUser(res.data)))
       .catch(err => console.log(err))
 
 
-export const auth = (email, password, method) =>
-  dispatch =>
-    axios.post(`/auth/${method}`, { email, password })
-      .then(res => {
-        dispatch(getUser(res.data))
-        history.push('/home')
-      }, authError => { // rare example: a good use case for parallel (non-catch) error handler
-        dispatch(getUser({ error: authError }))
-      })
-      .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
+// export const login = () => dispatch => {
+
+// }
+
+// export const signup = () => dispatch => {
+
+// }
+
+
+// export const edit = () => dispatch => {
+
+// }
+
+
+// export const auth = (email, password, method) =>
+//   dispatch =>
+//     axios.post(`/auth/${method}`, { email, password })
+//       .then(res => {
+//         dispatch(getUser(res.data))
+//         history.push('/home')
+//       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
+//         dispatch(getUser({ error: authError }))
+//       })
+//       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
 
 
 export const logout = () =>
@@ -43,13 +59,13 @@ export const logout = () =>
       .catch(err => console.log(err))
 
 
-export default function (state = defaultUser, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return Object.assign({}, state, { loggedInUser: action.user });
     case REMOVE_USER:
-      return defaultUser
+      return Object.assign({}, state, { loggedInUser: {} });
     default:
-      return state
+      return state;
   }
 }
