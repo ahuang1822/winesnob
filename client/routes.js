@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, WineList, AccountPage, Cart, Checkout, OrderDetails, OrderHistory, Review, SelectedWine} from './components'
+import {Login, Signup, WineList, Home, AccountPage, Cart, Checkout, OrderDetails, OrderHistory, Review, SelectedWine} from './components'
 import {me} from './store'
 import { fetchWineList } from './store/wine'
 /**
@@ -19,7 +19,7 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/winelist" component={WineList} />
@@ -30,15 +30,6 @@ class Routes extends Component {
         <Route exact path="/order-details" component={OrderDetails} />
         <Route exact path="/order-history" component={OrderHistory} />
         <Route exact path="/reviews/:wineId" component={Review} />
-        {
-          isLoggedIn &&
-            <Switch>
-              {/* Routes placed here are only available after logging in */}
-              <Route exact path="/home" component={UserHome} />
-            </Switch>
-        }
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
       </Switch>
     )
   }
@@ -77,3 +68,13 @@ Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
+
+
+
+// {
+//   isLoggedIn &&
+//     <Switch>
+//       {/* Routes placed here are only available after logging in */}
+//       <Route exact path="/home" component={UserHome} />
+//     </Switch>
+// }
