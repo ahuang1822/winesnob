@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Order = require('./order')
 
 const User = db.define('user', {
   firstName: {
@@ -42,6 +43,10 @@ const User = db.define('user', {
     get: function () {
       return `${this.firstName} ${this.lastName}`
     }
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false
   }
 })
 
@@ -52,6 +57,17 @@ module.exports = User
 User.prototype.correctPassword = function (candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
+
+User.beforeBulkDestroy = () => {
+  
+}
+
+User.hook('beforeBulkDestroy', (user) => {
+  Order.destroy({
+    where: {
+      userId: user.id
+  }})
+})
 
 
 User.generateSalt = function () {
