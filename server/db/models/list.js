@@ -9,7 +9,7 @@ const List = db.define('list', {
     },
     quantity: {
         type: Sequelize.INTEGER
-    }, 
+    },
     total: {
         type: Sequelize.VIRTUAL,
         get: function () {
@@ -18,9 +18,6 @@ const List = db.define('list', {
 
     }
 })
-
-
-
 
 
 module.exports = List;

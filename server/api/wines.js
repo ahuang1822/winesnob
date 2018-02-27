@@ -28,7 +28,6 @@ router.post('/', (req, res, next) => {
   Wine.create(req.body)
     .then(wine => res.json(wine))
     .catch(next)
-    
 })
 
 router.put('/:id', (req, res, next) => {
@@ -37,12 +36,12 @@ router.put('/:id', (req, res, next) => {
     {where: {
       id: req.params.id
     },
-      returning: true          
+      returning: true
     }
   )
   .then(wine => {
     res.json({
-      message: "Updated successfully",
+      message: 'Updated successfully',
       wine: wine
     })
   })
