@@ -5,8 +5,7 @@ import { selectWineById } from '../store/wine'
 
 export const WineList = (props) => {
     const wineList = props.wineListOnProps;
-    
-    return (
+     return (
         <div>
             <ul>
                 {wineList.map(wine => (
