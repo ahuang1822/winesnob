@@ -27,7 +27,7 @@ export const fetchWineList = () =>
 
 export const selectWineById = (id) =>
     dispatch =>
-        axios.get(`/api/winelist/${id}`)
+        axios.get(`/api/wines/${id}`)
             .then(res => {
                 dispatch(selectWine(res.data))
                 history.push(`/winelist/${res.data.id}`)

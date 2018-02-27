@@ -6,4 +6,12 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {default as WineList} from './wine-list'
+export {default as AccountPage} from './account-page'
+export {default as Cart} from './cart'
+export {default as Checkout} from './checkout'
+export {default as OrderDetails} from './order-details'
+export {default as OrderHistory} from './order-history'
+export {default as Review} from './review'
+export {default as SelectedWine} from './selected-wine'
+
 export {Login, Signup} from './auth-form'
