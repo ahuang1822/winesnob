@@ -4,21 +4,27 @@ const db = require('../db')
 
 const User = db.define('user', {
   firstName: {
-    type: Sequelize.TEXT,
-    allowNull: false
+    type: Sequelize.STRING,
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   lastName: {
-    type: Sequelize.TEXT,
-    allowNull: false
-  },
-  userName: {
-    type: Sequelize.TEXT,
-    allowNull: false,
+    type: Sequelize.STRING,
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      isEmail: true
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -32,12 +38,18 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
     // This is a hack to get around Sequelize's lack of a "private" option.
-    get () {
+    get() {
       return () => this.getDataValue('salt')
     }
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  name: {
+    type: Sequelize.VIRTUAL,
+    get: function () {
+      return `${this.firstName} ${this.lastName}`
+    }
   }
 }, {
   getterMethods: {
@@ -48,6 +60,13 @@ const User = db.define('user', {
 })
 
 module.exports = User
+
+
+
+
+
+
+
 
 /**
  * instanceMethods
