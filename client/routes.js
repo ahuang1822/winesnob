@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, WineList} from './components'
+import {Login, Signup, UserHome, WineList, AccountPage, Cart, Checkout, OrderDetails, OrderHistory, Review, SelectedWine} from './components'
 import {me} from './store'
 import { fetchWineList } from './store/wine'
 /**
@@ -20,14 +20,21 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/winelist" component={WineList} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/winelist" component={WineList} />
+        <Route exact path="/winelist/:id" component={SelectedWine} />
+        <Route exact path="/account-page" component={AccountPage} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/order-details" component={OrderDetails} />
+        <Route exact path="/order-history" component={OrderHistory} />
+        <Route exact path="/reviews/:wineId" component={Review} />
         {
           isLoggedIn &&
             <Switch>
               {/* Routes placed here are only available after logging in */}
-              <Route path="/home" component={UserHome} />
+              <Route exact path="/home" component={UserHome} />
             </Switch>
         }
         {/* Displays our Login component as a fallback */}
