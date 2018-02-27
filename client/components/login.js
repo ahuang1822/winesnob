@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { login } from '../store'
 
 
@@ -14,11 +13,11 @@ const Login = (props) => {
         <form onSubmit={props.loginSubmit}>
        <div>
        <label>Email :</label>
-       <input name="email" type="email"/>
+       <input name="email" type="email" />
        </div>
        <div>
        <label>Password :</label>
-       <input name="password" type="password"/>
+       <input name="password" type="password" />
        </div>
        <button type="submit">Login</button>
       </form>
@@ -36,8 +35,6 @@ const Login = (props) => {
        </div>
     )
 }
-
-
 
 
 const mapState = (state) => ({ loggedInUser: state.user.loggedInUser })

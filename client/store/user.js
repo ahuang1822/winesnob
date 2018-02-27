@@ -19,24 +19,22 @@ export const me = () =>
   dispatch =>
     axios.get('/auth/me')
       .then(res =>
-        dispatch(getUser(res.data || defaultUser)))
+        dispatch(getUser(res.data)))
       .catch(err => console.log(err))
 
 
+// export const login = () => dispatch => {
 
-export const login = () => dispatch => {
+// }
 
-}
+// export const signup = () => dispatch => {
 
-export const signup = () => dispatch => {
-  
-}
+// }
 
 
 // export const edit = () => dispatch => {
 
 // }
-
 
 
 // export const auth = (email, password, method) =>
@@ -61,13 +59,13 @@ export const logout = () =>
       .catch(err => console.log(err))
 
 
-export default function (state = initialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return Object.assign({}, state, { loggedInUser: action.user });
     case REMOVE_USER:
-      return defaultUser
+      return Object.assign({}, state, { loggedInUser: {} });
     default:
-      return state
+      return state;
   }
 }
