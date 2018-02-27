@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 
-export const Signup = (props) => {
+export const Signup = () => {
     
     return (
         <div>

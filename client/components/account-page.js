@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 
-export const AccountPage = (props) => {
+export const AccountPage = () => {
     console.log('hello');
     return (
         <div>
@@ -11,7 +11,7 @@ export const AccountPage = (props) => {
                 <Link to="/cart">Cart</Link>
             </div>
             <div>
-                <Link to="/order-history">Order History</Link> 
+                <Link to="/order-history">Order History</Link>
             </div>
         </div>
     )

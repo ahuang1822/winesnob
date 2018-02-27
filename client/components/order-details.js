@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 
-export const OrderDetails= (props) => {
+export const OrderDetails= () => {
     
     return (
         <div>

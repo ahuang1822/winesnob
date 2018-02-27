@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 
 
-export const Cart = (props) => {
+export const Cart = () => {
     
     return (
         <div>

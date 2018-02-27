@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 
-export const Review = (props) => {
+export const Review = () => {
     console.log(props.selectedWine)
     return (
         <div>
