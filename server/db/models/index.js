@@ -4,7 +4,7 @@ const Order = require('./order')
 const List = require('./list')
 const Wine = require('./wine')
 const Review = require('./review')
-
+const db = require('../db')
 
 
 User.belongsTo(Place, { as: 'place' })
@@ -36,6 +36,7 @@ Review.belongsTo(User, { as: 'user' })
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
+  db,
   User,
   Place,
   Order,

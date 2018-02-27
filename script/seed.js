@@ -5,8 +5,11 @@ var {
   db,
   Place, 
   User,
-  Wine
-} = require('./server/db/models');
+  Wine,
+  Order,
+  List,
+  Review
+} = require('../server/db/models');
 
 var data = {
   user: [ 
@@ -222,6 +225,7 @@ var data = {
 
 
 
+
 db
 .sync({ force: true })
 .then(function() {
@@ -229,7 +233,7 @@ db
   return Promise.map(Object.keys(data), function(name) {
     return Promise.map(data[name], function(item) {
       return db.model(name).create(item, {
-        include: [Place]
+        include: [{ model: Place, as: 'place' }]
       });
     });
   });
@@ -245,7 +249,6 @@ db
   console.log("connection closed"); // the connection eventually closes, we just manually do so to end the process quickly
   return null; // silences bluebird warning about using non-returned promises inside of handlers.
 });
-
 
 
 
