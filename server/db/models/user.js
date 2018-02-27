@@ -51,12 +51,6 @@ const User = db.define('user', {
       return `${this.firstName} ${this.lastName}`
     }
   }
-}, {
-  getterMethods: {
-    fullName() {
-      return this.firstName + ' ' + this.lastName
-    }
-  }
 })
 
 module.exports = User

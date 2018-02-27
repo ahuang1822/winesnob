@@ -25,7 +25,7 @@ export const fetchWineList = () =>
             .catch(err => console.log(err))
 
 
-export const selectWineById = (id, history) =>
+export const selectWineById = (id) =>
     dispatch =>
         axios.get(`/api/winelist/${id}`)
             .then(res => {

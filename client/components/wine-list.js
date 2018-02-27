@@ -3,17 +3,19 @@ import { connect } from 'react-redux'
 
 
 export const WineList = (props) => {
-    const wine = props.wineList;
+    const wineList = props.wineListOnProps;
     return (
         <div>
             <ul>
-                {wine.map(wine => (
+                { wineList.map(wine => (
 
                     <div key={wine.id}>
                     <li>{wine.name}</li>
-                    <div><img src={wine.img}/></div>
+                    <div>
+                    <img src={wine.img} />
                     </div>
-                ))}
+                    </div>
+                )) }
             </ul>
         </div>
     )
@@ -23,11 +25,9 @@ export const WineList = (props) => {
 const mapState = (state) => {
 
     return {
-        wineList: state.wine.wineList
+        wineListOnProps: state.wine.wineList
     }
 }
 
 
 export default connect(mapState)(WineList)
-
-

@@ -5,8 +5,6 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, WineList} from './components'
 import {me} from './store'
 import { fetchWineList } from './store/wine'
-import store from './store'
-
 /**
  * COMPONENT
  */
