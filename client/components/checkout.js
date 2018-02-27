@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
 
 export const Checkout = () => {
-    
     return (
         <div>
             <h1>Checkout</h1>

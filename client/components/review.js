@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 
 export const Review = () => {
-    console.log(props.selectedWine)
     return (
         <div>
             <h1>Review</h1>

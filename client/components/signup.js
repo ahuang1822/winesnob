@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 
 export const Signup = () => {
-    
     return (
         <div>
             <h1>Signup</h1>
