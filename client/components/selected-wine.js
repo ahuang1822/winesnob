@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 
 export const SelectedWine = (props) => {
-    const wine = props.selectedWine;
+    const wine = props.data;
     return (
         <div>
             <h3>{wine.name}</h3>
@@ -41,12 +41,45 @@ export const SelectedWine = (props) => {
     ) 
 }
 
-const mapState = (state) => {
+import { selectWineById } from '../store/wine'
 
-    return {
-        selectedWine: state.wine.selectedWine.wine
+class SingleWineContainer extends React.Component {
+    componentDidMount() {
+        this.props.selectWineById(this.props.match.params.id)
+    }
+
+    render() {
+        if (!this.props.selectedWine) return <h1>Loading...</h1>
+
+        return <SelectedWine selectedWine={this.props.selectedWine} />
     }
 }
 
 
-export default connect(mapState)(SelectedWine)
+class Loader extends React.Component {
+    componentDidMount() {
+        this.props.load(this.props.match.params.id)
+            .then(console.log)            
+            .catch(error => this.setState({error}))
+    }
+
+    render() {
+        if (!this.props.data) return <h1>Loading...</h1>
+        if (this.state.error) return <h1>{error.message}</h1>
+
+        
+        const Render = this.props.Render
+        return <Render data={this.props.data} />
+    }
+}
+
+const mapState = (state) => {
+
+    return {
+        data: state.wine.selectedWine.wine,
+        Render: SelectedWine,
+    }
+}
+
+
+export default connect(mapState, {load: selectWineById})(Loader)
