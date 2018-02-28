@@ -9,10 +9,6 @@ const Order = db.define('order', {
    status: {
      type: Sequelize.STRING,
      defaultValue: 'pending'
-   },
-   total: {
-     type: Sequelize.DECIMAL,
-     defaultValue: 0.0
    }
 })
 
