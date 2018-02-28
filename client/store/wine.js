@@ -5,7 +5,6 @@ import history from '../history'
 const GET_WINE_LIST = 'GET_WINE_LIST'
 const SELECT_WINE = 'SELECT_WINE'
 
-
 const initialState = {
     wineList: [],
     selectedWine: {}
@@ -15,6 +14,7 @@ const initialState = {
 const getWineList = wineList => ({ type: GET_WINE_LIST, wineList })
 
 const selectWine = wine => ({ type: SELECT_WINE, wine })
+
 
 
 export const fetchWineList = () =>
@@ -30,8 +30,10 @@ export const selectWineById = (id) =>
         axios.get(`/api/wines/${id}`)
             .then(res => {
                 dispatch(selectWine(res.data))
-                history.push(`/winelist/${res.data.id}`)
+                history.push(`/winelist/${res.data.wine.id}`)
             })
+
+
 
 
 const reducer = function (state = initialState, action) {

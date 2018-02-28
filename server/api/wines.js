@@ -3,7 +3,12 @@ const { Wine, Review, Place } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Wine.findAll()
+  Wine.findAll({
+    include: [{
+      model: Place,
+      as: 'place'
+    }]
+  })
   .then(wines => {
     res.json(wines)
   })
