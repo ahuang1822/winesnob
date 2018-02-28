@@ -6,23 +6,24 @@ import {logout} from '../store'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>Wine Snobs</h1>
     <nav>
       {isLoggedIn ? (
         <div>
-          {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
+          <Link to="/account-page">Account Page</Link>
+          <Link to="/winelist">Wine Collection</Link>
+          <Link to="/cart">Cart</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
         </div>
       ) : (
         <div>
-          {/* The navbar will show these links before you log in */}
+          <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/winelist">Wine Collection</Link>
-          <Link to="/account-page">Account Page</Link>
           <Link to="/cart">Cart</Link>
         </div>
       )}
@@ -34,9 +35,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
+  let bool = false;
+  if (state.user.loggedInUser.id) {
+    bool = true;
+  }
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: bool
   }
 }
 

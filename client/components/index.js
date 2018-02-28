@@ -13,5 +13,9 @@ export {default as OrderDetails} from './order-details'
 export {default as OrderHistory} from './order-history'
 export {default as Review} from './review'
 export {default as SelectedWine} from './selected-wine'
+export {default as Home} from './Home'
+export {default as Login} from './login'
+export {default as Signup} from './signup'
 
-export {Login, Signup} from './auth-form'
+
+// export {Login, Signup} from './auth-form'
