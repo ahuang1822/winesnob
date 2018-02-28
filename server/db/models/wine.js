@@ -15,7 +15,7 @@ const Wine = db.define('wine', {
         allowNull: false
     },
     price: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.STRING,
         allowNull: false
     },
     size: {
