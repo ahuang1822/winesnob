@@ -36,7 +36,6 @@ const Login = (props) => {
     )
 }
 
-
 const mapState = ({ loggedInUser }) => ({ loggedInUser })
 
 const mapDispatch = (dispatch) => ({
