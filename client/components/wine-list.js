@@ -5,6 +5,7 @@ import { selectWineById } from '../store/wine'
 
 export const WineList = (props) => {
     const wineList = props.wineListOnProps;
+    console.log(wineList)
      return (
         <div>
             <ul>
@@ -13,28 +14,27 @@ export const WineList = (props) => {
                         <div>
                             <img src={wine.img} />
                         </div>
-                        <Link to={`/winelist/${wine.id}`}>{wine.name}</Link>
+                        <div><h3>{wine.name}</h3></div>
                         <div>
-                            <h3>
+                            <h5>
                                 {`${wine.vintage} ${wine.varietal}`}
-                            </h3>
+                            </h5>
                         </div>
-                        {/* <div>
-                            <h3>
-                                {`${wine.place.city} ${wine.place.state} ${wine.place.country}`}
-                            </h3>
-                        </div> */}
+                         <div>
+                            <h5>
+                                {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
+                            </h5>
+                        </div> 
                         <div>
-                            <h3>
+                            <h6>
                                 size: {wine.size}
-                            </h3>
+                            </h6>
                         </div>
                         <div>
-                            <h3>
+                            <h6>
                                 price: ${wine.price}
-                            </h3>
+                            </h6>
                         </div>
-                        <Link to={`/reviews/${wine.id}`}>reviews</Link>
                     </div>
                 ))}
             </ul>
