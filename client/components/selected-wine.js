@@ -4,47 +4,47 @@ import { connect } from 'react-redux'
 
 export const SelectedWine = (props) => {
     const wine = props.selectedWine;
-    console.log('wine', wine)
     return (
         <div>
-            <h1>{wine.name}</h1>
+            <h3>{wine.name}</h3>
             <div>
-                <h3>
+                <h5>
                     {wine.description}
-                </h3>
+                </h5>
             </div>
             <div>
                 <img src={wine.img} />
             </div>
             <div>
-                <h3>
+                <h5>
                     {`${wine.vintage} ${wine.varietal}`}
-                </h3>
+                </h5>
             </div>
-            {/* <div>
-                            <h3>
-                                {`${wine.place.city} ${wine.place.state} ${wine.place.country}`}
-                            </h3>
-                        </div> */}
             <div>
-                <h3>
+                            <h5>
+                                {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
+                            </h5>
+                        </div> 
+            <div>
+                <h6>
                     size: {wine.size}
-                </h3>
+                </h6>
             </div>
             <div>
-                <h3>
+                <h6>
                     price: ${wine.price}
-                </h3>
+                </h6>
             </div>
 
 
         </div>
-    )
+    ) 
 }
+
 const mapState = (state) => {
 
     return {
-        selectedWine: state.wine.selectedWine
+        selectedWine: state.wine.selectedWine.wine
     }
 }
 
