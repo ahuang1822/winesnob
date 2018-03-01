@@ -3,6 +3,8 @@ import history from '../history'
 
 
 const GET_USER = 'GET_USER'
+const ADD_USER = 'ADD_USER'
+const UPDATE_USER = 'UPDATE_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
 
@@ -12,6 +14,8 @@ const initialState = {
 
 
 const getUser = user => ({ type: GET_USER, user })
+const addUser = user => ({ type: ADD_USER, user })
+const editUser = user => ({ type: UPDATE_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 
 
@@ -23,31 +27,33 @@ export const me = () =>
       .catch(err => console.log(err))
 
 
-// export const login = () => dispatch => {
+export const login = (email, password) =>
+  dispatch =>
+    axios.post('/auth/login', {email, password})
+        .then(res => {
+          dispatch(getUser(res.data))
+          history.push('/home')
+        })
+      .catch(err => console.log(err))
 
-// }
-
-// export const signup = () => dispatch => {
-
-// }
-
-
-// export const edit = () => dispatch => {
-
-// }
+export const signup = (signUpInfo) =>
+  dispatch =>
+    axios.post('/auth/signup', signUpInfo)
+      .then(res => {
+        dispatch(addUser(res.data))
+        history.push('/home')
+      })
+      .catch(err => console.log(err))
 
 
-// export const auth = (email, password, method) =>
-//   dispatch =>
-//     axios.post(`/auth/${method}`, { email, password })
-//       .then(res => {
-//         dispatch(getUser(res.data))
-//         history.push('/home')
-//       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
-//         dispatch(getUser({ error: authError }))
-//       })
-//       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
-
+export const edit = (userId, editInfo) =>
+  dispatch =>
+      axios.put(`/users/${userId}`, editInfo)
+      .then(res => {
+        dispatch(editUser(res.data))
+        history.push(`/users/${userId}`)
+      })
+      .catch(err => console.log(err))
 
 export const logout = () =>
   dispatch =>
@@ -63,8 +69,16 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_USER:
       return Object.assign({}, state, { loggedInUser: action.user });
+
+    case ADD_USER:
+      return Object.assign({}, state, { loggedInUser: action.user });
+
+    case UPDATE_USER:
+      return Object.assign({}, state, { loggedInUser: action.user });
+
     case REMOVE_USER:
       return Object.assign({}, state, { loggedInUser: {} });
+
     default:
       return state;
   }

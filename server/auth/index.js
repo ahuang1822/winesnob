@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const Place = require('../db/models/place')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
@@ -17,7 +18,21 @@ router.post('/login', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-  User.create(req.body)
+  Place.create({
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    country: req.body.country,
+    phone: req.body.phone
+  })
+  .then(place => {
+    User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      placeId: place.id,
+    })
     .then(user => {
       req.login(user, err => (err ? next(err) : res.json(user)))
     })
@@ -28,6 +43,7 @@ router.post('/signup', (req, res, next) => {
         next(err)
       }
     })
+  })
 })
 
 router.post('/logout', (req, res) => {

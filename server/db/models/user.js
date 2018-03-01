@@ -59,7 +59,7 @@ User.prototype.correctPassword = function (candidatePwd) {
 }
 
 User.beforeBulkDestroy = () => {
-  
+
 }
 
 User.hook('beforeBulkDestroy', (user) => {
