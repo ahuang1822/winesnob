@@ -10,7 +10,7 @@ export const WineList = (props) => {
         <div>
             <ul>
                 {wineList.map(wine => (
-                    <div key={wine.id} onClick={() => props.selectWine(wine.id)}>
+                    <Link to={`/winelist/${wine.id}`} key={wine.id}>
                         <div>
                             <img src={wine.img} />
                         </div>
@@ -35,7 +35,7 @@ export const WineList = (props) => {
                                 price: ${wine.price}
                             </h6>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </ul>
         </div>

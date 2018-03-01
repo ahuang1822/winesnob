@@ -18,6 +18,9 @@ Wine.hasMany(Review, { as: 'reviews'})
 Review.belongsTo(Wine, { as: 'wine' })
 Review.belongsTo(User, { as: 'user' })
 
+List.belongsTo(Wine)
+List.belongsTo(Order)
+
 
 module.exports = {
   db,
