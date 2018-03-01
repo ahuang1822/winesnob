@@ -7,7 +7,7 @@ const REMOVE_USER = 'REMOVE_USER'
 
 
 const initialState = {
-  loggedInUser: {}
+  loggedInUser: {},
 }
 
 
