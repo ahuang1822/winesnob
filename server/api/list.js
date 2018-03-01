@@ -47,7 +47,7 @@ async function withCart(req, res, next) {
   //   }
   // }
   
-  router.post('/cart/add', /* signInAnonymously, */ withCart, (req, res, next) => {
+  router.post('/cart', /* signInAnonymously, */ withCart, (req, res, next) => {
     // console.log('test ---------------------', req.cart[0].dataValues.id)
 
     List.create({
@@ -70,3 +70,12 @@ async function withCart(req, res, next) {
   //   }).then(() => res.send(req.cart))
   //     .catch(next)
   // })
+
+router.delete('/cart/:id', (req, res, next) => {
+  List.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(() => res.sendStatus(204))
+  .catch(next)
+})
