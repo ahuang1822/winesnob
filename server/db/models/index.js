@@ -20,6 +20,9 @@ Review.belongsTo(User, { as: 'user' })
 List.belongsTo(Wine)
 List.belongsTo(Order)
 
+List.belongsTo(Wine)
+List.belongsTo(Order)
+
 
 module.exports = {
   db,

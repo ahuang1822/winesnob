@@ -4,7 +4,7 @@ const db = require('../db')
 
 const List = db.define('list', {
     price: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.STRING,
         allowNull: false
     },
     quantity: {
@@ -13,7 +13,7 @@ const List = db.define('list', {
     total: {
         type: Sequelize.VIRTUAL,
         get: function () {
-            return this.price * this.quantity;
+            return Number(this.price) * this.quantity;
         }
     }
 })
