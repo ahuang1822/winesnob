@@ -15,7 +15,6 @@ const List = db.define('list', {
         get: function () {
             return Number(this.price) * this.quantity;
         }
-
     }
 })
 

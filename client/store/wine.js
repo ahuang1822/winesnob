@@ -31,8 +31,7 @@ export const selectWineById = (id) =>
             .then(res => {
                 dispatch(selectWine(res.data))
             })
-
-
+            .catch(err => console.log(err))
 
 
 const reducer = function (state = initialState, action) {

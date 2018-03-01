@@ -37,7 +37,6 @@ export const SelectedWine = (props) => {
                 </h6>
             </div>
             <button onClick={() => props.addToCart(wine)}> Add to Cart </button>
-
         </div>
     )
 }
