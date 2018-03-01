@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { postItem } from '../store'
 
 export const SelectedWine = (props) => {
     const wine = props.data;
+    console.log('props -------------->', props);
     return (
         <div>
             <h3>{wine.name}</h3>
@@ -21,10 +22,10 @@ export const SelectedWine = (props) => {
                 </h5>
             </div>
             <div>
-                            <h5>
-                                {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
-                            </h5>
-                        </div> 
+                <h5>
+                    {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
+                </h5>
+            </div>
             <div>
                 <h6>
                     size: {wine.size}
@@ -35,10 +36,10 @@ export const SelectedWine = (props) => {
                     price: ${wine.price}
                 </h6>
             </div>
-
+            <button onClick={() => props.addToCart(wine)}> Add to Cart </button>
 
         </div>
-    ) 
+    )
 }
 
 import { selectWineById } from '../store/wine'
@@ -59,17 +60,16 @@ class SingleWineContainer extends React.Component {
 class Loader extends React.Component {
     componentDidMount() {
         this.props.load(this.props.match.params.id)
-            .then(console.log)            
-            .catch(error => this.setState({error}))
+            .then(console.log)
+            .catch(error => this.setState({ error }))
     }
 
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
-       // if (this.state.error) return <h1>{error.message}</h1>
 
-        
+
         const Render = this.props.Render
-        return <Render data={this.props.data} />
+        return <Render data={this.props.data} addToCart={this.props.addToCart}/>
     }
 }
 
@@ -81,5 +81,16 @@ const mapState = (state) => {
     }
 }
 
+const mapDispatch = (dispatch) => {
+    return {
+        load(id) {
+            return dispatch(selectWineById(id))
+        },
+        addToCart(item) {
+            console.log('props item-----------> ', item);
+             dispatch(postItem(item))
+        }
+    }
+}
 
-export default connect(mapState, {load: selectWineById})(Loader)
+export default connect(mapState, mapDispatch)(Loader)
