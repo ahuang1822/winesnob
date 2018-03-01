@@ -51,11 +51,11 @@ async function withCart(req, res, next) {
     // console.log('test ---------------------', req.cart[0].dataValues.id)
 
     List.create({
-      wineId: req.body.wineId,
+      wineId: req.body.id,
       quantity: req.body.quantity,
       orderId: req.cart[0].dataValues.id,
-      price: req.body.price
-
+      price: req.body.price,
+      userId: req.cart[0].dataValues.userId
     })
    .then((list) => res.send(list))
       .catch(next)
