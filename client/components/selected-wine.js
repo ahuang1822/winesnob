@@ -66,7 +66,6 @@ class Loader extends React.Component {
 
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
-        // if (this.state.error) return <h1>{error.message}</h1>
 
 
         const Render = this.props.Render
