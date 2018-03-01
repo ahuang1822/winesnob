@@ -24,7 +24,7 @@ export const WineList = (props) => {
                             <h5>
                                 {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
                             </h5>
-                        </div> 
+                        </div>
                         <div>
                             <h6>
                                 size: {wine.size}
@@ -44,7 +44,7 @@ export const WineList = (props) => {
 
 
 const mapState = (state) => {
-
+  console.log('state: ', state)
     return {
         wineListOnProps: state.wine.wineList
     }

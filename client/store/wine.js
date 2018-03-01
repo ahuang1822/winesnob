@@ -30,10 +30,8 @@ export const selectWineById = (id) =>
         axios.get(`/api/wines/${id}`)
             .then(res => {
                 dispatch(selectWine(res.data))
-                history.push(`/winelist/${res.data.wine.id}`)
             })
-
-
+            .catch(err => console.log(err))
 
 
 const reducer = function (state = initialState, action) {
