@@ -72,6 +72,7 @@ export const Signup = (props) => {
         </div>
         <button type="submit">Sign up</button>
       </form>
+
       <div>
          <h5>OR</h5>
       </div>

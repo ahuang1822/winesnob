@@ -6,7 +6,6 @@ const Wine = require('./wine')
 const Review = require('./review')
 const db = require('../db')
 
-
 User.belongsTo(Place, { as: 'place' })
 User.hasMany(Order, { as: 'orders' })
 User.hasMany(Review, { as: 'reviews'})
@@ -22,7 +21,6 @@ List.belongsTo(Order)
 
 List.belongsTo(Wine)
 List.belongsTo(Order)
-
 
 module.exports = {
   db,

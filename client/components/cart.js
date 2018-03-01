@@ -11,8 +11,8 @@ export const Cart = () => {
         </div>
     )
 }
-const mapState = (state) => {
 
+const mapState = (state) => {
     return {
         wineListOnProps: state.wine.wineList
     }

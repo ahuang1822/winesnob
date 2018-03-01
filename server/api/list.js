@@ -1,9 +1,7 @@
 const router = require('express').Router()
-const { User, Place, Order, List} = require('../db/models')
+
+const { List, Order } = require('../db/models')
 module.exports = router
-
-
-
 
 /**
  * NOTES. This probably doesn't work as written.
@@ -23,7 +21,7 @@ async function withCart(req, res, next) {
     if (req.session.cartId) {
       req.cart = await Order.findById(req.session.cartId)
       next()
-      console.log('after next()')
+      console.log('hello-----------------------')
       return
     }
   
@@ -34,11 +32,8 @@ async function withCart(req, res, next) {
           status: 'cart',
         }
       })
-
-
-    req.session.cartId = order.id
-    
-
+      req.cart = order;
+      req.session.cartId = order.id
     next()  
   }
   
@@ -53,13 +48,35 @@ async function withCart(req, res, next) {
   //   }
   // }
   
-  router.post('/cart/add', /* maybe: signInAnonymously,*/ withCart, (req, res, next) => {
-    req.cart.addList({
+  router.post('/cart', /* signInAnonymously, */ withCart, (req, res, next) => {
+    // console.log('test ---------------------', req.cart[0].dataValues.id)
+
+    List.create({
       wineId: req.body.wineId,
-      qty: req.body.qty,
-      //...
-    }).then(() => res.send(req.cart))
+      quantity: req.body.quantity,
+      orderId: req.cart[0].dataValues.id,
+      price: req.body.price
+
+    })
+   .then((list) => res.send(list))
       .catch(next)
   })
   /**********/
-  
+  // router.post('/cart/add', /* signInAnonymously, */ withCart, (req, res, next) => {
+  //   console.log(req.cart)
+  //   req.cart[0].addList({
+  //     wineId: req.body.wineId,
+  //     quantity: req.body.quantity,
+  //     price: req.body.price
+  //   }).then(() => res.send(req.cart))
+  //     .catch(next)
+  // })
+
+router.delete('/cart/:id', (req, res, next) => {
+  List.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(() => res.sendStatus(204))
+  .catch(next)
+})
