@@ -15,16 +15,16 @@ const Wine = db.define('wine', {
         allowNull: false
     },
     price: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.STRING,
         allowNull: false
     },
     size: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING, // enum { BOTTLE, HALF, ... }
         allowNull: false
     },
     img: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     description: {
         type: Sequelize.TEXT,
