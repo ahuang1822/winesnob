@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom'
 import { fetchSingleOrder } from '../store/order'
 
 class OrderDetails extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     console.log('match: ', this.props.match)

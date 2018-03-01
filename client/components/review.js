@@ -4,9 +4,6 @@ import { SelectedWine } from './selected-wine'
 import { selectWineById } from '../store/wine'
 
 class Review extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     console.log('match: ', this.props.match)
