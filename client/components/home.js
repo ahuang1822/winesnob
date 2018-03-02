@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 export const Home = () => {
     return (
         <div>
-            <h1>Home Page</h1>
+            <h1>Come get drunk with us. We got the goods.</h1>
         </div>
     )
 }

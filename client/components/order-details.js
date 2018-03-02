@@ -6,9 +6,9 @@ import { fetchSingleOrder } from '../store/order'
 class OrderDetails extends React.Component {
 
   componentDidMount() {
-    console.log('match: ', this.props.match)
+    // console.log('match: ', this.props.match)
     const orderId = Number(this.props.match.params.orderId)
-    console.log('orderId: ', orderId);
+    // console.log('orderId: ', orderId);
     this.props.fetchSingleOrder(orderId);
   }
 

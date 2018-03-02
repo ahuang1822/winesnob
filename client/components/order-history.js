@@ -11,8 +11,13 @@ class OrderHistory extends React.Component {
   }
 
   render() {
+    const myOrders = this.props.ordersOnProps.filter(orders => {
+      return orders.userId === this.props.userOnProps
+    })
+    console.log('orders : ', myOrders);
     console.log('orders on props: ', this.props.ordersOnProps);
-    if (!this.props.ordersOnProps) {
+    
+    if (!myOrders) {
       return <h1>You have no orders</h1>
     }
     else {
@@ -21,12 +26,12 @@ class OrderHistory extends React.Component {
           <h1>Order History</h1>
           <div>
             {
-              this.props.ordersOnProps && this.props.ordersOnProps.map(order => {
+              myOrders && myOrders.map(order => {
                 return (
                   <div key={order.id}>
-                    <h2>Date Ordered: {order.date}</h2>
+                    <h2>Date Ordered: {order.updatedAt}</h2>
                     <h2>Status: {order.status}</h2>
-                    <h2>Total: {order.total}</h2>
+                    <h2>Total: fix this </h2>
                     <Link to={`/order-detail/${order.id}`}>Order Details</Link>
                   </div>
                 )
@@ -43,7 +48,8 @@ class OrderHistory extends React.Component {
 const mapState = (state) => {
   console.log('state: ', state);
     return {
-        ordersOnProps: state.order.orders
+        ordersOnProps: state.order.orders, 
+        userOnProps: state.user.loggedInUser.id
     }
 }
 
