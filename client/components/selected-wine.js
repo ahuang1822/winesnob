@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { postItem } from '../store'
+import { fetchItems } from '../store/cart'
+import { selectWineById } from '../store/wine'
+
 
 export const SelectedWine = (props) => {
     const wine = props.data;
-    console.log('props -------------->', props);
+    //console.log('props -------------->', props);
     return (
         <div>
             <h3>{wine.name}</h3>
@@ -36,12 +39,12 @@ export const SelectedWine = (props) => {
                     price: ${wine.price}
                 </h6>
             </div>
-            <button onClick={() => props.addToCart(wine)}> Add to Cart </button>
+             <div onClick={props.loadCart}>
+            <button onClick={() => props.addToCart(wine)} > Add to Cart </button>
+            </div>
         </div>
     )
 }
-
-import { selectWineById } from '../store/wine'
 
 class SingleWineContainer extends React.Component {
     componentDidMount() {
@@ -68,7 +71,7 @@ class Loader extends React.Component {
 
 
         const Render = this.props.Render
-        return <Render data={this.props.data} addToCart={this.props.addToCart}/>
+        return <Render data={this.props.data} addToCart={this.props.addToCart} loadCart={this.props.loadCart}/>
     }
 }
 
@@ -86,8 +89,11 @@ const mapDispatch = (dispatch) => {
             return dispatch(selectWineById(id))
         },
         addToCart(item) {
-            console.log('props item-----------> ', item);
+           // console.log('props item-----------> ', item);
              dispatch(postItem(item))
+        },
+        loadCart () {
+          dispatch(fetchItems())
         }
     }
 }

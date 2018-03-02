@@ -21,7 +21,6 @@ async function withCart(req, res, next) {
     if (req.session.cartId) {
       req.cart = await Order.findById(req.session.cartId)
       next()
-      console.log('hello-----------------------')
       return
     }
   
@@ -32,8 +31,8 @@ async function withCart(req, res, next) {
           status: 'cart',
         }
       })
-      req.cart = order;
-      req.session.cartId = order.id
+      req.cart = order[0];
+      req.session.cartId = req.cart.id
     next()  
   }
   
@@ -49,34 +48,29 @@ async function withCart(req, res, next) {
   // }
   
   router.post('/cart', /* signInAnonymously, */ withCart, (req, res, next) => {
-    // console.log('test ---------------------', req.cart[0].dataValues.id)
-
+     //console.log('test ---------------------', req.cart)
     List.create({
       wineId: req.body.wineId,
       quantity: req.body.quantity,
-      orderId: req.cart[0].dataValues.id,
+      orderId: req.cart.id,
       price: req.body.price
-
     })
    .then((list) => res.send(list))
       .catch(next)
   })
-  /**********/
-  // router.post('/cart/add', /* signInAnonymously, */ withCart, (req, res, next) => {
-  //   console.log(req.cart)
-  //   req.cart[0].addList({
-  //     wineId: req.body.wineId,
-  //     quantity: req.body.quantity,
-  //     price: req.body.price
-  //   }).then(() => res.send(req.cart))
-  //     .catch(next)
-  // })
 
-router.delete('/cart/:id', (req, res, next) => {
-  List.destroy({
-    where: {
-      id: req.params.id
-    }
-  }).then(() => res.sendStatus(204))
-  .catch(next)
-})
+
+
+  router.get('/cart', (req, res, next) => {
+     List.findAll({
+       where: {
+        orderId: req.session.cartId
+       }
+     })
+     .then(cart => {
+       console.log('CART', cart)
+       res.json(cart)
+      })
+     .catch(next)
+    })
+    

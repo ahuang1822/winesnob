@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { selectWineById } from '../store/wine'
+import { Link } from 'react-router-dom'
+
 
 export const WineList = (props) => {
     const wineList = props.wineListOnProps;
