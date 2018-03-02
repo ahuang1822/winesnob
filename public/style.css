@@ -25,10 +25,67 @@ img {
   width: 150px; 
 }
 
-body {
-  background-color: rgb(208,208,208);
-}
 
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.button {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color :maroon;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  border-radius: 15%;
+  margin: 2px;
+}
+
+h1 {
+  color :maroon;
+}
+
+.dropbtn {
+  background-color: maroon;
+  color: white;
+  padding: 16px;
+  font-size: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: maroon;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+#filter-varietal.dropdown {
+  height: 5px;
+  width: auto;
+}
+
+.dropdown a:hover {background-color: #ddd}

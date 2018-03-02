@@ -10,22 +10,21 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     <nav>
       {isLoggedIn ? (
         <div>
-          <Link to="/home">Home</Link>
-          <Link to="/account-page">Account Page</Link>
-          <Link to="/winelist">Wine Collection</Link>
-          <Link to="/cart">Cart</Link>
+          <Link to="/home" className="button">Home</Link>
+          <Link to="/account-page" className="button">Account Page</Link>
+          <Link to="/winelist" className="button">Wine Collection</Link>
+          <Link to="/cart" className="button">Cart</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
         </div>
       ) : (
         <div>
-          <Link to="/">Home</Link>
-          " "
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/winelist">Wine Collection</Link>
-          <Link to="/cart">Cart</Link>
+          <Link to="/" className="button">Home</Link>
+          <Link to="/login" className="button">Login</Link>
+          <Link to="/signup" className="button">Sign Up</Link>
+          <Link to="/winelist" className="button">Wine Collection</Link>
+          <Link to="/cart" className="button">Cart</Link>
         </div>
       )}
     </nav>
