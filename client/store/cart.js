@@ -47,6 +47,7 @@ export const getItems = () =>
     dispatch =>
         axios.get('/api/')
 
+
 const reducer = function (state = initialState, action) {
     switch (action.type) {
         case ADD_ITEM:

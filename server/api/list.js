@@ -1,4 +1,5 @@
 const router = require('express').Router()
+
 const { List, Order } = require('../db/models')
 module.exports = router
 
@@ -78,4 +79,13 @@ router.delete('/cart/:id', (req, res, next) => {
     }
   }).then(() => res.sendStatus(204))
   .catch(next)
+})
+
+
+router.get('/cart/:id', (req, res, next) => {
+  List.findAll({
+    where: {
+      orderId: req.session.cartId
+    }
+  })
 })

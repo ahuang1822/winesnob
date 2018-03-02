@@ -25,7 +25,7 @@ class Routes extends Component {
         <Route exact path="/account-page" component={AccountPage} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
-        <Route exact path="/order-details" component={OrderDetails} />
+        <Route exact path="/order-detail/:orderId" component={OrderDetails} />
         <Route exact path="/order-history" component={OrderHistory} />
         <Route exact path="/reviews/:wineId" component={Review} />
       </Switch>
@@ -60,12 +60,3 @@ Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   //isLoggedIn: PropTypes.bool.isRequired
 }
-
-
-// {
-//   isLoggedIn &&
-//     <Switch>
-//       {/* Routes placed here are only available after logging in */}
-//       <Route exact path="/home" component={UserHome} />
-//     </Switch>
-// }

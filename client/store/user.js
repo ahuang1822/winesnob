@@ -9,7 +9,7 @@ const REMOVE_USER = 'REMOVE_USER'
 
 
 const initialState = {
-  loggedInUser: {}
+  loggedInUser: {},
 }
 
 
@@ -48,7 +48,7 @@ export const signup = (signUpInfo) =>
 
 export const edit = (userId, editInfo) =>
   dispatch =>
-      axios.put(`/users/${userId}`, editInfo)
+      axios.put(`/api/users/${userId}`, editInfo)
       .then(res => {
         dispatch(editUser(res.data))
         history.push(`/users/${userId}`)

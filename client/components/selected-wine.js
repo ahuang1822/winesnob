@@ -37,7 +37,6 @@ export const SelectedWine = (props) => {
                 </h6>
             </div>
             <button onClick={() => props.addToCart(wine)}> Add to Cart </button>
-
         </div>
     )
 }
@@ -66,7 +65,6 @@ class Loader extends React.Component {
 
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
-        // if (this.state.error) return <h1>{error.message}</h1>
 
 
         const Render = this.props.Render
