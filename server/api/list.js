@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-const { List, Order } = require('../db/models')
+const { List, Order, Wine } = require('../db/models')
 module.exports = router
 
 /**
@@ -18,8 +18,8 @@ module.exports = router
  */
 async function withCart(req, res, next) {
     // If we've already associated an order with this session
-    if (req.session.cartId) {
-      req.cart = await Order.findById(req.session.cartId)
+    if (req.session.order) {
+      //req.session.order = await Order.findById(req.session.cartId)
       next()
       return
     }
@@ -31,28 +31,19 @@ async function withCart(req, res, next) {
           status: 'cart',
         }
       })
-      req.cart = order[0];
-      req.session.cartId = req.cart.id
+      req.session.order = order[0];
+      console.log(req.session)
+      //req.session.cartId = req.cart.id
     next()  
   }
   
-  // Approach (a): Create anon users
-  //
-  // If there's nobody signed in, create an anon user and sign them in.
-  // async function signInAnonymously(req, res, next) {
-  //   if (!req.user) {
-  //     // Look up what it is in the passport docs.
-  //     req.logIn(await User.create({ type: 'anonymous' }))
-  //     next()
-  //   }
-  // }
+
   
-  router.post('/cart', /* signInAnonymously, */ withCart, (req, res, next) => {
-     //console.log('test ---------------------', req.cart)
+  router.post('/cart', withCart, (req, res, next) => {
     List.create({
-      wineId: req.body.wineId,
-      quantity: req.body.quantity,
-      orderId: req.cart.id,
+      wineId: req.body.id,
+      quantity: 1,
+      orderId: req.session.order.id,
       price: req.body.price
     })
    .then((list) => res.send(list))
@@ -62,15 +53,20 @@ async function withCart(req, res, next) {
 
 
   router.get('/cart', (req, res, next) => {
+    console.log('hit get', req.session)
+    if(req.session.order){
      List.findAll({
        where: {
-        orderId: req.session.cartId
-       }
+        orderId: req.session.order.id
+       },
+       include: [{
+           model: Wine
+       }]
      })
      .then(cart => {
-       console.log('CART', cart)
        res.json(cart)
       })
      .catch(next)
+    }
     })
-    
+

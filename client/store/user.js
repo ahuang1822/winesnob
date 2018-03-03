@@ -1,6 +1,8 @@
 import axios from 'axios'
 import history from '../history'
-import {clearItems} from './cart'
+import { clearItems } from './cart'
+import { updateOrder } from './order'
+
 
 const GET_USER = 'GET_USER'
 const ADD_USER = 'ADD_USER'
@@ -27,22 +29,26 @@ export const me = () =>
       .catch(err => console.log(err))
 
 
-export const login = (email, password) =>
+export const login = (email, password, order) =>
   dispatch =>
-    axios.post('/auth/login', {email, password})
-        .then(res => {
-          dispatch(getUser(res.data))
-          dispatch(clearItems())
-          history.push('/home')
-        })
+    axios.post('/auth/login', { email, password })
+      .then(res => {
+        dispatch(getUser(res.data))
+        if (order.id) {
+          dispatch(updateOrder(order.id, { userId: res.data.id }))
+        }
+        history.push('/home')
+      })
       .catch(err => console.log(err))
 
-export const signup = (signUpInfo) =>
+export const signup = (signUpInfo, order) =>
   dispatch =>
     axios.post('/auth/signup', signUpInfo)
       .then(res => {
         dispatch(addUser(res.data))
-        dispatch(clearItems())
+        if (order.id) {
+          dispatch(updateOrder(order.id, { userId: res.data.id }))
+        }
         history.push('/home')
       })
       .catch(err => console.log(err))
@@ -50,7 +56,7 @@ export const signup = (signUpInfo) =>
 
 export const edit = (userId, editInfo) =>
   dispatch =>
-      axios.put(`/api/users/${userId}`, editInfo)
+    axios.put(`/api/users/${userId}`, editInfo)
       .then(res => {
         dispatch(editUser(res.data))
         history.push(`/users/${userId}`)

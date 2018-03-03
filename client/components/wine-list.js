@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 export const WineList = (props) => {
     const wineList = props.wineListOnProps;
-    console.log(wineList)
+    //console.log(wineList)
      return (
         <div>
             <ul>
@@ -45,7 +45,7 @@ export const WineList = (props) => {
 
 
 const mapState = (state) => {
-  console.log('state: ', state)
+  //console.log('state: ', state)
     return {
         wineListOnProps: state.wine.wineList
     }

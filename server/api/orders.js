@@ -43,12 +43,13 @@ router.get('/:orderId', (req, res, next) => {
   res.json(req.order);
 })
 
-// router.put('/:wineId', (req, res, next) => {
-//   req.wine
-//     .update(req.body, { returning: true })
-//     .then(wine => res.status(200).json(wine))
-//     .catch(next);
-// });
+
+router.put('/:orderId', (req, res, next) => {
+  req.order
+    .update(req.body, { returning: true })
+    .then(wine => res.status(200).json(wine))
+    .catch(next);
+});
 
 // router.delete('/:wineId', (req, res, next) => {
 //   req.wine
