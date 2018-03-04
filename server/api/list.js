@@ -17,26 +17,46 @@ module.exports = router
  *         and save the order's id on the session as cartId.
  */
 async function withCart(req, res, next) {
-    // If we've already associated an order with this session
-    if (req.session.order) {
+  // If we've already associated an order with this session
+  
+  if (req.session.order && req.session.order !== null) {
       //req.session.order = await Order.findById(req.session.cartId)
       next()
       return
     }
-  
+    console.log('withCart REQ.SESSION', req.session)
     const order = await Order
       .findOrCreate({
         where: {
-          userId: req.user ? req.user.id : null,
-          status: 'cart',
+          userId: req.session.passport ? req.session.passport.id : null,
+          status: 'cart'
         }
       })
-      req.session.order = order[0];
-      console.log(req.session)
+      req.session.order = order[0].dataValues;
+      console.log('RIGHT AFTER',req.session)
       //req.session.cartId = req.cart.id
     next()  
   }
   
+
+  async function getCart(req, res, next) {
+    console.log('getCart REQ.SESSION', req.session)
+      const order = await Order
+        .findOne({
+          where: {
+            userId: req.session.passport ? req.session.passport.id : null,
+            status: 'cart'
+          }
+        })
+        if(order){
+          console.log('ORDER' ,order.dataValues)
+        req.session.order = order.dataValues;
+        }
+        console.log(req.session)
+      next()  
+    }
+    
+
 
   
   router.post('/cart', withCart, (req, res, next) => {
@@ -52,7 +72,7 @@ async function withCart(req, res, next) {
 
 
 
-  router.get('/cart', (req, res, next) => {
+  router.get('/cart', getCart, (req, res, next) => {
     console.log('hit get', req.session)
     if(req.session.order){
      List.findAll({

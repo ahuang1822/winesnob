@@ -34,9 +34,10 @@ export const login = (email, password, order) =>
     axios.post('/auth/login', { email, password })
       .then(res => {
         dispatch(getUser(res.data))
-        if (order.id) {
-          dispatch(updateOrder(order.id, { userId: res.data.id }))
-        }
+        dispatch(clearItems())
+        // if (order.id) {
+        //   dispatch(updateOrder(order.id, { userId: res.data.id }))
+        // }
         history.push('/home')
       })
       .catch(err => console.log(err))
