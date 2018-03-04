@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import {Login, Signup, WineList, Home, AccountPage, Cart, Checkout, OrderDetails, OrderHistory, Review, SelectedWine} from './components'
 import {me} from './store'
 import { fetchWineList } from './store/wine'
+import { fetchItems } from './store/cart'
+
 /**
  * COMPONENT
  */
@@ -12,6 +14,7 @@ class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
     this.props.loadWineList()
+    this.props.loadCart()
   }
 
   render () {
@@ -45,6 +48,10 @@ const mapDispatch = (dispatch) => {
     },
     loadWineList () {
       dispatch(fetchWineList())
+    },
+    loadCart () {
+      console.log('loadCart')
+      dispatch(fetchItems())
     }
   }
 }

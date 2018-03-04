@@ -4,9 +4,10 @@ import { signup } from '../store'
 
 
 export const Signup = (props) => {
+  const { order } = props;
   return (
     <div>
-      <form onSubmit={props.signupSubmit}>
+      <form onSubmit={(event) => props.signupSubmit(event, order.order)}>
         <div>
           <label>First Name:</label>
           <input
@@ -86,22 +87,23 @@ export const Signup = (props) => {
 }
 
 
-const mapState = ({ loggedInUser }) => ({ loggedInUser })
+const mapState = ({ loggedInUser, order }) => ({ loggedInUser, order })
 
 const mapDispatch = (dispatch) => ({
-  signupSubmit(event){
-    event.preventDefault()
-    dispatch(signup({
-      firstName: event.target.firstName.value,
-      lastName: event.target.lastName.value,
-      email: event.target.email.value,
-      password: event.target.password.value,
-      address: event.target.address.value,
-      city: event.target.city.value,
-      state: event.target.state.value,
-      country: event.target.country.value,
-      phone: event.target.phone.value
-    }))
+  signupSubmit(event, order){
+   event.preventDefault()
+   const userInfo = {
+    firstName: event.target.firstName.value,
+    lastName: event.target.lastName.value,
+    email: event.target.email.value,
+    password: event.target.password.value,
+    address: event.target.address.value,
+    city: event.target.city.value,
+    state: event.target.state.value,
+    country: event.target.country.value,
+    phone: event.target.phone.value,
+  }
+    dispatch(signup(userInfo, order))
   }
 })
 
