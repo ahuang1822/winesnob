@@ -4,7 +4,8 @@ const Place = require('../db/models/place')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  req.session.order = null
+  req.session.guestOrder= req.session.order;
+  req.session.order = null;
   User.findOne({where: {email: req.body.email}})
     .then(user => {
       if (!user) {
