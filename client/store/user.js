@@ -26,7 +26,7 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res =>
         dispatch(getUser(res.data)))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 
 export const login = (email, password, order) =>
@@ -40,7 +40,7 @@ export const login = (email, password, order) =>
         // }
         history.push('/home')
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 export const signup = (signUpInfo, order) =>
   dispatch =>
@@ -52,7 +52,7 @@ export const signup = (signUpInfo, order) =>
         }
         history.push('/home')
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 
 export const edit = (userId, editInfo) =>
@@ -62,7 +62,7 @@ export const edit = (userId, editInfo) =>
         dispatch(editUser(res.data))
         history.push(`/users/${userId}`)
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 export const logout = () =>
   dispatch =>
@@ -72,7 +72,7 @@ export const logout = () =>
         dispatch(clearItems())
         history.push('/login')
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 
 export default function reducer(state = initialState, action) {

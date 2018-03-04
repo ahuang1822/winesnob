@@ -38,8 +38,8 @@ export const SelectedWine = (props) => {
                 </h6>
             </div>
              <div>
-            <button onClick={() => {
-                props.addToCart(wine)
+            <button onClick={(event) => {
+                props.addToCart(event, wine)
             }} > Add to Cart </button>
             </div>
         </div>
@@ -87,7 +87,8 @@ const mapDispatch = (dispatch) => {
         load(id) {
             return dispatch(selectWineById(id))
         },
-        addToCart(item) {
+        addToCart(event, item) {
+             event.preventDefault()
              dispatch(postItem(item))
         }
     }

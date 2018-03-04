@@ -9,7 +9,6 @@ const GET_GUEST_ORDERS = 'GET_GUEST_ORDERS'
 const initialState = {
   orders: [],
   order: {},
-  guestOrders: []
 }
 
 
@@ -25,7 +24,7 @@ export const fetchOrder = () =>
         //console.log('res data info: ', res.data);
         dispatch(getOrders(res.data))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 
 export const updateOrder = (id, orderInfo) => 
@@ -35,7 +34,7 @@ export const updateOrder = (id, orderInfo) =>
         console.log('res.data', res.data)
         dispatch(editOrder(res.data))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
       
 
 export const fetchSingleOrder = (id) =>
@@ -44,15 +43,7 @@ export const fetchSingleOrder = (id) =>
       .then(res => {
         dispatch(getSingleOrder(res.data))
       })
-      .catch(err => console.log(err))
-
-export const fetchGuestOrders = () => 
-dispatch =>
-axios.get('api/orders/guest')
-.then(res => {
-  dispatch(getGuestOrders(res.data))
-})
-.catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 
 
@@ -64,8 +55,6 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, { order: action.order });
     case UPDATE_ORDER:
      return Object.assign({}, state, { order: action.order })
-     case GET_GUEST_ORDERS:
-     return Object.assign({}, state, { guestOrders: action.orders })
     default:
       return state;
   }

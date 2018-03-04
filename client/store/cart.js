@@ -1,6 +1,8 @@
 import axios from 'axios'
 import history from '../history'
 import { fetchSingleOrder } from './order'
+
+
 const initialState = {
     items: []
 }
@@ -8,16 +10,12 @@ const initialState = {
 
 const GET_ITEMS = 'GET_ITEMS'
 //const ADD_ITEM = 'ADD_ITEM'
-// const REMOVE_ITEM= 'REMOVE_ITEM'
 const CLEAR_ITEMS = 'CLEAR_ITEMS'
 
 
 const getItems = items => ({ type: GET_ITEMS, items })
 //const addItem = item => ({ type: ADD_ITEM, item })
-// const removeItem = item => ({ type: REMOVE_ITEM, item })
 export const clearItems = () => ({ type: CLEAR_ITEMS })
-
-
 
 export const fetchItems = () =>
     dispatch =>
@@ -26,7 +24,7 @@ export const fetchItems = () =>
                 console.log('RES IN FETCH', res)
                 dispatch(getItems(res.data))
             })
-            .catch(console.error)
+            .catch(err => console.error(err))
 
 
 
@@ -37,17 +35,35 @@ export const postItem = (item) =>
             .then(list => {
                 dispatch(fetchSingleOrder(list.data.orderId))
             })
-            .catch(console.error)
+            .catch(err => console.error(err))
 
 
+
+export const putItems = (body) =>
+    dispatch =>
+        axios.put('/api/list/guestCart', body)
+            .catch(err => console.error(err))
+
+
+export const updateQuantity = (id, quantity) =>
+    dispatch =>
+        axios.put(`/api/list/cart/${id}`, quantity)
+            .catch(err => console.error(err))
+
+
+
+export const removeItem = (id) =>
+   dispatch =>
+     axios.delete(`/api/list/cart/${id}`)
+     .catch(err => console.error(err))
 
 
 const reducer = function (state = initialState, action) {
     switch (action.type) {
         case GET_ITEMS:
+            console.log('inside merge items reducer', action.items)
             return Object.assign({}, state, { items: action.items })
         case CLEAR_ITEMS:
-            // console.log('OMG ')
             return Object.assign({}, state, { items: [] })
         default:
             return state;
