@@ -12,14 +12,14 @@ export const Signup = (props) => {
           <label>First Name:</label>
           <input
             name="firstName"
-            type="firstName"
+            type="text"
           />
         </div>
         <div>
           <label>Last Name:</label>
           <input
             name="lastName"
-            type="lastName"
+            type="text"
           />
         </div>
         <div>
@@ -33,42 +33,42 @@ export const Signup = (props) => {
           <label>Password:</label>
           <input
             name="password"
-            type="password"
+            type="text"
           />
         </div>
         <div>
           <label>Address:</label>
           <input
             name="address"
-            type="address"
+            type="text"
           />
         </div>
         <div>
           <label>City:</label>
           <input
             name="city"
-            type="city"
+            type="text"
           />
         </div>
         <div>
           <label>State:</label>
           <input
             name="state"
-            type="state"
+            type="text"
           />
         </div>
         <div>
           <label>Country:</label>
           <input
             name="country"
-            type="country"
+            type="text"
           />
         </div>
         <div>
           <label>Phone:</label>
           <input
             name="phone"
-            type="phone"
+            type="tel"
           />
         </div>
         <button type="submit">Sign up</button>
