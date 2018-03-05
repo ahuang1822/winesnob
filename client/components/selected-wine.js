@@ -2,13 +2,21 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { postItem } from '../store'
 import { selectWineById } from '../store/wine'
+import { Link } from 'react-router-dom'
 
 export const SelectedWine = (props) => {
     const wine = props.data;
-    //console.log('props -------------->', props);
+    const user = props.user;
+    console.log('user: ', user);
+    
+    
     return (
         <div>
-            <h3>{wine.name}</h3>
+            {
+                user.isAdmin
+                    ? <h3>{wine.name} <Link to={`/winelist/${wine.id}/edit`}>Edit Wine</Link></h3>
+                    : <h3>{wine.name}</h3>
+            }
             <div>
                 <h5>
                     {wine.description}
@@ -42,22 +50,10 @@ export const SelectedWine = (props) => {
                 props.addToCart(event, wine)
             }} > Add to Cart </button>
             </div>
+
         </div>
     )
 }
-
-class SingleWineContainer extends React.Component {
-    componentDidMount() {
-        this.props.selectWineById(this.props.match.params.id)
-    }
-
-    render() {
-        if (!this.props.selectedWine) return <h1>Loading...</h1>
-
-        return <SelectedWine selectedWine={this.props.selectedWine} />
-    }
-}
-
 
 class Loader extends React.Component {
     componentDidMount() {
@@ -67,18 +63,17 @@ class Loader extends React.Component {
 
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
-
-
         const Render = this.props.Render
-        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} />
+        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user}/>
     }
 }
 
 const mapState = (state) => {
-
+    console.log("state", state.user.loggedInUser)
     return {
         data: state.wine.selectedWine.wine,
-        Render: SelectedWine,
+        user: state.user.loggedInUser,
+        Render: SelectedWine
     }
 }
 

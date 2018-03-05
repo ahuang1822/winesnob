@@ -4,7 +4,8 @@ import { fetchSingleOrder } from './order'
 
 
 const initialState = {
-    items: []
+    items: [],
+    userItems: []
 }
 
 
@@ -28,7 +29,7 @@ export const fetchItems = () =>
 
 
 
-export const postItem = (item) =>
+export const postItem = (postWine) =>
     dispatch =>
         // console.log('postItem item ==============', item);
         axios.post('/api/list/cart', item)
@@ -56,7 +57,6 @@ export const removeItem = (id) =>
    dispatch =>
      axios.delete(`/api/list/cart/${id}`)
      .catch(err => console.error(err))
-
 
 const reducer = function (state = initialState, action) {
     switch (action.type) {

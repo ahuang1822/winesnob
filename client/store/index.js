@@ -7,6 +7,7 @@ import wine from './wine'
 import cart from './cart'
 import order from './order'
 
+
 const reducer = combineReducers({user, wine, cart, order})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,

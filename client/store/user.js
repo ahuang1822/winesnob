@@ -38,7 +38,7 @@ export const login = (email, password, order) =>
         // if (order.id) {
         //   dispatch(updateOrder(order.id, { userId: res.data.id }))
         // }
-        history.push('/home')
+        history.push('/')
       })
       .catch(err => console.error(err))
 
@@ -50,7 +50,7 @@ export const signup = (signUpInfo, order) =>
         if (order.id) {
           dispatch(updateOrder(order.id, { userId: res.data.id }))
         }
-        history.push('/home')
+        history.push('/')
       })
       .catch(err => console.error(err))
 
