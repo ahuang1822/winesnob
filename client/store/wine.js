@@ -47,11 +47,11 @@ export const editWine = (id, editedDetails) =>
 export const addWine = (wineDetails) =>
     dispatch => {
         axios.post('/api/wines', wineDetails)
-        .then(res => {
-            dispatch(createWine(res.data))
-            history.push('/')
-        })
-        .catch(err => console.error(err))
+            .then(res => {
+                dispatch(createWine(res.data))
+                history.push('/')
+            })
+            .catch(err => console.error(err))
     }
 
 const reducer = function (state = initialState, action) {
@@ -61,8 +61,8 @@ const reducer = function (state = initialState, action) {
         case SELECT_WINE:
             return Object.assign({}, state, { selectedWine: action.wine })
         case CREATE_WINE:
-            return Object.assign({}, state, { wineList: [...state.wineList, action.wine]})
-      
+            return Object.assign({}, state, { wineList: [...state.wineList, action.wine] })
+
         default: return state
     }
 };

@@ -26,8 +26,6 @@ export const fetchItems = () =>
             })
             .catch(err => console.error(err))
 
-
-
 export const postItem = (item) =>
     dispatch =>
         axios.post('/api/list/cart', item)
@@ -35,8 +33,6 @@ export const postItem = (item) =>
                 dispatch(fetchSingleOrder(list.data.orderId))
             })
             .catch(err => console.error(err))
-
-
 
 export const putItems = (body) =>
     dispatch =>
@@ -49,12 +45,10 @@ export const updateQuantity = (id, quantity) =>
         axios.put(`/api/list/cart/${id}`, quantity)
             .catch(err => console.error(err))
 
-
-
 export const removeItem = (id) =>
-   dispatch =>
-     axios.delete(`/api/list/cart/${id}`)
-     .catch(err => console.error(err))
+    dispatch =>
+        axios.delete(`/api/list/cart/${id}`)
+            .catch(err => console.error(err))
 
 const reducer = function (state = initialState, action) {
     switch (action.type) {

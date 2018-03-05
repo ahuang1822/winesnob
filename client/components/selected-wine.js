@@ -43,10 +43,10 @@ export const SelectedWine = (props) => {
                     price: ${wine.price}
                 </h6>
             </div>
-             <div>
-            <button onClick={(event) => {
-                props.addToCart(event, wine)
-            }} > Add to Cart </button>
+            <div>
+                <button onClick={(event) => {
+                    props.addToCart(event, wine)
+                }} > Add to Cart </button>
             </div>
 
         </div>
@@ -74,7 +74,7 @@ class Loader extends React.Component {
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
         const Render = this.props.Render
-        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user}/>
+        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user} />
     }
 }
 
@@ -93,8 +93,8 @@ const mapDispatch = (dispatch) => {
             return dispatch(selectWineById(id))
         },
         addToCart(event, item) {
-             event.preventDefault()
-             dispatch(postItem(item))
+            event.preventDefault()
+            dispatch(postItem(item))
         }
     }
 }
