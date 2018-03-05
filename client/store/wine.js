@@ -5,20 +5,17 @@ import history from '../history'
 const GET_WINE_LIST = 'GET_WINE_LIST'
 const SELECT_WINE = 'SELECT_WINE'
 const CREATE_WINE = 'CREATE_WINE'
-const DELETE_CATEGORY = 'DELETE_CATEGORY'
 
 const initialState = {
     wineList: [],
     selectedWine: {},
-    wineCategories: []
 }
 
 
 const getWineList = wineList => ({ type: GET_WINE_LIST, wineList })
 const selectWine = wine => ({ type: SELECT_WINE, wine })
 const createWine = wine => ({ type: CREATE_WINE, wine })
-const deleteCategory = category => ({ type: DELETE_CATEGORY, category}
-)
+
 
 export const fetchWineList = () =>
     dispatch =>
@@ -57,11 +54,6 @@ export const addWine = (wineDetails) =>
         .catch(err => console.error(err))
     }
 
-export const removeCategory = (category) =>
-    dispatch => {
-        dispatch(deleteCategory(category))
-    }
-    
 const reducer = function (state = initialState, action) {
     switch (action.type) {
         case GET_WINE_LIST:
@@ -70,8 +62,7 @@ const reducer = function (state = initialState, action) {
             return Object.assign({}, state, { selectedWine: action.wine })
         case CREATE_WINE:
             return Object.assign({}, state, { wineList: [...state.wineList, action.wine]})
-        case DELETE_CATEGORY:
-            return Object.assign({}, state, { wineCategories: [...state.wineCategories, action.category]})
+      
         default: return state
     }
 };

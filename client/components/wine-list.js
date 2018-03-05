@@ -13,7 +13,6 @@ export const WineList = (props) => {
                 user.isAdmin && 
                 <div>
                     <Link to={'/winelist/add-wine'}>Add Wine</Link>
-                    <Link to={'/winelist/edit-wine-details'}>Edit Wine Details</Link>
                 </div>
             }
             <ul>
