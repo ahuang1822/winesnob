@@ -49,7 +49,6 @@ async function getCart(req, res, next) {
   if (order) {
     req.session.order = order.dataValues;
   }
-  console.log(req.session)
   next()
 }
 
@@ -105,8 +104,12 @@ router.put(`/cart/:id`, (req, res, next) => {
     .catch(next)
 })
 
+
 router.delete(`/cart/:id`, (req, res, next) => {
   List.destroy({ where: { id: req.params.id } })
+  .then(() => {
+    res.sendStatus(204)
+  })
   .catch(next)
 })
 

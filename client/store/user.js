@@ -57,7 +57,7 @@ export const edit = (userId, editInfo) =>
     axios.put(`/api/users/${userId}`, editInfo)
       .then(res => {
         dispatch(editUser(res.data))
-        history.push(`/cart`)
+        history.push(`/checkout`)
       })
       .catch(err => console.error(err))
 
@@ -74,7 +74,8 @@ export const edit = (userId, editInfo) =>
 export const logout = () =>
   dispatch =>
     axios.post('/auth/logout')
-      .then(_ => {
+      .then(() => {
+        console.log('LOGGED OUT')
         dispatch(removeUser())
         dispatch(clearItems())
         history.push('/login')

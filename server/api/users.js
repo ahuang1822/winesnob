@@ -92,6 +92,8 @@ router.put('/:userId/checkout', (req, res, next) => {
     where: {
       id: req.body.id
     }
+  }).then(() => {
+    res.sendStatus(200)
   })
 })
 

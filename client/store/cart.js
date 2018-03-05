@@ -28,7 +28,7 @@ export const fetchItems = () =>
 
 
 
-export const postItem = (postWine) =>
+export const postItem = (item) =>
     dispatch =>
         axios.post('/api/list/cart', item)
             .then(list => {
