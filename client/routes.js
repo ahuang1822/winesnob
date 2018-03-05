@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, WineList, Home, AccountPage, Cart, Checkout, OrderDetails, OrderHistory, Review, SelectedWine} from './components'
+import {Login, Signup, WineList, Home, AccountPage, Cart, Checkout, OrderDetails, OrderHistory, Review, SelectedWine, Payment, UserPlace} from './components'
 import {me} from './store'
 import { fetchWineList } from './store/wine'
 import { fetchItems } from './store/cart'
@@ -31,6 +31,8 @@ class Routes extends Component {
         <Route exact path="/order-detail/:orderId" component={OrderDetails} />
         <Route exact path="/order-history" component={OrderHistory} />
         <Route exact path="/reviews/:wineId" component={Review} />
+        <Route exact path="/payment" component={Payment} />
+        <Route exact path="/shipping/:id/:placeId" component={UserPlace} />
       </Switch>
     )
   }
@@ -50,7 +52,6 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchWineList())
     },
     loadCart () {
-      console.log('loadCart')
       dispatch(fetchItems())
     }
   }

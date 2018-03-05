@@ -21,7 +21,6 @@ export const fetchItems = () =>
     dispatch =>
         axios.get('/api/list/cart')
             .then(res => {
-                console.log('RES IN FETCH', res)
                 dispatch(getItems(res.data))
             })
             .catch(err => console.error(err))
@@ -30,7 +29,6 @@ export const fetchItems = () =>
 
 export const postItem = (item) =>
     dispatch =>
-        // console.log('postItem item ==============', item);
         axios.post('/api/list/cart', item)
             .then(list => {
                 dispatch(fetchSingleOrder(list.data.orderId))
@@ -61,7 +59,6 @@ export const removeItem = (id) =>
 const reducer = function (state = initialState, action) {
     switch (action.type) {
         case GET_ITEMS:
-            console.log('inside merge items reducer', action.items)
             return Object.assign({}, state, { items: action.items })
         case CLEAR_ITEMS:
             return Object.assign({}, state, { items: [] })

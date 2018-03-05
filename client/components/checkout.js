@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Cart } from './cart'
+import { Link } from 'react-router-dom'
+import { fetchItems, putItems, updateQuantity, removeItem } from '../store'
 
 
 export const Checkout = (props) => {
@@ -12,84 +14,35 @@ export const Checkout = (props) => {
     const remove = props.removeItem;
     return (
         <div>
-            <div>
-            <h1>Checkout</h1>
-            </div>
-            <div>
-            Ship to
-            </div>
-            <form>
-            <div>
-            <div>
-              <label>First Name:</label>
-              <input
-                name="firstName"
-                type="text"
-              />
-            </div>
-            <div>
-              <label>Last Name:</label>
-              <input
-                name="lastName"
-                type="text"
-              />
-              <div>
-              <label>Email:</label>
-              <input
-                name="email"
-                type="email"
-              />
-            </div>
-            </div>
-            </div>
-            <div>
-              <label>Address:</label>
-              <input
-                name="address"
-                type="text"
-              />
-            </div>
-            <div>
-              <label>City:</label>
-              <input
-                name="city"
-                type="text"
-              />
-            </div>
-            <div>
-              <label>State:</label>
-              <input
-                name="state"
-                type="text"
-              />
-              <div>
-              <label>Zip Code:</label>
-              <input
-                name="zipcode"
-                type="number"
-              />
-            </div>
-            <div>
-              <label>Country:</label>
-              <input
-                name="country"
-                type="text"
-              />
-            </div>
-            <div>
-              <label>Phone:</label>
-              <input
-                name="phone"
-                type="tel"
-              />
-            </div>
-            <button type="submit">Save</button>
-            </div>
-          </form>
 
+            <Cart winesInCart={winesInCart} loggedInUser={loggedInUser} mergeCarts={mergeCarts} loadCart={loadCart} update={update} remove={remove} />
+            <div>
+                <h1>Checkout</h1>
+            </div>
+            <div>
+                Ship to
+                </div>
+                { loggedInUser.id ? 
+            <div>
+       <h6>{loggedInUser.name}</h6>
+       <h6>{loggedInUser.place.address}</h6>
+       <h6>{loggedInUser.place.city}, {loggedInUser.place.state}</h6>
+       <h6>{loggedInUser.place.country} {loggedInUser.place.zipcode}</h6>
+       <h6>Shipping email: {loggedInUser.email}</h6>
+       <h6>Phone Number: {loggedInUser.place.phone}</h6>
+       <Link to={`/shipping/${loggedInUser.id}/${loggedInUser.placeId}`}>Edit</Link>
+       </div>
+      :
 
+       <div> 
+       <Link to={`/shipping/0`}>Add your shipping information </Link>
+       </div>
+                }
+                
 
-
+<div>
+<Link to="/payment">Add Payment</Link>
+</div>
         </div>
     )
 }
@@ -121,7 +74,7 @@ const mapDispatch = (dispatch) => {
                 dispatch(updateQuantity(id, { quantity: numItems }))
             }
         },
-        removeItem(event, id){
+        removeItem(event, id) {
             event.preventDefault()
             dispatch(removeItem(id))
         }
@@ -131,6 +84,3 @@ const mapDispatch = (dispatch) => {
 
 export default connect(mapState, mapDispatch)(Checkout)
 
-
-
-// <Cart winesInCart={winesInCart} loggedInUser={loggedInUser} mergeCarts={mergeCarts} loadCart={loadCart} update={update} remove={remove} />

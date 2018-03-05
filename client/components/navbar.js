@@ -11,7 +11,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     <nav>
       {isLoggedIn ? (
         <div>
-          <Link to="/home">Home</Link>
+          <Link to="/">Home</Link>
           <Link to="/account-page">Account Page</Link>
           <Link to="/winelist">Wine Collection</Link>
           <Link to="/cart">Cart</Link>
@@ -48,7 +48,8 @@ const mapState = (state) => {
 
 const mapDispatch = dispatch => {
   return {
-    handleClick() {
+    handleClick(event) {
+      event.preventDefault()
       dispatch(logout())
      }
   }

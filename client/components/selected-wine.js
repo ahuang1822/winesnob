@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { postItem } from '../store'
-import { selectWineById } from '../store/wine'
+import { selectWineById, postItem } from '../store'
 
 export const SelectedWine = (props) => {
     const wine = props.data;
-    //console.log('props -------------->', props);
     return (
         <div>
             <h3>{wine.name}</h3>
@@ -46,17 +44,17 @@ export const SelectedWine = (props) => {
     )
 }
 
-class SingleWineContainer extends React.Component {
-    componentDidMount() {
-        this.props.selectWineById(this.props.match.params.id)
-    }
+// class SingleWineContainer extends React.Component {
+//     componentDidMount() {
+//         this.props.selectWineById(this.props.match.params.id)
+//     }
 
-    render() {
-        if (!this.props.selectedWine) return <h1>Loading...</h1>
+//     render() {
+//         if (!this.props.selectedWine) return <h1>Loading...</h1>
 
-        return <SelectedWine selectedWine={this.props.selectedWine} />
-    }
-}
+//         return <SelectedWine selectedWine={this.props.selectedWine} />
+//     }
+// }
 
 
 class Loader extends React.Component {

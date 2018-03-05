@@ -1,17 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
-import { fetchOrder } from '../store/order'
+import { fetchOrder } from '../store'
 
 class OrderHistory extends React.Component {
 
   componentDidMount() {
     this.props.fetchOrder();
-   // console.log('orders: ', this.props.ordersOnProps);
   }
 
   render() {
-   // console.log('orders on props: ', this.props.ordersOnProps);
     if (!this.props.ordersOnProps) {
       return <h1>You have no orders</h1>
     }

@@ -18,6 +18,9 @@ const Place = db.define('place', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    zipcode: {
+        type: Sequelize.INTEGER
+    },
     phone: {
         type: Sequelize.STRING
     }

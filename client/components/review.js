@@ -1,14 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { SelectedWine } from './selected-wine'
-import { selectWineById } from '../store/wine'
+import { selectWineById } from '../store'
 
 class Review extends React.Component {
 
   componentDidMount() {
-   // console.log('match: ', this.props.match)
     const wineId = Number(this.props.match.params.wineId)
-    //console.log('wineId: ', wineId);
     this.props.selectWineById(wineId);
   }
 

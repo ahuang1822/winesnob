@@ -58,9 +58,6 @@ User.prototype.correctPassword = function (candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
-User.beforeBulkDestroy = () => {
-
-}
 
 User.hook('beforeBulkDestroy', (user) => {
   Order.destroy({
