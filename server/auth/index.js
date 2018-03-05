@@ -1,6 +1,5 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
-const Place = require('../db/models/place')
+const { User, Place, Order, List, Payment } = require('../db/models')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
@@ -10,7 +9,11 @@ router.post('/login', (req, res, next) => {
     include: [{
       model: Place,
       as: 'place'
+    }, {
+      model: Payment,
+      as: 'payment'
     }]
+    
   })
     .then(user => {
       if (!user) {

@@ -116,72 +116,17 @@ router.delete(`/cart/:id`, (req, res, next) => {
 
 router.put('/guestCart', (req, res, next) => {
   if (req.body.merging) {
-    console.log('SESSION IN VERY BEGGINNING PUT', req.session)
     List.update(
       { orderId: req.session.order.id },
       { where: { orderId: req.session.guestOrder.id } })
       .then(() => {
-        Order.destroy({ where: { id: req.session.guestOrder.id } })
         req.session.guestOrder = null;
-      }).then(() => console.log('SESSION IN END PUT', req.session))
+        return Order.destroy({ where: { id: req.session.guestOrder.id } })
+      }).then(() => res.sendStatus(200))
       .catch(next)
   }
 })
 
 
-
-
-
-// router.put('/guestCart', (req, res, next) => {
-//   if (req.body.merging) {
-//     console.log('SESSION IN VERY BEGGINNING PUT', req.session)
-//     List.update(
-//       { orderId: req.session.order.id },
-//       { where: { orderId: req.session.guestOrder.id }, returning: true }
-//     ).then((list) => {
-//       console.log('LIST IN PUT', list[1])
-//       res.json(list[1])
-//     })
-//       .then(() => {
-//         Order.destroy({ where: { id: req.session.guestOrder.id } })
-//         req.session.guestOrder = null;
-//       }).then(() => console.log('SESSION IN END PUT', req.session))
-//       .catch(next)
-//   }
-// })
-
-
-
-
-
-// router.put('/guestCart', (req, res, next) => {
-//   if (req.body.merging) {
-//     console.log('SESSION IN VERY BEGGINNING PUT', req.session)
-//     List.findAll({
-//       where: {
-//         orderId: req.session.guestOrder.id
-//       },
-//       include: [{
-//         model: Wine
-//       }]
-//     })
-//       .then((lists) => {
-//         console.log('lists: ', lists);
-//         return lists.forEach(list => {
-//           list.update({ orderId: req.session.order.id })
-//         })
-//       })
-//       .then((list) => {
-//         console.log('LIST IN PUT', list)
-//         console.log('LIST[1] IN PUT', list[1])
-//         res.json(list[1])
-//       })
-//       .then(() => {
-//         Order.destroy({ where: { id: req.session.guestOrder.id } })
-//         req.session.guestOrder = null;
-//       }).then(() => console.log('SESSION IN END PUT', req.session))
-//       .catch(next)
-//   }
-// })
 
 

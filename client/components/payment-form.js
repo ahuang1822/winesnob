@@ -1,18 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { signup } from '../store'
+import { signup, addPayment } from '../store'
 
 
 export const Payment = (props) => {
   return (
     <div>
-        <form>
+        <form onSubmit={props.handleSubmit}>
         <div>
+        <div><h6>Creditcard Information</h6></div>
+        <div>
+        <label>Creditcard Type:</label>
+        <input
+            name="type"
+            type="text"
+        />
+    </div>
             <div>
                 <label>Creditcard Number:</label>
                 <input
-                    name="ccNum"
-                    type="number"
+                    name="cc"
+                    type="text"
                 />
             </div>
             <div>
@@ -30,6 +38,7 @@ export const Payment = (props) => {
                 </div>
             </div>
         </div>
+        <div><h6>Billing Information</h6></div>
         <div>
             <label>Address:</label>
             <input
@@ -64,13 +73,6 @@ export const Payment = (props) => {
                     type="text"
                 />
             </div>
-            <div>
-                <label>Phone:</label>
-                <input
-                    name="phone"
-                    type="tel"
-                />
-            </div>
             <button type="submit">Save</button>
         </div>
     </form>
@@ -81,21 +83,22 @@ export const Payment = (props) => {
 
 const mapState = ({ loggedInUser }) => ({ loggedInUser })
 
-const mapDispatch = (dispatch) => ({
-  signupSubmit(event, order){
+const mapDispatch = (dispatch, ownProps) => ({
+  handleSubmit(event){
    event.preventDefault()
-   const userInfo = {
-    firstName: event.target.firstName.value,
-    lastName: event.target.lastName.value,
-    email: event.target.email.value,
-    password: event.target.password.value,
+   const userId = ownProps.match.params.id;
+   const paymentInfo = {
+    cardCompany: event.target.type.value,
+    cardNumber: event.target.cc.value,
+    expiration: event.target.exp.value,
+    security: event.target.security.value,
     address: event.target.address.value,
     city: event.target.city.value,
     state: event.target.state.value,
     country: event.target.country.value,
-    phone: event.target.phone.value,
+    zipcode: event.target.zipcode.value,
   }
-    dispatch(signup(userInfo, order))
+    dispatch(addPayment(paymentInfo, userId))
   }
 })
 

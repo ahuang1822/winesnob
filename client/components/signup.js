@@ -65,6 +65,13 @@ export const Signup = (props) => {
           />
         </div>
         <div>
+        <label>Zipcode:</label>
+        <input
+          name="zipcode"
+          type="number"
+        />
+      </div>
+        <div>
           <label>Phone:</label>
           <input
             name="phone"
@@ -101,6 +108,7 @@ const mapDispatch = (dispatch) => ({
     city: event.target.city.value,
     state: event.target.state.value,
     country: event.target.country.value,
+    zipcode: event.target.zipcode.value,
     phone: event.target.phone.value,
   }
     dispatch(signup(userInfo, order))

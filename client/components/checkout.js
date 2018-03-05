@@ -35,14 +35,28 @@ export const Checkout = (props) => {
       :
 
        <div> 
-       <Link to={`/shipping/0`}>Add your shipping information </Link>
+       <Link to={`/shipping/0/0`}>Add your shipping information </Link>
        </div>
                 }
                 
-
+{ loggedInUser.payment ?
 <div>
-<Link to="/payment">Add Payment</Link>
+    <h6>Payment</h6>
+<div>
+<h6>{loggedInUser.payment.cardCompany} ending in {loggedInUser.payment.cardNumber.slice(-4)}</h6>
+<h6>Expiration: {loggedInUser.payment.expiration}</h6>
+<h6>Security: {loggedInUser.payment.security}</h6>
+<h4>Billing Information</h4>
+<h6>{loggedInUser.payment.address}</h6>
+<h6>{loggedInUser.payment.city}, {loggedInUser.payment.state}</h6>
+<h6>{loggedInUser.payment.country} {loggedInUser.payment.zipcode}</h6>
 </div>
+</div>
+:
+<div>
+<Link to={`/payment/${loggedInUser.id}`}>Add Payment</Link>
+</div>
+}
         </div>
     )
 }

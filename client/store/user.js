@@ -62,13 +62,20 @@ export const edit = (userId, editInfo) =>
       .catch(err => console.error(err))
 
 
-      export const editUserPlace = (placeId, editInfo) =>
-      dispatch =>
-        axios.put(`/api/users/place/${placeId}`, editInfo)
-        .then(res => console.log(res.data) )
-          .catch(err => console.error(err))
+export const editUserPlace = (placeId, editInfo) =>
+  dispatch =>
+    axios.put(`/api/users/place/${placeId}`, editInfo)
+      .then(res => console.log(res.data))
+      .catch(err => console.error(err))
 
-
+export const addPayment = (paymentInfo, userId) =>
+  dispatch =>
+    axios.post(`/api/users/payment/${userId}`, paymentInfo)
+      .then(res => { 
+        console.log(res.data[0])
+       // history.push('/checkout')
+      })
+      .catch(err => console.error(err))
 
 
 export const logout = () =>

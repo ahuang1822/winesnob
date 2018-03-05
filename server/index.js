@@ -11,7 +11,7 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
-const { Place } = require('./db/models')
+const { Place, Payment } = require('./db/models')
 module.exports = app
 
 /**
@@ -30,8 +30,9 @@ passport.deserializeUser((id, done) =>
   db.models.user.findById(id, {
     include: [{
       model: Place,
-      as: 'place'
-    }]
+      as: 'place' }, {
+        model: Payment, as: 'payment'
+      }]
   })
     .then(user => done(null, user))
     .catch(done))
