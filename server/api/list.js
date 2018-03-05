@@ -17,47 +17,6 @@ module.exports = router
  *         and save the order's id on the session as cartId.
  */
 async function withCart(req, res, next) {
-<<<<<<< HEAD
-    // If we've already associated an order with this session
-    if (req.session.cartId) {
-      console.log("had it```````````")
-      req.cart = await Order.findById(req.session.cartId)
-      next()
-      return
-    }
-  
-    const order = await Order
-      .findOrCreate({
-        where: {
-          userId: req.user ? req.user.id : null,
-          status: 'cart',
-        }
-      })
-      req.cart = order[0];
-      req.session.cartId = req.cart.id
-    next()  
-  }
-  
-  // Approach (a): Create anon users
-  //
-  // If there's nobody signed in, create an anon user and sign them in.
-  // async function signInAnonymously(req, res, next) {
-  //   if (!req.user) {
-  //     // Look up what it is in the passport docs.
-  //     req.logIn(await User.create({ type: 'anonymous' }))
-  //     next()
-  //   }
-  // }
-  
-  router.post('/cart', /* signInAnonymously, */ withCart, (req, res, next) => {
-     console.log('test -------------', req.body)
-     console.log('req.session', req.session)
-    List.create({
-      wineId: req.body.id,
-      quantity: 1,
-      orderId: req.session.cartId,
-      price: req.body.price
-=======
   // If we've already associated an order with this session
 
   if (req.session.order && req.session.order !== null) {
@@ -86,7 +45,6 @@ async function getCart(req, res, next) {
         userId: req.session.passport ? req.session.passport.user : null,
         status: 'cart'
       }
->>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
     })
   if (order) {
     req.session.order = order.dataValues;
@@ -105,23 +63,6 @@ router.post('/cart', withCart, (req, res, next) => {
     orderId: req.session.order.id,
     price: req.body.price
   })
-<<<<<<< HEAD
-
-  router.get('/cart', withCart, (req, res, next) => {
-    console.log("req.session:", req.session)
-     List.findAll({
-       where: {
-        orderId: req.session.cartId
-       }
-     })
-     .then(cart => {
-       console.log('CART', cart)
-       res.send(cart)
-      })
-     .catch(next)
-    })
-    
-=======
     .then((list) => res.send(list))
     .catch(next)
 })
@@ -241,4 +182,3 @@ router.put('/guestCart', (req, res, next) => {
 // })
 
 
->>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7

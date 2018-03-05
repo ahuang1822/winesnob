@@ -1,13 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { SelectedWine } from './selected-wine'
-<<<<<<< HEAD
-import { selectWineById } from '../store/wine'
-import { postReview } from '../store'
-
-=======
 import { selectWineById } from '../store'
->>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
 
 class Review extends React.Component {
 
@@ -73,11 +67,7 @@ class Review extends React.Component {
 }
 
 const mapState = (state) => {
-<<<<<<< HEAD
-  console.log('state.user: ', state.user)
-=======
   
->>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
     return {
         selectedWine: state.wine.selectedWine.wine,
         currentUser: state.user.loggedInUser

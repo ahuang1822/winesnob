@@ -1,12 +1,8 @@
 import axios from 'axios'
 import history from '../history'
-<<<<<<< HEAD
-import {clearItems, fetchItems} from './cart'
-=======
 import { clearItems } from './cart'
 import { updateOrder } from './order'
 
->>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
 
 const GET_USER = 'GET_USER'
 const ADD_USER = 'ADD_USER'
@@ -34,19 +30,6 @@ export const me = () =>
 
 export const login = (email, password, order) =>
   dispatch =>
-<<<<<<< HEAD
-    axios.post('/auth/login', {email, password})
-        .then(res => {
-          dispatch(clearItems())
-          dispatch(getUser(res.data))
-          dispatch(fetchItems())
-          
-          history.push('/home')
-        })
-      .catch(err => console.log(err))
-
-export const signup = (signUpInfo) =>
-=======
     axios.post('/auth/login', { email, password })
       .then(res => {
         dispatch(getUser(res.data))
@@ -57,20 +40,14 @@ export const signup = (signUpInfo) =>
 
 
 export const signup = (signUpInfo, order) =>
->>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
   dispatch =>
     axios.post('/auth/signup', signUpInfo)
       .then(res => {
         dispatch(addUser(res.data))
-<<<<<<< HEAD
-        dispatch(clearItems())
-        history.push('/home')
-=======
         if (order.id) {
           dispatch(updateOrder(order.id, { userId: res.data.id }))
         }
         history.push('/')
->>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
       })
       .catch(err => console.error(err))
 
