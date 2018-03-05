@@ -2,11 +2,11 @@ const router = require('express').Router()
 const { User, Place, Order, List } = require('../db/models')
 module.exports = router
 
-// router.get('/', (req, res, next) => {
-//   User.findAll()
-//     .then(users => res.json(users))
-//     .catch(next)
-// })
+router.get('/', (req, res, next) => {
+  User.findAll()
+    .then(users => res.json(users))
+    .catch(next)
+})
 
 router.post('/', (req, res, next) => {
   User.create(req.body)
