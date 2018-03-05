@@ -79,8 +79,23 @@ router.get('/size', (req, res, next) => {
     .catch(next)
 })
 
+router.get('/place', (req, res, next) => {
+  // Wine.aggregate(
+  //   'varietal', 'DISTINCT', { plain: false }
+  // )
 
-
+  Place.findAll({
+    where: ({
+      type: 'vineyard',
+    }),
+    attributes: ['city'],
+      group: ['city']
+  })
+  .then(wines => {
+    res.json(wines)
+  }) 
+    .catch(next)
+  }) 
 
 router.param('wineId', (req, res, next, id) => {
   Wine

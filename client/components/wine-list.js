@@ -5,10 +5,8 @@ import {
   selectWineById, 
   filterWineList, 
   fetchWineList, 
-  fetchWineVarietal, 
-  filterSizes, 
-  filterVarietals, 
-  filterSearch } from '../store/wine'
+  fetchWineVarietal,
+    } from '../store/wine'
 
 
 
@@ -16,65 +14,75 @@ class WineList extends Component {
   // const wineList = props.wineListOnProps;
 	// console.log(wineList)
 	constructor(props) {
-		super(props)
+    super(props);
+    
+    this.state = {
+      varietal: "",
+      size: "",
+      place: "",
+      searchKey: ""
+    }
+
     this.handleChange = this.handleChange.bind(this)
     this.onClickVarietal = this.onClickVarietal.bind(this)
-    // this.onClickSize = this.onClickSize.bind(this)
-	}
+    this.onClickSize = this.onClickSize.bind(this)
+    this.onClickPlace = this.onClickPlace.bind(this)
+  }
+  
+  
 
   componentDidMount() {
     this.props.fetchWineList()
+    this.state.filteredList = this.props.wineListOnProps
   }
 
   handleChange (e) {
-    // console.log(this.state.name)
-    var filteredWines = this.props.filteredListOnProps.filter(wine => {
+    let filteredList = this.props.filteredListOnProps.filter(wine => {
       return wine.name.toLowerCase().includes(e.target.value.toLowerCase())
     })
-    console.log('filteredList: ', filteredWines)
-    console.log("list: ", this.props.wineListOnProps)
-    this.props.testFilter(filteredWines)
-    // this.props.wineListOnProps = filteredWines
+    this.props.filterWineList(filteredList)
   }
 
   onClickVarietal (e) {
-    // console.log("eeeee: ", e.target.value)
-    // var filteredWines = this.props.wineListOnProps.filter(wine => {
-    //   // return wine.varietal === e.target.value
-    //   return wine.varietal.toLowerCase().includes(e.target.value.toLowerCase())
-    // })
-    // this.props.filterWineList(filteredWines)
-    // this.props.testFilter(filteredWines)
-    console.log(e.target.value)
-    console.log("SIZEEEEEEEE", this.props.sizeOnProps)
-    this.props.filterVarietals(e.target.value)
-    // console.log('made it here')
-    let varietal = this.props.varietalOnProps
-    let size = this.props.sizeOnProps
-    console.log([varietal, size])
-    //this.props.filterSearch(e.target.value, this.props.sizeOnProps)
+    this.state.varietal = e.target.value
+    let wineList = this.props.wineListOnProps
+    let filteredList = wineList.filter(wine => {
+      return (wine.varietal.includes(this.state.varietal) &&
+        wine.size.includes(this.state.size) &&
+        wine.place.city.includes(this.state.place))
+    })
+    this.props.filterWineList(filteredList)
   }
 
-  // onClickSize (e) {
-  //   console.log("SIZEEE: ", e.target.value)
-  //   var filteredWines = this.props.filter(wine => {
-  //     // return wine.varietal === e.target.value
-  //     return wine.varietal.toLowerCase().includes(e.target.value.toLowerCase())
-  //   })
-  //   this.props.filterWineList(filteredWines)
-  //   this.props.testFilter(filteredWines)
-  // }
+  onClickSize (e) {
+    this.state.size = e.target.value
+    // console.log("this.state.varietal: ", this.state)
+    let wineList = this.props.wineListOnProps
+    let filteredList = wineList.filter(wine => {
+      return (wine.varietal.includes(this.state.varietal) &&
+        wine.size.includes(this.state.size) &&
+        wine.place.city.includes(this.state.place))
+    })
+    this.props.filterWineList(filteredList)
+  }
 
+  onClickPlace (e) {
+    this.state.place = e.target.value
+    let wineList = this.props.wineListOnProps
+    let filteredList = wineList.filter(wine => {
+      return (wine.varietal.includes(this.state.varietal) &&
+        wine.size.includes(this.state.size) &&
+        wine.place.city.includes(this.state.place))
+    })
+    this.props.filterWineList(filteredList)
+  }
 
 	render() {
-  // console.log(this.props.wineListOnProps)  
-  let filteredWines = this.props.filteredListOnProps
-  console.log('props: ', this.props)
-  console.log('filterd: ', filteredWines)
+  // let filteredWines = this.props.filteredListOnProps
   let listOfVarietal = this.props.varietalsOnProps
-  let testFilter = this.props.testFilterOnProps
   let listOfSize = this.props.sizesOnProps
-  
+  let listOfPlace = this.props.placeOnProps
+
 	return (
 		<div>
 		<div id="filterByName">
@@ -90,7 +98,7 @@ class WineList extends Component {
       <select id="varietal" onChange={this.onClickVarietal}>
           <option 
             key="defaultVarietal"
-            value="default">
+            value="">
               Search By Varietal
             </option>
         {listOfVarietal.map(varietal => (
@@ -109,7 +117,7 @@ class WineList extends Component {
     <select id="size" onChange={this.onClickSize}>
         <option 
           key="defaultSize"
-          value="default">
+          value="">
             Search By Size
           </option>
       {listOfSize.map(size => (
@@ -123,10 +131,29 @@ class WineList extends Component {
     </div> : <h2>Loading...</h2>
 }
     
-  {filteredWines.length ?
+  {listOfPlace.length > 1 ?
+    <div>
+    <select id="place" onChange={this.onClickPlace}>
+        <option 
+          key="defaultSize"
+          value="">
+            Search By Vineyard Location
+          </option>
+      {listOfPlace.map(place => (
+        <option 
+          key={place.id} 
+          value={place.city}>
+            {place.city}
+          </option>
+      ))}
+      </select>
+    </div> : <h2>Loading...</h2>
+  }
+
+  {this.props.filteredListOnProps.length ?
   
 			<ul>
-				{filteredWines.map(wine => (
+				{this.props.filteredListOnProps.map(wine => (
 					<Link to={`/winelist/${wine.id}`} key={wine.id}>
 						<div>
 							<img src={wine.img} />
@@ -168,8 +195,7 @@ const mapState = (state) => {
     filteredListOnProps: state.wine.filteredList,
     varietalsOnProps: state.wine.varietal,
     sizesOnProps: state.wine.sizes,
-    sizeOnProps: state.wine.filterSize,
-    varietalOnProps: state.wine.filterVarietal
+    placeOnProps: state.wine.places
   }
 }
 
@@ -180,15 +206,6 @@ const mapDispatch = (dispatch) => {
         },
         filterWineList(wines) {
           dispatch(filterWineList(wines)) 
-        },
-        filterVarietals(varietal) {
-          dispatch(filterVarietals(varietal))
-        },
-        filterSizes(size) {
-          dispatch(filterSizes(size))
-        },
-        filterSearch(varietal, size) {
-          dispatch(filterSearch(varietal, size))
         }
     }
 }
