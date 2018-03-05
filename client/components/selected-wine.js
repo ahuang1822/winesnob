@@ -1,13 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { postItem } from '../store'
+import { fetchItems } from '../store/cart'
+import { selectWineById } from '../store/wine'
+import { Link } from 'react-router-dom'
 
 export const SelectedWine = (props) => {
+    console.log('props ============', props)
     const wine = props.data;
-    console.log('props -------------->', props);
+    const user = props.user;
+    console.log('wine ===============', wine)
+    // console.log('user -------------->', user)
     return (
         <div>
-            <h3>{wine.name}</h3>
+            {
+                user.isAdmin 
+                ? <h3>{ wine.name } <Link to={`/winelist/${wine.id}/edit`}>Edit Wine</Link></h3>
+                : <h3>{ wine.name }</h3>
+            }
             <div>
                 <h5>
                     {wine.description}
@@ -36,12 +46,13 @@ export const SelectedWine = (props) => {
                     price: ${wine.price}
                 </h6>
             </div>
-            <button onClick={() => props.addToCart(wine)}> Add to Cart </button>
+            <div onClick={props.loadCart}>
+                <button onClick={() => props.addToCart(wine)} > Add to Cart </button>
+            </div>
+            
         </div>
     )
 }
-
-import { selectWineById } from '../store/wine'
 
 class SingleWineContainer extends React.Component {
     componentDidMount() {
@@ -55,7 +66,6 @@ class SingleWineContainer extends React.Component {
     }
 }
 
-
 class Loader extends React.Component {
     componentDidMount() {
         this.props.load(this.props.match.params.id)
@@ -66,9 +76,8 @@ class Loader extends React.Component {
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
 
-
         const Render = this.props.Render
-        return <Render data={this.props.data} addToCart={this.props.addToCart}/>
+        return <Render user={this.props.user} data={this.props.data} addToCart={this.props.addToCart} loadCart={this.props.loadCart} />
     }
 }
 
@@ -76,7 +85,8 @@ const mapState = (state) => {
 
     return {
         data: state.wine.selectedWine.wine,
-        Render: SelectedWine,
+        user: state.user.loggedInUser,
+        Render: SelectedWine
     }
 }
 
@@ -86,8 +96,11 @@ const mapDispatch = (dispatch) => {
             return dispatch(selectWineById(id))
         },
         addToCart(item) {
-            console.log('props item-----------> ', item);
-             dispatch(postItem(item))
+            // console.log('props item-----------> ', item);
+            dispatch(postItem(item))
+        },
+        loadCart() {
+            dispatch(fetchItems())
         }
     }
 }

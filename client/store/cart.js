@@ -8,7 +8,7 @@ const initialState = {
 
 
 
-// const GET_ITEMS= 'GET_ITEMS'
+ const GET_ITEMS= 'GET_ITEMS'
 const ADD_ITEM = 'ADD_ITEM'
 // const REMOVE_ITEM= 'REMOVE_ITEM'
 const GET_ITEMS_BY_ORDER = 'GET_ITEMS_BY_ORDER'
@@ -23,15 +23,16 @@ const getItemsByOrder = items => ({ type: GET_ITEMS_BY_ORDER, items })
 // }
 
 
+export const fetchItems = () =>
+  dispatch =>
+  axios.get('/api/list/cart')
+  .then(res => { 
+    console.log('RES IN FETCH', res)
+    dispatch(getItems(res.data))
+  })
+.catch(console.error)
 
 
-
-// export const fetchItems = () =>
-//   dispatch =>
-//   axios.get('/api')
-//   .then(res => 
-//     dispatch(getItems(res.data))
-// )
 
 export const postItem = (postWine) =>
     dispatch =>
@@ -46,6 +47,8 @@ export const postItem = (postWine) =>
 export const getItems = () => 
     dispatch =>
         axios.get('/api/')
+
+
 
 
 const reducer = function (state = initialState, action) {

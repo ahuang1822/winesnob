@@ -10,6 +10,7 @@ router.get('/', (req, res, next) => {
     }]
   })
   .then(wines => {
+    // console.log('wines ---------------', wines)
     res.json(wines)
   })
     .catch(next)
