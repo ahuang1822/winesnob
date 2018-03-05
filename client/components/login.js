@@ -4,13 +4,13 @@ import { login } from '../store/user'
 
 
 const Login = (props) => {
-    const { loggedInUser } = props;
+    const { loggedInUser, order } = props;
     return (
       <div>
         { loggedInUser ? <h5>You are already logged in as {loggedInUser.name}</h5> :
           <div>
             <div>
-              <form onSubmit={props.loginSubmit}>
+              <form onSubmit={(event) => props.loginSubmit(event, order.order)}>
                 <div>
                   <label>Email :</label>
                   <input name="email" type="email" />
@@ -36,14 +36,14 @@ const Login = (props) => {
     )
 }
 
-const mapState = ({ loggedInUser }) => ({ loggedInUser })
+const mapState = ({ loggedInUser, order }) => ({ loggedInUser, order })
 
 const mapDispatch = (dispatch) => ({
-  loginSubmit(event) {
+  loginSubmit(event, order) {
     event.preventDefault()
     const email = event.target.email.value
     const password = event.target.password.value
-    dispatch(login(email, password))
+    dispatch(login(email, password, order))
   }
 })
 

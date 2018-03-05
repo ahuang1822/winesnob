@@ -7,10 +7,11 @@ class OrderHistory extends React.Component {
 
   componentDidMount() {
     this.props.fetchOrder();
-    console.log('orders: ', this.props.ordersOnProps);
+   // console.log('orders: ', this.props.ordersOnProps);
   }
 
   render() {
+
     const myOrders = this.props.ordersOnProps.filter(orders => {
       return orders.userId === this.props.userOnProps
     })
@@ -18,6 +19,7 @@ class OrderHistory extends React.Component {
     console.log('orders on props: ', this.props.ordersOnProps);
     
     if (!myOrders) {
+
       return <h1>You have no orders</h1>
     }
     else {

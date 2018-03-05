@@ -14,7 +14,9 @@ class Review extends React.Component {
   }
 
   componentDidMount() {
+
     const wineId = Number(this.props.match.params.wineId)
+
     this.props.selectWineById(wineId);
   }
 

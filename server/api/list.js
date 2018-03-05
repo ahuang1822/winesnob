@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-const { List, Order } = require('../db/models')
+const { List, Order, Wine } = require('../db/models')
 module.exports = router
 
 /**
@@ -17,6 +17,7 @@ module.exports = router
  *         and save the order's id on the session as cartId.
  */
 async function withCart(req, res, next) {
+
     // If we've already associated an order with this session
     if (req.session.cartId) {
       req.cart = await Order.findById(req.session.cartId)
@@ -54,10 +55,24 @@ async function withCart(req, res, next) {
       quantity: req.body.quantity,
       orderId: req.cart.id,
       price: req.body.price
+
     })
-   .then((list) => res.send(list))
+      .then(cart => {
+        res.json(cart)
+      })
       .catch(next)
+  }
+})
+
+
+router.put(`/cart/:id`, (req, res, next) => {
+  List.update(
+    { quantity: req.body.quantity },
+    { where: { id: req.params.id }, returning: true }
+  ).then(list => {
+    res.json(list)
   })
+
 
 
 
@@ -74,3 +89,7 @@ async function withCart(req, res, next) {
      .catch(next)
     })
     
+
+
+
+

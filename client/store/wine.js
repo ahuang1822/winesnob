@@ -26,7 +26,7 @@ export const fetchWineList = () =>
         axios.get('/api/wines')
             .then(res =>
                 dispatch(getWineList(res.data)))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 
 export const selectWineById = (id) =>
@@ -35,7 +35,7 @@ export const selectWineById = (id) =>
             .then(res => {
                 dispatch(selectWine(res.data))
             })
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 export const filterWineList = (wines) => {
     return {

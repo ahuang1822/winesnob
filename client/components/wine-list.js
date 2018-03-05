@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+
 import { selectWineById, filterWineList, fetchWineList } from '../store/wine'
 import { Link } from 'react-router-dom'
 
@@ -87,6 +88,7 @@ class WineList extends Component {
 		</div>
   )}
 }
+
 
 
 const mapState = (state) => { 

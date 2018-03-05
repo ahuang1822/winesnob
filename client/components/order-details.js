@@ -6,14 +6,16 @@ import { fetchSingleOrder } from '../store/order'
 class OrderDetails extends React.Component {
 
   componentDidMount() {
+
     // console.log('match: ', this.props.match)
     const orderId = Number(this.props.match.params.orderId)
     // console.log('orderId: ', orderId);
+
     this.props.fetchSingleOrder(orderId);
   }
 
   render() {
-    console.log('orderOnProps: ', this.props.orderOnProps)
+    //console.log('orderOnProps: ', this.props.orderOnProps)
     if (!this.props.orderOnProps.lists) {
       return <h1>Loading...</h1>
     }
