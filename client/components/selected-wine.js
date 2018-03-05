@@ -6,17 +6,15 @@ import { selectWineById } from '../store/wine'
 import { Link } from 'react-router-dom'
 
 export const SelectedWine = (props) => {
-    console.log('props ============', props)
     const wine = props.data;
     const user = props.user;
-    console.log('wine ===============', wine)
-    // console.log('user -------------->', user)
+
     return (
         <div>
             {
-                user.isAdmin 
-                ? <h3>{ wine.name } <Link to={`/winelist/${wine.id}/edit`}>Edit Wine</Link></h3>
-                : <h3>{ wine.name }</h3>
+                user.isAdmin
+                    ? <h3>{wine.name} <Link to={`/winelist/${wine.id}/edit`}>Edit Wine</Link></h3>
+                    : <h3>{wine.name}</h3>
             }
             <div>
                 <h5>
@@ -49,40 +47,38 @@ export const SelectedWine = (props) => {
             <div onClick={props.loadCart}>
                 <button onClick={() => props.addToCart(wine)} > Add to Cart </button>
             </div>
-            
+
         </div>
     )
 }
 
-class SingleWineContainer extends React.Component {
-    componentDidMount() {
-        this.props.selectWineById(this.props.match.params.id)
-    }
+// class SingleWineContainer extends React.Component {
+//     componentDidMount() {
+//         this.props.selectWineById(this.props.match.params.id)
+//     }
 
-    render() {
-        if (!this.props.selectedWine) return <h1>Loading...</h1>
-
-        return <SelectedWine selectedWine={this.props.selectedWine} />
-    }
-}
+//     render() {
+//         if (!this.props.selectedWine) return <h1>Loading...</h1>
+//         return <SelectedWine selectedWine={this.props.selectedWine} />
+//     }
+// }
 
 class Loader extends React.Component {
     componentDidMount() {
         this.props.load(this.props.match.params.id)
             .then(console.log)
             .catch(error => this.setState({ error }))
+
     }
 
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
-
         const Render = this.props.Render
         return <Render user={this.props.user} data={this.props.data} addToCart={this.props.addToCart} loadCart={this.props.loadCart} />
     }
 }
 
 const mapState = (state) => {
-
     return {
         data: state.wine.selectedWine.wine,
         user: state.user.loggedInUser,
@@ -96,7 +92,6 @@ const mapDispatch = (dispatch) => {
             return dispatch(selectWineById(id))
         },
         addToCart(item) {
-            // console.log('props item-----------> ', item);
             dispatch(postItem(item))
         },
         loadCart() {

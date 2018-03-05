@@ -31,7 +31,6 @@ export const login = (email, password) =>
   dispatch =>
     axios.post('/auth/login', {email, password})
         .then(res => {
-          // console.log('login res ------------------', res)
           dispatch(getUser(res.data))
           history.push('/home')
         })

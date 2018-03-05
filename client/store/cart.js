@@ -44,11 +44,6 @@ export const postItem = (postWine) =>
     })
     .catch(console.error)
 
-export const getItems = () => 
-    dispatch =>
-        axios.get('/api/')
-
-
 
 
 const reducer = function (state = initialState, action) {
