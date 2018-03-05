@@ -17,6 +17,7 @@ export {default as Home} from './home'
 export {default as Login} from './login'
 export {default as Signup} from './signup'
 export {default as EditWine} from './edit-wine'
-
+export {default as AddWine} from './add-wine'
+export {default as EditWineDetails} from './edit-wine-details'
 
 // export {Login, Signup} from './auth-form'

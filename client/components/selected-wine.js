@@ -1,14 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { postItem } from '../store'
-import { fetchItems } from '../store/cart'
 import { selectWineById } from '../store/wine'
 import { Link } from 'react-router-dom'
 
 export const SelectedWine = (props) => {
     const wine = props.data;
     const user = props.user;
-
+    console.log('user: ', user);
+    
+    
     return (
         <div>
             {
@@ -44,41 +45,31 @@ export const SelectedWine = (props) => {
                     price: ${wine.price}
                 </h6>
             </div>
-            <div onClick={props.loadCart}>
-                <button onClick={() => props.addToCart(wine)} > Add to Cart </button>
+             <div>
+            <button onClick={(event) => {
+                props.addToCart(event, wine)
+            }} > Add to Cart </button>
             </div>
 
         </div>
     )
 }
 
-// class SingleWineContainer extends React.Component {
-//     componentDidMount() {
-//         this.props.selectWineById(this.props.match.params.id)
-//     }
-
-//     render() {
-//         if (!this.props.selectedWine) return <h1>Loading...</h1>
-//         return <SelectedWine selectedWine={this.props.selectedWine} />
-//     }
-// }
-
 class Loader extends React.Component {
     componentDidMount() {
         this.props.load(this.props.match.params.id)
-            .then(console.log)
             .catch(error => this.setState({ error }))
-
     }
 
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
         const Render = this.props.Render
-        return <Render user={this.props.user} data={this.props.data} addToCart={this.props.addToCart} loadCart={this.props.loadCart} />
+        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user}/>
     }
 }
 
 const mapState = (state) => {
+    console.log("state", state.user.loggedInUser)
     return {
         data: state.wine.selectedWine.wine,
         user: state.user.loggedInUser,
@@ -91,11 +82,9 @@ const mapDispatch = (dispatch) => {
         load(id) {
             return dispatch(selectWineById(id))
         },
-        addToCart(item) {
-            dispatch(postItem(item))
-        },
-        loadCart() {
-            dispatch(fetchItems())
+        addToCart(event, item) {
+             event.preventDefault()
+             dispatch(postItem(item))
         }
     }
 }

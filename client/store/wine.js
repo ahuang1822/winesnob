@@ -5,24 +5,27 @@ import history from '../history'
 const GET_WINE_LIST = 'GET_WINE_LIST'
 const SELECT_WINE = 'SELECT_WINE'
 const CREATE_WINE = 'CREATE_WINE'
+const DELETE_CATEGORY = 'DELETE_CATEGORY'
 
 const initialState = {
     wineList: [],
-    selectedWine: {}
+    selectedWine: {},
+    wineCategories: []
 }
 
 
 const getWineList = wineList => ({ type: GET_WINE_LIST, wineList })
 const selectWine = wine => ({ type: SELECT_WINE, wine })
 const createWine = wine => ({ type: CREATE_WINE, wine })
-
+const deleteCategory = category => ({ type: DELETE_CATEGORY, category}
+)
 
 export const fetchWineList = () =>
     dispatch =>
         axios.get('/api/wines')
             .then(res =>
                 dispatch(getWineList(res.data)))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 
 export const selectWineById = (id) =>
@@ -31,7 +34,7 @@ export const selectWineById = (id) =>
             .then(res => {
                 dispatch(selectWine(res.data))
             })
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 export const editWine = (id, editedDetails) =>
     dispatch => {
@@ -40,6 +43,7 @@ export const editWine = (id, editedDetails) =>
             .then(res => {
                 history.push(`/winelist/${id}`)
             })
+            .catch(err => console.error(err))
 
     }
 
@@ -47,16 +51,27 @@ export const addWine = (wineDetails) =>
     dispatch => {
         axios.post('/api/wines', wineDetails)
         .then(res => {
-
+            dispatch(createWine(res.data))
+            history.push('/')
         })
+        .catch(err => console.error(err))
     }
 
+export const removeCategory = (category) =>
+    dispatch => {
+        dispatch(deleteCategory(category))
+    }
+    
 const reducer = function (state = initialState, action) {
     switch (action.type) {
         case GET_WINE_LIST:
             return Object.assign({}, state, { wineList: action.wineList })
         case SELECT_WINE:
             return Object.assign({}, state, { selectedWine: action.wine })
+        case CREATE_WINE:
+            return Object.assign({}, state, { wineList: [...state.wineList, action.wine]})
+        case DELETE_CATEGORY:
+            return Object.assign({}, state, { wineCategories: [...state.wineCategories, action.category]})
         default: return state
     }
 };

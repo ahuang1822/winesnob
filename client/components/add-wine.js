@@ -1,7 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { addWine } from '../store/wine'
 
 export const AddWine = (props) => {
+    console.log('test AddWine')
+    const user = props.user
     return (
         <div>
             {
@@ -14,31 +17,41 @@ export const AddWine = (props) => {
                                     <legend>Edit Wine</legend>
                                     <div>
                                         <label>Name</label>
-                                        <input name="name" type="text" defaultValue={name} />
+                                        <input name="name" type="text" />
                                     </div>
                                     <div>
                                         <label>Description</label>
-                                        <input name="description" type="text" defaultValue={description} />
+                                        <input name="description" type="text" />
                                     </div>
                                     <div>
                                         <label>Image</label>
-                                        <input name="image" type="text" defaultValue={img} />
+                                        <input name="image" type="text" />
                                     </div>
                                     <div>
                                         <label>Vintage</label>
-                                        <input name="vintage" type="number" defaultValue={vintage} />
+                                        <input name="vintage" type="number" />
                                     </div>
                                     <div>
                                         <label>Varietal</label>
-                                        <input name="varietal" type="text" defaultValue={varietal} />
+                                        <input name="varietal" type="text" />
+                                    </div>
+                                    <div>
+                                        <label>Place</label>
+                                        <input name="city" type="text" defaultValue={'City'} />
+                                        <input name="state" type="text" defaultValue={'State'} />
+                                        <input name="country" type="text" defaultValue={'Country'} />
                                     </div>
                                     <div>
                                         <label>Size</label>
-                                        <input name="size" type="text" defaultValue={size} />
+                                        <input name="size" type="text" />
                                     </div>
                                     <div>
                                         <label>Price</label>
-                                        <input name="price" type="text" defaultValue={price} />
+                                        <input name="price" type="text" />
+                                    </div>
+                                    <div>
+                                        <label>Quantity</label>
+                                        <input name="quantity" type="number" />
                                     </div>
                                     <button type="submit" >Add Wine</button>
                                 </fieldset>
@@ -54,47 +67,40 @@ export const AddWine = (props) => {
 
 class Loader extends React.Component {
 
-    componentDidMount() {
-        // console.log('props***', this.props)
-        // this.props.load(this.props.match.params.id)
-        //     .then(console.log)
-        //     .catch(console.error)
-    }
-
     render() {
-        if (!this.props.data) return <h1>Loading...</h1>
         const Render = this.props.Render
-        return <Render handleSubmit={this.props.handleSubmit} />
+        return <Render handleSubmit={this.props.handleSubmit} user={this.props.user} />
     }
 }
 
 const mapState = (state) => {
+    console.log('state user: ', state.user);
+
     return {
-        // data: state.wine.selectedWine.wine,
-        // user: state.user.loggedInUser,
+        user: state.user.loggedInUser,
         Render: AddWine
     }
 }
 
 const mapDispatch = (dispatch) => {
     return {
-        // load(id) {
-        //     return dispatch(selectWineById(id))
-        // },
-        // handleSubmit(event, id) {
-        //     event.preventDefault();
-        //     let editedValues = {
-        //         name: event.target.name.value,
-        //         vintage: event.target.vintage.value,
-        //         varietal: event.target.varietal.value,
-        //         price: event.target.price.value,
-        //         size: event.target.size.value,
-        //         img: event.target.image.value,
-        //         description: event.target.description.value
-
-        //     }
-        //     dispatch(editWine(id, editedValues))
-        // }
+        handleSubmit(event) {
+            event.preventDefault();
+            let newWine = {
+                name: event.target.name.value,
+                vintage: event.target.vintage.value,
+                varietal: event.target.varietal.value,
+                price: event.target.price.value,
+                size: event.target.size.value,
+                img: event.target.image.value,
+                description: event.target.description.value,
+                quantity: event.target.quantity.value,
+                city: event.target.city.value,
+                state: event.target.state.value,
+                country: event.target.country.value
+            }
+            dispatch(addWine(newWine))
+        }
     }
 }
 

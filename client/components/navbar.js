@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { logout } from '../store'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {logout} from '../store'
+//import { fetchItems } from '../store/cart'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
@@ -10,7 +11,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     <nav>
       {isLoggedIn ? (
         <div>
-          <Link to="/home">Home</Link>
+          <Link to="/">Home</Link>
           <Link to="/account-page">Account Page</Link>
           <Link to="/winelist">Wine Collection</Link>
           <Link to="/cart">Cart</Link>
@@ -49,7 +50,7 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+     }
   }
 }
 

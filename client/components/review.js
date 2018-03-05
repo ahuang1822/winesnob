@@ -6,9 +6,9 @@ import { selectWineById } from '../store/wine'
 class Review extends React.Component {
 
   componentDidMount() {
-    console.log('match: ', this.props.match)
+   // console.log('match: ', this.props.match)
     const wineId = Number(this.props.match.params.wineId)
-    console.log('wineId: ', wineId);
+    //console.log('wineId: ', wineId);
     this.props.selectWineById(wineId);
   }
 

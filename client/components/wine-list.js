@@ -5,13 +5,16 @@ import { Link } from 'react-router-dom'
 
 export const WineList = (props) => {
     const wineList = props.wineListOnProps;
-    const user = props.user;
-    // console.log(user)
+    const user = props.user
+    //console.log(wineList)
      return (
         <div>
             {
                 user.isAdmin && 
-                <Link to={'/winelist/add-wine'}>Add Wine</Link>
+                <div>
+                    <Link to={'/winelist/add-wine'}>Add Wine</Link>
+                    <Link to={'/winelist/edit-wine-details'}>Edit Wine Details</Link>
+                </div>
             }
             <ul>
                 {wineList.map(wine => (
@@ -49,7 +52,7 @@ export const WineList = (props) => {
 
 
 const mapState = (state) => {
-//   console.log('state: ', state.user.loggedInUser)
+  //console.log('state: ', state)
     return {
         wineListOnProps: state.wine.wineList,
         user: state.user.loggedInUser

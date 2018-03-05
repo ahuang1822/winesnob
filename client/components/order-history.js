@@ -7,11 +7,11 @@ class OrderHistory extends React.Component {
 
   componentDidMount() {
     this.props.fetchOrder();
-    console.log('orders: ', this.props.ordersOnProps);
+   // console.log('orders: ', this.props.ordersOnProps);
   }
 
   render() {
-    console.log('orders on props: ', this.props.ordersOnProps);
+   // console.log('orders on props: ', this.props.ordersOnProps);
     if (!this.props.ordersOnProps) {
       return <h1>You have no orders</h1>
     }

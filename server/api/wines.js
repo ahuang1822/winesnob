@@ -9,17 +9,21 @@ router.get('/', (req, res, next) => {
       as: 'place'
     }]
   })
-  .then(wines => {
-    // console.log('wines ---------------', wines)
-    res.json(wines)
-  })
+    .then(wines => {
+      // console.log('wines ---------------', wines)
+      res.json(wines)
+    })
     .catch(next)
 })
 
 router.post('/', (req, res, next) => {
-  Wine.create(req.body)
-    .then(wine => res.json(wine))
-    .catch(next)
+  let { city, state, country, name, vintage, varietal, price, size, img, description, quantity } = req.body
+  Place.create({ city, state, country })
+    .then(place => {
+      Wine.create({ name, vintage, varietal, price, size, img, description, quantity, placeId: place.id })
+        .then(wine => res.json(wine))
+        .catch(next)
+    })
 })
 
 
@@ -50,13 +54,13 @@ router.get('/:wineId', (req, res) => {
       wineId: req.params.wineId
     }
   })
-  .then(
-    reviews => {
-      res.json({
-        wine: req.wine,
-        reviews: reviews
-    })
-  });
+    .then(
+      reviews => {
+        res.json({
+          wine: req.wine,
+          reviews: reviews
+        })
+      });
 })
 
 router.put('/:wineId', (req, res, next) => {
@@ -68,7 +72,7 @@ router.put('/:wineId', (req, res, next) => {
 
 router.delete('/:wineId', (req, res, next) => {
   req.wine
-  .destroy({ force: true })
-  .then(() => res.status(204).end())
-  .catch(next);
+    .destroy({ force: true })
+    .then(() => res.status(204).end())
+    .catch(next);
 });

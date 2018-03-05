@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 export const AccountPage = () => {
-    console.log('hello');
     return (
         <div>
             <h1>Account Page</h1>
