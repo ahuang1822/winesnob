@@ -33,6 +33,9 @@ const Wine = db.define('wine', {
     quantity: {
         type: Sequelize.INTEGER,
         allowNull: false
+    },
+    tags: {
+        type: Sequelize.ARRAY(Sequelize.TEXT)
     }
 })
 
