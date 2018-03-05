@@ -4,6 +4,7 @@ const Place = require('../db/models/place')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
+  // req.session.destroy()
   User.findOne({where: {email: req.body.email}})
     .then(user => {
       if (!user) {
@@ -57,7 +58,7 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  res.json(req.user)
+  res.send(req.user)
 })
 
 router.use('/google', require('./google'))

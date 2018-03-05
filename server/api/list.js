@@ -19,6 +19,7 @@ module.exports = router
 async function withCart(req, res, next) {
     // If we've already associated an order with this session
     if (req.session.cartId) {
+      console.log("had it```````````")
       req.cart = await Order.findById(req.session.cartId)
       next()
       return
@@ -48,20 +49,20 @@ async function withCart(req, res, next) {
   // }
   
   router.post('/cart', /* signInAnonymously, */ withCart, (req, res, next) => {
-     //console.log('test ---------------------', req.cart)
+     console.log('test -------------', req.body)
+     console.log('req.session', req.session)
     List.create({
-      wineId: req.body.wineId,
-      quantity: req.body.quantity,
-      orderId: req.cart.id,
+      wineId: req.body.id,
+      quantity: 1,
+      orderId: req.session.cartId,
       price: req.body.price
     })
    .then((list) => res.send(list))
       .catch(next)
   })
 
-
-
-  router.get('/cart', (req, res, next) => {
+  router.get('/cart', withCart, (req, res, next) => {
+    console.log("req.session:", req.session)
      List.findAll({
        where: {
         orderId: req.session.cartId
@@ -69,7 +70,7 @@ async function withCart(req, res, next) {
      })
      .then(cart => {
        console.log('CART', cart)
-       res.json(cart)
+       res.send(cart)
       })
      .catch(next)
     })

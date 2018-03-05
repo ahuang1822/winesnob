@@ -6,8 +6,8 @@ import { selectWineById } from '../store/wine'
 
 
 export const SelectedWine = (props) => {
-    const wine = props.data;
-    //console.log('props -------------->', props);
+		const wine = props.data
+    console.log('props -------------->', props);
     return (
         <div>
             <h3>{wine.name}</h3>
@@ -39,7 +39,7 @@ export const SelectedWine = (props) => {
                     price: ${wine.price}
                 </h6>
             </div>
-             <div onClick={props.loadCart}>
+             <div>
             <button onClick={() => props.addToCart(wine)} > Add to Cart </button>
             </div>
         </div>

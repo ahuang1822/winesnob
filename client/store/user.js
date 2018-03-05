@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import {clearItems} from './cart'
+import {clearItems, fetchItems} from './cart'
 
 const GET_USER = 'GET_USER'
 const ADD_USER = 'ADD_USER'
@@ -31,8 +31,10 @@ export const login = (email, password) =>
   dispatch =>
     axios.post('/auth/login', {email, password})
         .then(res => {
-          dispatch(getUser(res.data))
           dispatch(clearItems())
+          dispatch(getUser(res.data))
+          dispatch(fetchItems())
+          
           history.push('/home')
         })
       .catch(err => console.log(err))
