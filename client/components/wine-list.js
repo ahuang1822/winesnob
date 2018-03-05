@@ -3,11 +3,18 @@ import { connect } from 'react-redux'
 import { selectWineById } from '../store'
 import { Link } from 'react-router-dom'
 
-
 export const WineList = (props) => {
     const wineList = props.wineListOnProps;
+    const user = props.user
+    //console.log(wineList)
      return (
         <div>
+            {
+                user.isAdmin && 
+                <div>
+                    <Link to={'/winelist/add-wine'}>Add Wine</Link>
+                </div>
+            }
             <ul>
                 {wineList.map(wine => (
                     <Link to={`/winelist/${wine.id}`} key={wine.id}>
@@ -46,7 +53,8 @@ export const WineList = (props) => {
 const mapState = (state) => {
   //console.log('state: ', state)
     return {
-        wineListOnProps: state.wine.wineList
+        wineListOnProps: state.wine.wineList,
+        user: state.user.loggedInUser
     }
 }
 

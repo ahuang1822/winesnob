@@ -67,6 +67,14 @@ router.post('/cart', withCart, (req, res, next) => {
     .catch(next)
 })
 
+router.delete('/cart/:id', (req, res, next) => {
+  List.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(() => res.sendStatus(204))
+  .catch(next)
+})
 
 
 router.get('/cart', getCart, (req, res, next) => {

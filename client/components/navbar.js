@@ -20,14 +20,14 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </a>
         </div>
       ) : (
-        <div>
-          <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/winelist">Wine Collection</Link>
-          <Link to="/cart">Cart</Link>
-        </div>
-      )}
+          <div>
+            <Link to="/">Home</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+            <Link to="/winelist">Wine Collection</Link>
+            <Link to="/cart">Cart</Link>
+          </div>
+        )}
     </nav>
     <hr />
   </div>

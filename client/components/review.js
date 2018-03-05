@@ -29,7 +29,7 @@ class Review extends React.Component {
 }
 
 const mapState = (state) => {
-
+  
     return {
         selectedWine: state.wine.selectedWine.wine
     }
