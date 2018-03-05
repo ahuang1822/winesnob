@@ -20,7 +20,6 @@ const addUser = user => ({ type: ADD_USER, user })
 const editUser = user => ({ type: UPDATE_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 
-
 export const me = () =>
   dispatch =>
     axios.get('/auth/me')
@@ -35,12 +34,10 @@ export const login = (email, password, order) =>
       .then(res => {
         dispatch(getUser(res.data))
         dispatch(clearItems())
-        // if (order.id) {
-        //   dispatch(updateOrder(order.id, { userId: res.data.id }))
-        // }
         history.push('/')
       })
       .catch(err => console.error(err))
+
 
 export const signup = (signUpInfo, order) =>
   dispatch =>
@@ -60,9 +57,19 @@ export const edit = (userId, editInfo) =>
     axios.put(`/api/users/${userId}`, editInfo)
       .then(res => {
         dispatch(editUser(res.data))
-        history.push(`/users/${userId}`)
+        history.push(`/cart`)
       })
       .catch(err => console.error(err))
+
+
+      export const editUserPlace = (placeId, editInfo) =>
+      dispatch =>
+        axios.put(`/api/users/place/${placeId}`, editInfo)
+        .then(res => console.log(res.data) )
+          .catch(err => console.error(err))
+
+
+
 
 export const logout = () =>
   dispatch =>
@@ -88,7 +95,6 @@ export default function reducer(state = initialState, action) {
 
     case REMOVE_USER:
       return Object.assign({}, state, { loggedInUser: {} });
-
     default:
       return state;
   }

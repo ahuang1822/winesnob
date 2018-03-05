@@ -48,7 +48,8 @@ const mapState = (state) => {
 
 const mapDispatch = dispatch => {
   return {
-    handleClick() {
+    handleClick(event) {
+      event.preventDefault()
       dispatch(logout())
      }
   }

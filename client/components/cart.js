@@ -1,12 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchItems, putItems, updateQuantity, removeItem } from '../store/cart'
+import { fetchItems, putItems, updateQuantity, removeItem } from '../store'
 
 
-class Cart extends React.Component {
+export class Cart extends React.Component {
     constructor(props) {
         super(props)
+
+     this.state = {
+       isClicked: true
+     }
     }
 
     componentDidMount() {
@@ -23,17 +27,17 @@ class Cart extends React.Component {
         const update = this.props.update;
         const remove = this.props.removeItem;
         let counter = 0;
-        console.log(counter)
         return (
             <div>
                 <h1>Cart</h1>
                 {
-                    loggedInUser.id ?
+                    loggedInUser.id && this.state.isClicked ?
                         <h6>There have been items added to the shopping cart as a guest. Would you like to merge these items? <Link 
                         to="/cart"
                         onClick={(event) => {
                             mergeCarts(event, { merging: true });
                             loadCart(event)
+                            this.setState({isClicked: false});
                         }}>Merge Carts</Link></h6>
                         : null
                 }
@@ -66,7 +70,6 @@ class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-    console.log('state: ', state);
     return {
         winesInCart: state.cart.items,
         loggedInUser: state.user.loggedInUser

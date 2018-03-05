@@ -21,7 +21,6 @@ export const fetchOrder = () =>
   dispatch =>
     axios.get('/api/orders')
       .then(res => {
-        //console.log('res data info: ', res.data);
         dispatch(getOrders(res.data))
       })
       .catch(err => console.error(err))
@@ -31,7 +30,6 @@ export const updateOrder = (id, orderInfo) =>
   dispatch =>
     axios.put(`api/orders/${id}`, orderInfo)
       .then(res => {
-        console.log('res.data', res.data)
         dispatch(editOrder(res.data))
       })
       .catch(err => console.error(err))

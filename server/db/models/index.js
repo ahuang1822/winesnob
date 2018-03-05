@@ -4,21 +4,22 @@ const Order = require('./order')
 const List = require('./list')
 const Wine = require('./wine')
 const Review = require('./review')
+const Payment = require('./payment')
 const db = require('../db')
 
-User.belongsTo(Place, { as: 'place' })
-User.hasMany(Order, { as: 'orders' })
-User.hasMany(Review, { as: 'reviews'})
-Order.belongsTo(User, { as: 'user' })
-Order.hasMany(List, { as: 'lists' })
-Wine.belongsTo(Place, { as: 'place' })
-Wine.hasMany(List, { as: 'lists' })
-Wine.hasMany(Review, { as: 'reviews'})
-Review.belongsTo(Wine, { as: 'wine' })
-Review.belongsTo(User, { as: 'user' })
+User.belongsTo(Place)
+User.belongsTo(Payment)
+User.hasMany(Order)
+User.hasMany(Review)
+Order.belongsTo(User)
+Order.hasMany(List)
+Wine.belongsTo(Place)
+Wine.hasMany(List)
+Wine.hasMany(Review)
+Review.belongsTo(Wine)
+Review.belongsTo(User)
 List.belongsTo(Wine)
 List.belongsTo(Order)
-
 List.belongsTo(Wine)
 List.belongsTo(Order)
 
@@ -29,5 +30,6 @@ module.exports = {
   Order,
   List,
   Wine,
-  Review
+  Review,
+  Payment
 }

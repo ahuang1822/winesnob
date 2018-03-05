@@ -6,7 +6,12 @@ module.exports = router
 router.post('/login', (req, res, next) => {
   req.session.guestOrder= req.session.order;
   req.session.order = null;
-  User.findOne({where: {email: req.body.email}})
+  User.findOne({where: {email: req.body.email},
+    include: [{
+      model: Place,
+      as: 'place'
+    }]
+  })
     .then(user => {
       if (!user) {
         res.status(401).send('User not found')
@@ -38,8 +43,7 @@ router.post('/signup', (req, res, next) => {
     })
     .then(user => {
       req.login(user, err => (err ? next(err) : res.json(user)))
-      req.session.passport= user;
-      console.log('REQ.SESSION SIGN UP', req.session)
+      req.session.passport = user;
     })
     .catch(err => {
       if (err.name === 'SequelizeUniqueConstraintError') {
