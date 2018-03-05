@@ -1,19 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchSingleOrder } from '../store/order'
+import { fetchSingleOrder } from '../store'
 
 class OrderDetails extends React.Component {
 
   componentDidMount() {
+<<<<<<< HEAD
     // console.log('match: ', this.props.match)
     const orderId = Number(this.props.match.params.orderId)
     // console.log('orderId: ', orderId);
+=======
+    const orderId = Number(this.props.match.params.orderId)
+>>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
     this.props.fetchSingleOrder(orderId);
   }
 
   render() {
-    console.log('orderOnProps: ', this.props.orderOnProps)
     if (!this.props.orderOnProps.lists) {
       return <h1>Loading...</h1>
     }

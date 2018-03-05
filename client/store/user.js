@@ -1,6 +1,12 @@
 import axios from 'axios'
 import history from '../history'
+<<<<<<< HEAD
 import {clearItems, fetchItems} from './cart'
+=======
+import { clearItems } from './cart'
+import { updateOrder } from './order'
+
+>>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
 
 const GET_USER = 'GET_USER'
 const ADD_USER = 'ADD_USER'
@@ -18,17 +24,17 @@ const addUser = user => ({ type: ADD_USER, user })
 const editUser = user => ({ type: UPDATE_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 
-
 export const me = () =>
   dispatch =>
     axios.get('/auth/me')
       .then(res =>
         dispatch(getUser(res.data)))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 
-export const login = (email, password) =>
+export const login = (email, password, order) =>
   dispatch =>
+<<<<<<< HEAD
     axios.post('/auth/login', {email, password})
         .then(res => {
           dispatch(clearItems())
@@ -40,24 +46,53 @@ export const login = (email, password) =>
       .catch(err => console.log(err))
 
 export const signup = (signUpInfo) =>
+=======
+    axios.post('/auth/login', { email, password })
+      .then(res => {
+        dispatch(getUser(res.data))
+        dispatch(clearItems())
+        history.push('/')
+      })
+      .catch(err => console.error(err))
+
+
+export const signup = (signUpInfo, order) =>
+>>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
   dispatch =>
     axios.post('/auth/signup', signUpInfo)
       .then(res => {
         dispatch(addUser(res.data))
+<<<<<<< HEAD
         dispatch(clearItems())
         history.push('/home')
+=======
+        if (order.id) {
+          dispatch(updateOrder(order.id, { userId: res.data.id }))
+        }
+        history.push('/')
+>>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 
 export const edit = (userId, editInfo) =>
   dispatch =>
-      axios.put(`/api/users/${userId}`, editInfo)
+    axios.put(`/api/users/${userId}`, editInfo)
       .then(res => {
         dispatch(editUser(res.data))
-        history.push(`/users/${userId}`)
+        history.push(`/cart`)
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
+
+
+      export const editUserPlace = (placeId, editInfo) =>
+      dispatch =>
+        axios.put(`/api/users/place/${placeId}`, editInfo)
+        .then(res => console.log(res.data) )
+          .catch(err => console.error(err))
+
+
+
 
 export const logout = () =>
   dispatch =>
@@ -67,7 +102,7 @@ export const logout = () =>
         dispatch(clearItems())
         history.push('/login')
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 
 export default function reducer(state = initialState, action) {
@@ -83,7 +118,6 @@ export default function reducer(state = initialState, action) {
 
     case REMOVE_USER:
       return Object.assign({}, state, { loggedInUser: {} });
-
     default:
       return state;
   }

@@ -38,9 +38,10 @@ router.get('/', (req, res, next) => {
       as: 'place'
     }]
   })
-  .then(wines => {
-    res.json(wines)
-  })
+    .then(wines => {
+      // console.log('wines ---------------', wines)
+      res.json(wines)
+    })
     .catch(next)
 })
 
@@ -124,13 +125,13 @@ router.get('/:wineId', (req, res) => {
       wineId: req.params.wineId
     }
   })
-  .then(
-    reviews => {
-      res.json({
-        wine: req.wine,
-        reviews: reviews
-    })
-  });
+    .then(
+      reviews => {
+        res.json({
+          wine: req.wine,
+          reviews: reviews
+        })
+      });
 })
 
 router.put('/:wineId', (req, res, next) => {
@@ -142,7 +143,7 @@ router.put('/:wineId', (req, res, next) => {
 
 router.delete('/:wineId', (req, res, next) => {
   req.wine
-  .destroy({ force: true })
-  .then(() => res.status(204).end())
-  .catch(next);
+    .destroy({ force: true })
+    .then(() => res.status(204).end())
+    .catch(next);
 });

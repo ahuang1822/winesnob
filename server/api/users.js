@@ -3,8 +3,7 @@ const { User, Place, Order, List } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  User.findAll(
-  )
+  User.findAll()
     .then(users => res.json(users))
     .catch(next)
 })
@@ -94,4 +93,10 @@ router.put('/:userId/checkout', (req, res, next) => {
       id: req.body.id
     }
   })
+})
+
+router.put('/place/:placeId', (req, res, next) => {
+  Place.update(req.body,  { where: { id: req.params.placeId }, returning: true })
+  .then(result => res.json(result[1][0]))
+  .catch(next)
 })

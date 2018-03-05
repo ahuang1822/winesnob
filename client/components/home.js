@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 
 export const Home = () => {
+    console.log('test Home')
     return (
         <div>
             <h1>Come get drunk with us. We got the goods.</h1>
@@ -10,7 +11,6 @@ export const Home = () => {
     )
 }
 const mapState = (state) => {
-
     return {
         wineListOnProps: state.wine.wineList
     }

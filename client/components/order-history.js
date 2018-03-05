@@ -1,16 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
-import { fetchOrder } from '../store/order'
+import { fetchOrder } from '../store'
 
 class OrderHistory extends React.Component {
 
   componentDidMount() {
     this.props.fetchOrder();
-    console.log('orders: ', this.props.ordersOnProps);
   }
 
   render() {
+<<<<<<< HEAD
     const myOrders = this.props.ordersOnProps.filter(orders => {
       return orders.userId === this.props.userOnProps
     })
@@ -18,6 +18,9 @@ class OrderHistory extends React.Component {
     console.log('orders on props: ', this.props.ordersOnProps);
     
     if (!myOrders) {
+=======
+    if (!this.props.ordersOnProps) {
+>>>>>>> c0bf6040c224bfc281d95180776fa314ac9a2bb7
       return <h1>You have no orders</h1>
     }
     else {

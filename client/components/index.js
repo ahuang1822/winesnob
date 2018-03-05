@@ -16,6 +16,9 @@ export {default as SelectedWine} from './selected-wine'
 export {default as Home} from './home'
 export {default as Login} from './login'
 export {default as Signup} from './signup'
-
+export {default as Payment} from './payment-form'
+export {default as UserPlace} from './user-place-form'
+export {default as EditWine} from './edit-wine'
+export {default as AddWine} from './add-wine'
 
 // export {Login, Signup} from './auth-form'

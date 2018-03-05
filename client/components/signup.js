@@ -4,21 +4,22 @@ import { signup } from '../store'
 
 
 export const Signup = (props) => {
+  const { order } = props;
   return (
     <div>
-      <form onSubmit={props.signupSubmit}>
+      <form onSubmit={(event) => props.signupSubmit(event, order.order)}>
         <div>
           <label>First Name:</label>
           <input
             name="firstName"
-            type="firstName"
+            type="text"
           />
         </div>
         <div>
           <label>Last Name:</label>
           <input
             name="lastName"
-            type="lastName"
+            type="text"
           />
         </div>
         <div>
@@ -32,42 +33,42 @@ export const Signup = (props) => {
           <label>Password:</label>
           <input
             name="password"
-            type="password"
+            type="text"
           />
         </div>
         <div>
           <label>Address:</label>
           <input
             name="address"
-            type="address"
+            type="text"
           />
         </div>
         <div>
           <label>City:</label>
           <input
             name="city"
-            type="city"
+            type="text"
           />
         </div>
         <div>
           <label>State:</label>
           <input
             name="state"
-            type="state"
+            type="text"
           />
         </div>
         <div>
           <label>Country:</label>
           <input
             name="country"
-            type="country"
+            type="text"
           />
         </div>
         <div>
           <label>Phone:</label>
           <input
             name="phone"
-            type="phone"
+            type="tel"
           />
         </div>
         <button type="submit">Sign up</button>
@@ -86,22 +87,23 @@ export const Signup = (props) => {
 }
 
 
-const mapState = ({ loggedInUser }) => ({ loggedInUser })
+const mapState = ({ loggedInUser, order }) => ({ loggedInUser, order })
 
 const mapDispatch = (dispatch) => ({
-  signupSubmit(event){
-    event.preventDefault()
-    dispatch(signup({
-      firstName: event.target.firstName.value,
-      lastName: event.target.lastName.value,
-      email: event.target.email.value,
-      password: event.target.password.value,
-      address: event.target.address.value,
-      city: event.target.city.value,
-      state: event.target.state.value,
-      country: event.target.country.value,
-      phone: event.target.phone.value
-    }))
+  signupSubmit(event, order){
+   event.preventDefault()
+   const userInfo = {
+    firstName: event.target.firstName.value,
+    lastName: event.target.lastName.value,
+    email: event.target.email.value,
+    password: event.target.password.value,
+    address: event.target.address.value,
+    city: event.target.city.value,
+    state: event.target.state.value,
+    country: event.target.country.value,
+    phone: event.target.phone.value,
+  }
+    dispatch(signup(userInfo, order))
   }
 })
 
