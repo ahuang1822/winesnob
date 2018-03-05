@@ -17,8 +17,8 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  let { city, state, country, name, vintage, varietal, price, size, img, description, quantity } = req.body
-  Place.create({ city, state, country })
+  let { city, state, country, name, vintage, varietal, price, size, img, description, quantity, type } = req.body
+  Place.create({ city, state, country, type })
     .then(place => {
       Wine.create({ name, vintage, varietal, price, size, img, description, quantity, placeId: place.id })
         .then(wine => res.json(wine))

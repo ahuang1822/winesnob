@@ -12,6 +12,9 @@ export const AccountPage = () => {
             <div>
                 <Link to="/order-history">Order History</Link>
             </div>
+            <div>
+                <Link to="/account-page/add-admin">Add Admin</Link>
+            </div>
         </div>
     )
 }

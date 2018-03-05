@@ -63,11 +63,17 @@ export const edit = (userId, editInfo) =>
 
 
 export const editUserPlace = (placeId, editInfo) =>
-  dispatch =>
+  dispatch => 
     axios.put(`/api/users/place/${placeId}`, editInfo)
       .then(res => console.log(res.data))
       .catch(err => console.error(err))
 
+export const addAdmin = (newAdmin) =>
+  dispatch => {
+    return axios.put('/api/users/add_admin', newAdmin)
+    .then(res => {history.push(`/`)})
+    .catch(err => console.error(err))
+    }
 
 export const logout = () =>
   dispatch =>

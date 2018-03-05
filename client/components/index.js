@@ -20,5 +20,5 @@ export {default as Payment} from './payment-form'
 export {default as UserPlace} from './user-place-form'
 export {default as EditWine} from './edit-wine'
 export {default as AddWine} from './add-wine'
-
+export {default as AddAdmin} from './add-admin'
 // export {Login, Signup} from './auth-form'

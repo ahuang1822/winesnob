@@ -97,7 +97,8 @@ const mapDispatch = (dispatch) => {
                 quantity: event.target.quantity.value,
                 city: event.target.city.value,
                 state: event.target.state.value,
-                country: event.target.country.value
+                country: event.target.country.value,
+                type: "vineyard"
             }
             dispatch(addWine(newWine))
         }
