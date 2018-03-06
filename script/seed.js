@@ -210,7 +210,6 @@ var data = {
     }
   ],
   wine: [
-
     { name: 'Caymus', vintage: 2009, quantity: 2, description: 'Supple and creamy-textured, with mocha, ripe plum and cherry flavors that show touches of tobacco, espresso and underbrush. Full-bodied, gaining tannic traction on the finish, elegant and readily approachable.', varietal: 'Cabernet Sauvignon', price: '115.00', size: '750 ml', img: '/images/caymus09.jpeg', place: { city: 'Napa Valley', state: 'California', country: 'USA' }, tags: ['first edition', 'limited edition'] },
     { name: 'Flowers', vintage: 2014, quantity: 2, description: 'Deep garnet hue. Aromas of wild strawberry, pomegranate, cranberry, savory dried herbs, violet and forest floor lift elegantly from the glass. On the palate, layers of blood orange and hibiscus are framed by fine-grained tannins, coastal minerality and brilliant acidity that culminate in a lengthy finish.', varietal: 'Pinot Noir', price: '90.00', size: '750 ml', img: '/images/flowerspinot.png', place: { city: 'Sonoma Coast', state: 'California', country: 'USA' }, tags: ['limited edition'] },
     { name: 'Kistler', vintage: 2013, quantity: 2, description: 'Deep, concentrated, full-bodied notes of white currants, lemon oil, apple blossom, white peach and honeysuckle are all present in this beautiful wine that will drink nicely for the next seven or so years.', varietal: 'Chardonnay', price: '149.99', size: '750 ml', img: '/images/kistler.jpg', place: { city: 'Sonoma Coast', state: 'California', country: 'USA' }, tags: ['first edition'] },

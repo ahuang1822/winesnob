@@ -110,8 +110,8 @@ const mapDispatch = (dispatch) => {
             return dispatch(selectWineById(id))
         },
         addToCart(event, item) {
-            event.preventDefault()
-            dispatch(postItem(item))
+             event.preventDefault()
+             dispatch(postItem(item))
         }
     }
 }

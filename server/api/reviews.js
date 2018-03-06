@@ -3,6 +3,7 @@ const { Review } = require('../db/models')
 module.exports = router
 
 router.post('/', (req, res, next) => {
+  console.log('hey')
   Review.create(req.body)
     .then(review => res.json(review))
     .catch(next)
@@ -41,3 +42,4 @@ router.delete('/:reviewId', (req, res, next) => {
   .then(() => res.status(204).end())
   .catch(next);
 });
+
