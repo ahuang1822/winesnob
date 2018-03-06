@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-  selectWineById,
-  filterWineList,
-  fetchWineList,
-  fetchWineVarietal,
-    } from '../store/wine'
+import { filterWineList, fetchWineList } from '../store'
 
 
 class WineList extends Component {
-  // const wineList = props.wineListOnProps;
-	// console.log(wineList)
 	constructor(props) {
     super(props);
 
@@ -31,12 +24,12 @@ class WineList extends Component {
 
   componentDidMount() {
     this.props.fetchWineList()
-    this.state.filteredList = this.props.wineListOnProps
+    this.filteredList = this.props.wineListOnProps
   }
 
   handleChange (event) {
     event.preventDefault();
-    this.state.searchKey = event.target.value
+    this.setState({ searchKey: event.target.value })
     let wineList = this.props.wineListOnProps
     let filteredList = wineList.filter(wine => {
       return (wine.varietal.includes(this.state.varietal) &&
@@ -49,7 +42,7 @@ class WineList extends Component {
 
   onClickVarietal(event) {
     event.preventDefault();
-    this.state.varietal = event.target.value
+    this.setState({ varietal: event.target.value })
     let wineList = this.props.wineListOnProps
     let filteredList = wineList.filter(wine => {
       return (wine.varietal.includes(this.state.varietal) &&
@@ -62,7 +55,7 @@ class WineList extends Component {
 
   onClickSize(event) {
     event.preventDefault();
-    this.state.size = event.target.value
+    this.setState({ size: event.target.value })
     let wineList = this.props.wineListOnProps
     let filteredList = wineList.filter(wine => {
       return (wine.varietal.includes(this.state.varietal) &&
@@ -75,7 +68,7 @@ class WineList extends Component {
 
   onClickPlace(event) {
     event.preventDefault();
-    this.state.place = event.target.value
+    this.setState({ place: event.target.value })
     let wineList = this.props.wineListOnProps
     let filteredList = wineList.filter(wine => {
       return (wine.varietal.includes(this.state.varietal) &&
@@ -87,7 +80,6 @@ class WineList extends Component {
   }
 
 	render() {
-  console.log('props: ', this.props);
   let listOfVarietal = this.props.varietalsOnProps
   let listOfSize = this.props.sizesOnProps
   let listOfPlace = this.props.placeOnProps

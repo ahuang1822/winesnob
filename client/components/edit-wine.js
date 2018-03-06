@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectWineById, editWine } from '../store/wine'
+import { selectWineById, editWine } from '../store'
 
 
 export const EditWine = (props) => {
@@ -68,14 +68,12 @@ export const EditWine = (props) => {
 class Loader extends React.Component {
 
     componentDidMount() {
-        console.log('props***', this.props)
         this.props.load(this.props.match.params.id)
             .then(console.log)
             .catch(console.error)
     }
 
     render() {
-        console.log('test **********')
         if (!this.props.data) return <h1>Loading...</h1>
         const Render = this.props.Render
         return <Render user={this.props.user} data={this.props.data} handleSubmit={this.props.handleSubmit} />

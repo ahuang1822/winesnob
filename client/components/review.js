@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { SelectedWine } from './selected-wine'
-import { selectWineById } from '../store'
+import { selectWineById, postReview } from '../store'
 
 class Review extends React.Component {
 
@@ -44,21 +44,21 @@ class Review extends React.Component {
           <h1>Review this bottle!</h1>
           <form onSubmit={this.onSubmit}>
             <div>
-                <input 
-                name="review" 
-                width="200" 
-                height="200"/>
+                <input
+                name="review"
+                width="200"
+                height="200" />
             </div>
-            <div> 
+            <div>
               Rating (1 - 5)
               <div>
-              <input 
-              name="rating" 
-              width="200" 
-              height="200"/>
+              <input
+              name="rating"
+              width="200"
+              height="200" />
               </div>
             </div>
-            <button type="submit">Submit Revew</button> 
+            <button type="submit">Submit Revew</button>
           </form>
         </div>
       )
@@ -67,7 +67,7 @@ class Review extends React.Component {
 }
 
 const mapState = (state) => {
-  
+
     return {
         selectedWine: state.wine.selectedWine.wine,
         currentUser: state.user.loggedInUser

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { login } from '../store/user'
+import { login } from '../store'
 
 
 const Login = (props) => {

@@ -96,7 +96,6 @@ class Loader extends React.Component {
 }
 
 const mapState = (state) => {
-    console.log("state", state.user.loggedInUser)
     return {
         data: state.wine.selectedWine.wine,
         user: state.user.loggedInUser,

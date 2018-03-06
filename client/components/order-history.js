@@ -10,6 +10,7 @@ class OrderHistory extends React.Component {
   }
 
   render() {
+    const myOrders = this.props.ordersOnProps;
     if (!this.props.ordersOnProps) {
       return <h1>You have no orders</h1>
     }
@@ -41,7 +42,7 @@ class OrderHistory extends React.Component {
 const mapState = (state) => {
   console.log('state: ', state);
     return {
-        ordersOnProps: state.order.orders, 
+        ordersOnProps: state.order.orders,
         userOnProps: state.user.loggedInUser.id
     }
 }
