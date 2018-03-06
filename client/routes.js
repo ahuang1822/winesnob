@@ -2,21 +2,21 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Home, 
-        Login, 
-        WineList, 
-        AccountPage, 
-        Cart, 
-        Checkout, 
-        AddWine, 
-        EditWine, 
-        OrderDetails, 
-        OrderHistory, 
-        Review, 
-        SelectedWine, 
-        Payment, 
-        UserPlace, 
-        Signup} 
+import {Home,
+        Login,
+        WineList,
+        AccountPage,
+        Cart,
+        Checkout,
+        AddWine,
+        EditWine,
+        OrderDetails,
+        OrderHistory,
+        Review,
+        SelectedWine,
+        Payment,
+        UserPlace,
+        Signup}
         from './components'
 import {me} from './store'
 import { fetchWineList } from './store/wine'
