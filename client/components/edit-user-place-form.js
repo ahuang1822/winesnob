@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { edit, editUserPlace } from '../store'
+import { edit, updateUserPlace } from '../store'
 
 
-export const UserPlace = (props) => {
-    const user = props.loggedInUser;
+export const EditUserPlace = (props) => {
+    const user = props.loggedInUser || {};
     return (
         <div>
             <form onSubmit={(event) => {
@@ -37,28 +37,28 @@ export const UserPlace = (props) => {
                         />
                     </div>
                     <div>
-                    <label>Address:</label>
-                    <input
-                        name="address"
-                        type="text"
-                        defaultValue={user.place.address}
-                    />
+                        <label>Address:</label>
+                        <input
+                            name="address"
+                            type="text"
+                            defaultValue={user.place.address}
+                        />
                     </div>
                     <div>
-                    <label>City:</label>
-                    <input
-                        name="city"
-                        type="text"
-                        defaultValue={user.place.city}
-                    />
+                        <label>City:</label>
+                        <input
+                            name="city"
+                            type="text"
+                            defaultValue={user.place.city}
+                        />
                     </div>
                     <div>
-                    <label>State:</label>
-                    <input
-                        name="state"
-                        type="text"
-                        defaultValue={user.place.state}
-                    />
+                        <label>State:</label>
+                        <input
+                            name="state"
+                            type="text"
+                            defaultValue={user.place.state}
+                        />
                     </div>
                     <div>
                         <label>Zip Code:</label>
@@ -94,7 +94,6 @@ export const UserPlace = (props) => {
 }
 
 
-
 const mapState = (state) => {
     return {
         loggedInUser: state.user.loggedInUser
@@ -116,6 +115,7 @@ const mapDispatch = (dispatch, ownProps) => ({
     handleSubmitPlace(event) {
         event.preventDefault()
         const placeId = ownProps.match.params.placeId
+        const userId = ownProps.match.params.id
         const placeInfo = {
             address: event.target.address.value,
             city: event.target.city.value,
@@ -123,59 +123,9 @@ const mapDispatch = (dispatch, ownProps) => ({
             country: event.target.country.value,
             phone: event.target.phone.value,
         }
-        dispatch(editUserPlace(placeId, placeInfo))
+        dispatch(updateUserPlace(placeId, userId, placeInfo))
     }
 })
 
-export default connect(mapState, mapDispatch)(UserPlace)
 
-
-
-// <div>
-// <label>Address:</label>
-// <input
-//     name="address"
-//     type="text"
-//     defaultValue={user.place.address}
-// />
-// </div>
-// <div>
-// <label>City:</label>
-// <input
-//     name="city"
-//     type="text"
-//     defaultValue={user.place.city}
-// />
-// </div>
-// <div>
-// <label>State:</label>
-// <input
-//     name="state"
-//     type="text"
-//     defaultValue={user.place.state}
-// />
-// </div>
-// <div>
-//     <label>Zip Code:</label>
-//     <input
-//         name="zipcode"
-//         type="number"
-//         defaultValue={user.place.zipcode}
-//     />
-// </div>
-// <div>
-//     <label>Country:</label>
-//     <input
-//         name="country"
-//         type="text"
-//         defaultValue={user.place.country}
-//     />
-// </div>
-// <div>
-//     <label>Phone:</label>
-//     <input
-//         name="phone"
-//         type="tel"
-//         defaultValue={user.place.phone}
-//     />
-// </div>
+export default connect(mapState, mapDispatch)(EditUserPlace)

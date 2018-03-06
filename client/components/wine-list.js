@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 export const WineList = (props) => {
     const wineList = props.wineListOnProps;
     const user = props.user
-    //console.log(wineList)
      return (
         <div>
             {
@@ -51,7 +50,6 @@ export const WineList = (props) => {
 
 
 const mapState = (state) => {
-  //console.log('state: ', state)
     return {
         wineListOnProps: state.wine.wineList,
         user: state.user.loggedInUser

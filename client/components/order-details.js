@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom'
 import { fetchSingleOrder } from '../store'
 
 class OrderDetails extends React.Component {
-
   componentDidMount() {
     const orderId = Number(this.props.match.params.orderId)
     this.props.fetchSingleOrder(orderId);
   }
-
   render() {
     if (!this.props.orderOnProps.lists) {
       return <h1>Loading...</h1>
@@ -45,11 +43,11 @@ class OrderDetails extends React.Component {
 
 
 const mapState = (state) => {
-  console.log('state: ', state);
   return {
     orderOnProps: state.order.order
   }
 }
+
 
 const mapDispatch = (dispatch) => (
   {

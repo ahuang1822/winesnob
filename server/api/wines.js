@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { Wine, Review, Place } = require('../db/models')
 module.exports = router
 
+
 router.get('/', (req, res, next) => {
   Wine.findAll({
     include: [{
@@ -14,6 +15,7 @@ router.get('/', (req, res, next) => {
     })
     .catch(next)
 })
+
 
 router.post('/', (req, res, next) => {
   let { city, state, country, name, vintage, varietal, price, size, img, description, quantity } = req.body
@@ -47,6 +49,7 @@ router.param('wineId', (req, res, next, id) => {
     .catch(next);
 });
 
+
 router.get('/:wineId', (req, res) => {
   Review.findAll({
     where: {
@@ -62,12 +65,14 @@ router.get('/:wineId', (req, res) => {
       });
 })
 
+
 router.put('/:wineId', (req, res, next) => {
   req.wine
     .update(req.body, { returning: true })
     .then(wine => res.status(200).json(wine))
     .catch(next);
 });
+
 
 router.delete('/:wineId', (req, res, next) => {
   req.wine

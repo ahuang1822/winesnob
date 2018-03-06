@@ -57,15 +57,14 @@ export const EditWine = (props) => {
     )
 }
 
-class Loader extends React.Component {
 
+class Loader extends React.Component {
     componentDidMount() {
         console.log('props***', this.props)
         this.props.load(this.props.match.params.id)
             .then(console.log)
             .catch(console.error)
     }
-
     render() {
         console.log('test **********')
         if (!this.props.data) return <h1>Loading...</h1>
@@ -74,6 +73,7 @@ class Loader extends React.Component {
     }
 }
 
+
 const mapState = (state) => {
     return {
         data: state.wine.selectedWine.wine,
@@ -81,6 +81,7 @@ const mapState = (state) => {
         Render: EditWine
     }
 }
+
 
 const mapDispatch = (dispatch) => {
     return {
@@ -97,12 +98,12 @@ const mapDispatch = (dispatch) => {
                 size: event.target.size.value,
                 img: event.target.image.value,
                 description: event.target.description.value
-
             }
             dispatch(editWine(id, editedValues))
         }
     }
 }
+
 
 export default connect(mapState, mapDispatch)(Loader)
 

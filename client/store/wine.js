@@ -6,6 +6,7 @@ const GET_WINE_LIST = 'GET_WINE_LIST'
 const SELECT_WINE = 'SELECT_WINE'
 const CREATE_WINE = 'CREATE_WINE'
 
+
 const initialState = {
     wineList: [],
     selectedWine: {},
@@ -33,26 +34,27 @@ export const selectWineById = (id) =>
             })
             .catch(err => console.error(err))
 
+
 export const editWine = (id, editedDetails) =>
     dispatch => {
-        console.log(editedDetails);
         axios.put(`/api/wines/${id}`, editedDetails)
             .then(res => {
                 history.push(`/winelist/${id}`)
             })
             .catch(err => console.error(err))
-
     }
+
 
 export const addWine = (wineDetails) =>
     dispatch => {
         axios.post('/api/wines', wineDetails)
-        .then(res => {
-            dispatch(createWine(res.data))
-            history.push('/')
-        })
-        .catch(err => console.error(err))
+            .then(res => {
+                dispatch(createWine(res.data))
+                history.push('/')
+            })
+            .catch(err => console.error(err))
     }
+
 
 const reducer = function (state = initialState, action) {
     switch (action.type) {
@@ -61,8 +63,7 @@ const reducer = function (state = initialState, action) {
         case SELECT_WINE:
             return Object.assign({}, state, { selectedWine: action.wine })
         case CREATE_WINE:
-            return Object.assign({}, state, { wineList: [...state.wineList, action.wine]})
-      
+            return Object.assign({}, state, { wineList: [...state.wineList, action.wine] })
         default: return state
     }
 };

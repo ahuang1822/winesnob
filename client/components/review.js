@@ -3,16 +3,14 @@ import { connect } from 'react-redux'
 import { SelectedWine } from './selected-wine'
 import { selectWineById } from '../store'
 
-class Review extends React.Component {
 
+class Review extends React.Component {
   componentDidMount() {
     const wineId = Number(this.props.match.params.wineId)
     this.props.selectWineById(wineId);
   }
-
   render() {
     const wine = this.props.selectedWine;
-    console.log('wine: ', wine);
     if (!this.props.selectedWine) {
       return <h1>Loading...</h1>
     }
@@ -28,12 +26,14 @@ class Review extends React.Component {
   }
 }
 
+
 const mapState = (state) => {
   
     return {
         selectedWine: state.wine.selectedWine.wine
     }
 }
+
 
 const mapDispatch = (dispatch) => {
   return {
@@ -42,5 +42,6 @@ const mapDispatch = (dispatch) => {
     }
   }
 }
+
 
 export default connect(mapState, mapDispatch)(Review)

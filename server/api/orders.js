@@ -11,13 +11,12 @@ router.get('/', (req, res, next) => {
 })
 
 
-
-
 router.post('/', (req, res, next) => {
   Order.create(req.body)
     .then(order => res.json(order))
     .catch(next)
 })
+
 
 router.param('orderId', (req, res, next, id) => {
   Order
@@ -42,6 +41,7 @@ router.param('orderId', (req, res, next, id) => {
     .catch(next);
 });
 
+
 router.get('/:orderId', (req, res, next) => {
   res.json(req.order);
 })
@@ -50,12 +50,12 @@ router.get('/:orderId', (req, res, next) => {
 router.put('/:orderId', (req, res, next) => {
   req.order
     .update(req.body, { returning: true })
-    .then(wine => res.status(200).json(wine))
+    .then((wine) => {
+      req.session.order=null;
+      res.status(200).json(wine)
+    })
     .catch(next);
 });
-
-
-
 
 
 // router.delete('/:wineId', (req, res, next) => {

@@ -1,26 +1,10 @@
 const router = require('express').Router()
-
 const { List, Order, Wine } = require('../db/models')
 module.exports = router
 
-/**
- * NOTES. This probably doesn't work as written.
- * 
- * The cart:
- *   1. If I'm signed in, you can find (or create) Order where
- *        user_id = req.user.id
- *          and
- *        status = CART
- *   2. If I'm not signed in,
- *      Approach (a). Create a Guest user account, and do (1)
- *      Approach (b). Allow Orders not to be owned by a user (userId is NULL),
- *         and save the order's id on the session as cartId.
- */
-async function withCart(req, res, next) {
-  // If we've already associated an order with this session
 
+async function withCart(req, res, next) {
   if (req.session.order && req.session.order !== null) {
-    //req.session.order = await Order.findById(req.session.cartId)
     next()
     return
   }
@@ -32,8 +16,6 @@ async function withCart(req, res, next) {
       }
     })
   req.session.order = order[0].dataValues;
-
-  //req.session.cartId = req.cart.id
   next()
 }
 
@@ -53,8 +35,6 @@ async function getCart(req, res, next) {
 }
 
 
-
-
 router.post('/cart', withCart, (req, res, next) => {
   List.create({
     wineId: req.body.id,
@@ -66,13 +46,14 @@ router.post('/cart', withCart, (req, res, next) => {
     .catch(next)
 })
 
+
 router.delete('/cart/:id', (req, res, next) => {
   List.destroy({
     where: {
       id: req.params.id
     }
   }).then(() => res.sendStatus(204))
-  .catch(next)
+    .catch(next)
 })
 
 
@@ -90,6 +71,8 @@ router.get('/cart', getCart, (req, res, next) => {
         res.json(cart)
       })
       .catch(next)
+  } else {
+    res.json([])
   }
 })
 
@@ -107,10 +90,10 @@ router.put(`/cart/:id`, (req, res, next) => {
 
 router.delete(`/cart/:id`, (req, res, next) => {
   List.destroy({ where: { id: req.params.id } })
-  .then(() => {
-    res.sendStatus(204)
-  })
-  .catch(next)
+    .then(() => {
+      res.sendStatus(204)
+    })
+    .catch(next)
 })
 
 
@@ -120,13 +103,9 @@ router.put('/guestCart', (req, res, next) => {
       { orderId: req.session.order.id },
       { where: { orderId: req.session.guestOrder.id } })
       .then(() => {
+        Order.destroy({ where: { id: req.session.guestOrder.id } })
         req.session.guestOrder = null;
-        return Order.destroy({ where: { id: req.session.guestOrder.id } })
       }).then(() => res.sendStatus(200))
       .catch(next)
   }
 })
-
-
-
-

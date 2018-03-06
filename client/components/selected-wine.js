@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 export const SelectedWine = (props) => {
     const wine = props.data;
     const user = props.user;
-    console.log('user: ', user);
     return (
         <div>
             {
@@ -43,27 +42,16 @@ export const SelectedWine = (props) => {
                     price: ${wine.price}
                 </h6>
             </div>
-             <div>
-            <button onClick={(event) => {
-                props.addToCart(event, wine)
-            }} > Add to Cart </button>
+            <div>
+                <button onClick={(event) => {
+                    props.addToCart(event, wine)
+                }} > Add to Cart </button>
             </div>
 
         </div>
     )
 }
 
-// class SingleWineContainer extends React.Component {
-//     componentDidMount() {
-//         this.props.selectWineById(this.props.match.params.id)
-//     }
-
-//     render() {
-//         if (!this.props.selectedWine) return <h1>Loading...</h1>
-
-//         return <SelectedWine selectedWine={this.props.selectedWine} />
-//     }
-// }
 
 class Loader extends React.Component {
     componentDidMount() {
@@ -74,12 +62,12 @@ class Loader extends React.Component {
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
         const Render = this.props.Render
-        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user}/>
+        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user} />
     }
 }
 
+
 const mapState = (state) => {
-    console.log("state", state.user.loggedInUser)
     return {
         data: state.wine.selectedWine.wine,
         user: state.user.loggedInUser,
@@ -87,16 +75,18 @@ const mapState = (state) => {
     }
 }
 
+
 const mapDispatch = (dispatch) => {
     return {
         load(id) {
             return dispatch(selectWineById(id))
         },
         addToCart(event, item) {
-             event.preventDefault()
-             dispatch(postItem(item))
+            event.preventDefault()
+            dispatch(postItem(item))
         }
     }
 }
+
 
 export default connect(mapState, mapDispatch)(Loader)

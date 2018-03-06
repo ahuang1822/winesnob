@@ -2,22 +2,16 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
+import {Home, Login, WineList, AccountPage, Cart, Checkout, AddWine, EditWine, OrderDetails, OrderHistory, Review, SelectedWine, EditPayment, CreatePayment, CreateUserPlace, EditUserPlace, Signup, CompletedPurchase} from './components'
+import { fetchWineList, fetchItems, me } from './store'
 
-import {Home, Login, WineList, AccountPage, Cart, Checkout, AddWine, EditWine, OrderDetails, OrderHistory, Review, SelectedWine, Payment, UserPlace, Signup} from './components'
-import {me} from './store'
-import { fetchWineList } from './store/wine'
-import { fetchItems } from './store/cart'
 
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
     this.props.loadWineList()
     this.props.loadCart()
   }
-
   render () {
     return (
       <Switch>
@@ -34,17 +28,19 @@ class Routes extends Component {
         <Route exact path="/order-detail/:orderId" component={OrderDetails} />
         <Route exact path="/order-history" component={OrderHistory} />
         <Route exact path="/reviews/:wineId" component={Review} />
-        <Route exact path="/payment/:id" component={Payment} />
-        <Route exact path="/shipping/:id/:placeId" component={UserPlace} />
+        <Route exact path="/payment/:id" component={CreatePayment} />
+        <Route exact path="/payment/:id/:paymentId" component={EditPayment} />
+        <Route exact path="/shipping/:id" component={CreateUserPlace} />
+        <Route exact path="/shipping/:id/:placeId" component={EditUserPlace} />
+        <Route exact path="/purchase/complete" component={CompletedPurchase} />
       </Switch>
     )
   }
 }
 
-/**
- * CONTAINER
- */
+
 const mapState = () => ({message: 'Welcome'})
+
 
 const mapDispatch = (dispatch) => {
   return {
@@ -60,14 +56,10 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
+
 export default withRouter(connect(mapState, mapDispatch)(Routes))
 
-/**
- * PROP TYPES
- */
+
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  //isLoggedIn: PropTypes.bool.isRequired
 }

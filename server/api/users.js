@@ -2,17 +2,20 @@ const router = require('express').Router()
 const { User, Place, Order, List, Payment } = require('../db/models')
 module.exports = router
 
+
 router.get('/', (req, res, next) => {
   User.findAll()
     .then(users => res.json(users))
     .catch(next)
 })
 
+
 router.post('/', (req, res, next) => {
   User.create(req.body)
     .then(user => res.json(user))
     .catch(next)
 })
+
 
 router.param('userId', (req, res, next, id) => {
   User
@@ -35,6 +38,7 @@ router.param('userId', (req, res, next, id) => {
     .catch(next);
 });
 
+
 router.get('/:userId', (req, res) => {
   Order.findAll({
     where: {
@@ -50,12 +54,14 @@ router.get('/:userId', (req, res) => {
     });
 })
 
+
 router.put('/:userId', (req, res, next) => {
   req.user
     .update(req.body, { returning: true })
     .then(user => res.status(200).json(user))
     .catch(next);
 });
+
 
 router.delete('/:userId', (req, res, next) => {
   req.user
@@ -64,8 +70,8 @@ router.delete('/:userId', (req, res, next) => {
     .catch(next);
 });
 
+
 router.post('/:userId/cart', (req, res, next) => {
-  console.log('body ', req.body.total)
   Order.create({
     total: req.body.total,
     userId: req.params.userId
@@ -86,6 +92,7 @@ router.post('/:userId/cart', (req, res, next) => {
     .catch(next)
 })
 
+
 router.put('/:userId/checkout', (req, res, next) => {
   Order.update({
     status: 'Ordered',
@@ -97,22 +104,58 @@ router.put('/:userId/checkout', (req, res, next) => {
   })
 })
 
+
 router.post('/payment/:id', (req, res, next) => {
   Payment.create(req.body)
     .then(payment => {
-      console.log(payment)
       User.update({ paymentId: payment.dataValues.id }, { where: { id: req.params.id }, returning: true })
-        .then(user => {
-          console.log(user)
-          res.json(user[1])
+        .then(() => {
+          User.findById(req.params.id, {
+            include: [{
+              model: Place,
+              as: 'place'
+            }, {
+              model: Payment, as: 'payment'
+            }]
+          })
+            .then(user => {
+              res.json(user)
+            })
         })
     })
     .catch(next)
 })
 
 
-router.put('/place/:placeId', (req, res, next) => {
-  Place.update(req.body, { where: { id: req.params.placeId }, returning: true })
-    .then(result => res.json(result[1][0]))
+router.put('/payment/:userId/:paymentId', (req, res, next) => {
+  Payment.update(req.body, { where: { id: req.params.paymentId } })
+  .then(() => {
+    User.findById(req.params.userId, {
+      include: [{
+        model: Place,
+        as: 'place'
+      }, {
+        model: Payment, as: 'payment'
+      }]
+    })
+      .then(user => res.json(user))
+  })
+  .catch(next)
+})
+
+
+router.put('/place/:userId/:placeId', (req, res, next) => {
+  Place.update(req.body, { where: { id: req.params.placeId } })
+    .then(() => {
+      User.findById(req.params.userId, {
+        include: [{
+          model: Place,
+          as: 'place'
+        }, {
+          model: Payment, as: 'payment'
+        }]
+      })
+        .then(user => res.json(user))
+    })
     .catch(next)
 })

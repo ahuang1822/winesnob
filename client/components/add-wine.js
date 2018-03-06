@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addWine } from '../store/wine'
 
+
 export const AddWine = (props) => {
-    console.log('test AddWine')
     const user = props.user
     return (
         <div>
@@ -60,27 +60,26 @@ export const AddWine = (props) => {
                     )
                     : <h3>404 Error</h3>
             }
-
         </div>
     )
 }
 
-class Loader extends React.Component {
 
+class Loader extends React.Component {
     render() {
         const Render = this.props.Render
         return <Render handleSubmit={this.props.handleSubmit} user={this.props.user} />
     }
 }
 
-const mapState = (state) => {
-    console.log('state user: ', state.user);
 
+const mapState = (state) => {
     return {
         user: state.user.loggedInUser,
         Render: AddWine
     }
 }
+
 
 const mapDispatch = (dispatch) => {
     return {
@@ -103,5 +102,6 @@ const mapDispatch = (dispatch) => {
         }
     }
 }
+
 
 export default connect(mapState, mapDispatch)(Loader)

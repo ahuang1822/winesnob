@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { User, Place, Order, List, Payment } = require('../db/models')
 module.exports = router
 
+
 router.post('/login', (req, res, next) => {
   req.session.guestOrder= req.session.order;
   req.session.order = null;
@@ -13,7 +14,6 @@ router.post('/login', (req, res, next) => {
       model: Payment,
       as: 'payment'
     }]
-    
   })
     .then(user => {
       if (!user) {
@@ -22,11 +22,11 @@ router.post('/login', (req, res, next) => {
         res.status(401).send('Incorrect password')
       } else {
         req.login(user, err => (err ? next(err) : res.json(user)))
-        //req.session.passport= user.dataValues;
       }
     })
     .catch(next)
 })
+
 
 router.post('/signup', (req, res, next) => {
   Place.create({
@@ -44,9 +44,19 @@ router.post('/signup', (req, res, next) => {
       password: req.body.password,
       placeId: place.id,
     })
-    .then(user => {
-      req.login(user, err => (err ? next(err) : res.json(user)))
-      req.session.passport = user;
+    .then(result => {
+      User.findById(result.id, {
+        include: [{
+          model: Place,
+          as: 'place'
+        }, {
+          model: Payment, as: 'payment'
+        }]
+      })
+      .then(user => {
+        req.login(user, err => (err ? next(err) : res.json(user)))
+        req.session.passport = user;
+      })
     })
     .catch(err => {
       if (err.name === 'SequelizeUniqueConstraintError') {
@@ -58,15 +68,17 @@ router.post('/signup', (req, res, next) => {
   })
 })
 
+
 router.post('/logout', (req, res) => {
-  console.log('LOGGED OUT')
   req.logout()
   req.session.destroy()
   res.redirect('/')
 })
 
+
 router.get('/me', (req, res) => {
   res.json(req.user)
 })
+
 
 router.use('/google', require('./google'))
