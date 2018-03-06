@@ -2,6 +2,24 @@ const router = require('express').Router()
 const { List, Order, Wine } = require('../db/models')
 module.exports = router
 
+<<<<<<< HEAD
+=======
+/**
+ * NOTES. This probably doesn't work as written.
+ *
+ * The cart:
+ *   1. If I'm signed in, you can find (or create) Order where
+ *        user_id = req.user.id
+ *          and
+ *        status = CART
+ *   2. If I'm not signed in,
+ *      Approach (a). Create a Guest user account, and do (1)
+ *      Approach (b). Allow Orders not to be owned by a user (userId is NULL),
+ *         and save the order's id on the session as cartId.
+ */
+async function withCart(req, res, next) {
+  // If we've already associated an order with this session
+>>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
 
 async function withCart(req, res, next) {
   if (req.session.order && req.session.order !== null) {
@@ -68,7 +86,7 @@ router.get('/cart', getCart, (req, res, next) => {
       }]
     })
       .then(cart => {
-        res.json(cart)
+        res.json(cart).status(200)
       })
       .catch(next)
   } else {
@@ -90,9 +108,12 @@ router.put(`/cart/:id`, (req, res, next) => {
 
 router.delete(`/cart/:id`, (req, res, next) => {
   List.destroy({ where: { id: req.params.id } })
+<<<<<<< HEAD
     .then(() => {
       res.sendStatus(204)
     })
+=======
+>>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
     .catch(next)
 })
 

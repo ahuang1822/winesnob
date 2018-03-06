@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const { Wine, Review, Place } = require('../db/models')
 module.exports = router
+const Sequelize = require('sequelize')
+
 
 
 router.get('/', (req, res, next) => {
@@ -18,14 +20,46 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  let { city, state, country, name, vintage, varietal, price, size, img, description, quantity } = req.body
-  Place.create({ city, state, country })
-    .then(place => {
-      Wine.create({ name, vintage, varietal, price, size, img, description, quantity, placeId: place.id })
-        .then(wine => res.json(wine))
-        .catch(next)
-    })
+  Wine.create(req.body)
+    .then(wine => res.json(wine))
+    .catch(next)
 })
+
+router.get('/varietal', (req, res, next) => {
+  Wine.findAll({
+    attributes: ['varietal'],
+    group: ['varietal']
+  })
+  .then(wines => {
+    res.json(wines)
+  })
+    .catch(next)
+})
+
+router.get('/size', (req, res, next) => {
+  Wine.findAll({
+    attributes: ['size'],
+    group: ['size']
+  })
+  .then(wines => {
+    res.json(wines)
+  })
+    .catch(next)
+})
+
+router.get('/place', (req, res, next) => {
+  Place.findAll({
+    where: ({
+      type: 'vineyard',
+    }),
+    attributes: ['city'],
+      group: ['city']
+  })
+  .then(wines => {
+    res.json(wines)
+  })
+    .catch(next)
+  })
 
 
 router.param('wineId', (req, res, next, id) => {

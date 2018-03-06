@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectWineById, editWine } from '../store/wine'
+import { selectWineById, editWine } from '../store'
 
 
 export const EditWine = (props) => {
     const wine = props.data;
     const user = props.user;
-    let { name, description, img, vintage, varietal, size, price } = wine;
+    let { name, description, img, vintage, varietal, size, price, quantity, tags } = wine;
     return (
         <div>
             {
@@ -45,6 +45,14 @@ export const EditWine = (props) => {
                                         <label>Price</label>
                                         <input name="price" type="text" defaultValue={price} />
                                     </div>
+                                    <div>
+                                        <label>Quantity</label>
+                                        <input name="quantity" type="text" defaultValue={quantity} />
+                                    </div>
+                                    <div>
+                                        <label>Tags</label>
+                                        <input name="tags" type="text" defaultValue={tags} />
+                                    </div>
                                     <button type="submit" >Submit Changes</button>
                                 </fieldset>
                             </form>
@@ -60,13 +68,11 @@ export const EditWine = (props) => {
 
 class Loader extends React.Component {
     componentDidMount() {
-        console.log('props***', this.props)
         this.props.load(this.props.match.params.id)
             .then(console.log)
             .catch(console.error)
     }
     render() {
-        console.log('test **********')
         if (!this.props.data) return <h1>Loading...</h1>
         const Render = this.props.Render
         return <Render user={this.props.user} data={this.props.data} handleSubmit={this.props.handleSubmit} />
@@ -97,7 +103,9 @@ const mapDispatch = (dispatch) => {
                 price: event.target.price.value,
                 size: event.target.size.value,
                 img: event.target.image.value,
-                description: event.target.description.value
+                description: event.target.description.value,
+                quantity: event.target.quantity.value,
+                tags: event.target.tags.value.split(',')
             }
             dispatch(editWine(id, editedValues))
         }

@@ -91,6 +91,7 @@ export const addPayment = (paymentInfo, userId) =>
       .catch(err => console.error(err))
 
 
+<<<<<<< HEAD
 export const updatePayment = (paymentInfo, userId, paymentId) =>
   dispatch =>
     axios.put(`/api/users/payment/${userId}/${paymentId}`, paymentInfo)
@@ -113,6 +114,13 @@ export const updateGuestPayment = address =>
     dispatch(addGuestPayment(address))
     history.push('/checkout')
   }
+=======
+export const editUserPlace = (placeId, editInfo) =>
+  dispatch =>
+    axios.put(`/api/users/place/${placeId}`, editInfo)
+      .then(res => console.log(res.data))
+      .catch(err => console.error(err))
+>>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
 
 
 export const logout = () =>

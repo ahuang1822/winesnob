@@ -33,7 +33,7 @@ export const Signup = (props) => {
           <label>Password:</label>
           <input
             name="password"
-            type="text"
+            type="password"
           />
         </div>
         <div>

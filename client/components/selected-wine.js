@@ -43,11 +43,28 @@ export const SelectedWine = (props) => {
                 </h6>
             </div>
             <div>
-                <button onClick={(event) => {
-                    props.addToCart(event, wine)
-                }} > Add to Cart </button>
-            </div>
+                <h6>
+                    {
+                        wine.quantity
+                            ? <div>
+                                <h6>
+                                    {`quantity: ${wine.quantity} left`}
+                                </h6>
+                            </div>
+                            : <div>
+                                <h6>
+                                    sold out
+                                </h6>
+                            </div>
+                    }
 
+                </h6>
+            </div>
+            <div>
+                <button
+                    onClick={(event) => { props.addToCart(event, wine) }}
+                    disabled={!wine.quantity}> Add to Cart </button>
+            </div>
         </div>
     )
 }
@@ -88,5 +105,9 @@ const mapDispatch = (dispatch) => {
     }
 }
 
+<<<<<<< HEAD
 
 export default connect(mapState, mapDispatch)(Loader)
+=======
+export default connect(mapState, mapDispatch)(Loader)
+>>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9

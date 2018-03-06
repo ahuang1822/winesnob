@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addWine } from '../store/wine'
+import { addWine } from '../store'
 
 
 export const AddWine = (props) => {

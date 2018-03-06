@@ -4,9 +4,10 @@ module.exports = router
 
 
 router.post('/login', (req, res, next) => {
-  req.session.guestOrder= req.session.order;
+  req.session.guestOrder = req.session.order;
   req.session.order = null;
-  User.findOne({where: {email: req.body.email},
+  User.findOne({
+    where: { email: req.body.email },
     include: [{
       model: Place,
       as: 'place'
@@ -36,14 +37,27 @@ router.post('/signup', (req, res, next) => {
     country: req.body.country,
     phone: req.body.phone
   })
-  .then(place => {
-    User.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-      placeId: place.id,
+    .then(place => {
+      User.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        placeId: place.id,
+      })
+        .then(user => {
+          req.login(user, err => (err ? next(err) : res.json(user)))
+          req.session.passport = user;
+        })
+        .catch(err => {
+          if (err.name === 'SequelizeUniqueConstraintError') {
+            res.status(401).send('User already exists')
+          } else {
+            next(err)
+          }
+        })
     })
+<<<<<<< HEAD
     .then(result => {
       User.findById(result.id, {
         include: [{
@@ -66,6 +80,8 @@ router.post('/signup', (req, res, next) => {
       }
     })
   })
+=======
+>>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
 })
 
 
@@ -77,8 +93,12 @@ router.post('/logout', (req, res) => {
 
 
 router.get('/me', (req, res) => {
-  res.json(req.user)
+  res.send(req.user)
 })
 
+<<<<<<< HEAD
 
 router.use('/google', require('./google'))
+=======
+router.use('/google', require('./google'))
+>>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9

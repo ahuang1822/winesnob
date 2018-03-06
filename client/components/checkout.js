@@ -129,7 +129,6 @@ export const Checkout = (props) => {
     )
 }
 
-
 const mapState = (state) => {
     return {
         winesInCart: state.cart.items,

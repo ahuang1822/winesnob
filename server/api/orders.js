@@ -24,7 +24,7 @@ router.param('orderId', (req, res, next, id) => {
       include: [{
         model: List,
         as: 'lists', include: [{
-          model: Wine
+          model: Wine, as: 'wine'
         }]
       }]
     })

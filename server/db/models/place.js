@@ -23,6 +23,9 @@ const Place = db.define('place', {
     },
     phone: {
         type: Sequelize.STRING
+    },
+    type: {
+        type: Sequelize.STRING
     }
 })
 
