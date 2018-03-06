@@ -55,6 +55,16 @@ export const WineList = (props) => {
                                             <div>
                                                 <img src={wine.img} />
                                             </div>
+                                            <div>
+                                                <h5>
+                                                    {`${wine.vintage} ${wine.varietal}`}
+                                                </h5>
+                                            </div>
+                                            <div>
+                                                <h5>
+                                                    {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
+                                                </h5>
+                                            </div>
                                             <h4>Sold Out</h4>
                                         </Link>
                                     )
@@ -103,6 +113,16 @@ export const WineList = (props) => {
                                             </div>
                                             <div>
                                                 <img src={wine.img} />
+                                            </div>
+                                            <div>
+                                                <h5>
+                                                    {`${wine.vintage} ${wine.varietal}`}
+                                                </h5>
+                                            </div>
+                                            <div>
+                                                <h5>
+                                                    {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
+                                                </h5>
                                             </div>
                                             <h4>Sold Out</h4>
                                         </div>
