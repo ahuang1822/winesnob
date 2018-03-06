@@ -41,13 +41,13 @@ router.get('/:userId', (req, res) => {
       userId: req.params.userId
     }
   })
-  .then(
-    orders => {
-      res.json({
-        user: req.user,
-        orders
-    })
-  });
+    .then(
+      orders => {
+        res.json({
+          user: req.user,
+          orders
+        })
+      });
 })
 
 router.put('/:userId', (req, res, next) => {
@@ -59,31 +59,31 @@ router.put('/:userId', (req, res, next) => {
 
 router.delete('/:userId', (req, res, next) => {
   req.user
-  .destroy({ force: true })
-  .then(() => res.status(204).end())
-  .catch(next);
+    .destroy({ force: true })
+    .then(() => res.status(204).end())
+    .catch(next);
 });
 
 router.post('/:userId/cart', (req, res, next) => {
   console.log('body ', req.body.total)
   Order.create({
-      total: req.body.total,
-      userId: req.params.userId
-    })
-  .then(order => {
-    console.log('order ', order)
-    console.log('items ', req.body.items)
-    return req.body.items.forEach(item => {
-      List.create({
-        price: item.price,
-        quantity: item.quantity,
-        orderId: order.id,
-        wineId: item.id
+    total: req.body.total,
+    userId: req.params.userId
+  })
+    .then(order => {
+      console.log('order ', order)
+      console.log('items ', req.body.items)
+      return req.body.items.forEach(item => {
+        List.create({
+          price: item.price,
+          quantity: item.quantity,
+          orderId: order.id,
+          wineId: item.id
+        })
       })
     })
-  })
-  .then(lists => res.json(lists))
-  .catch(next)
+    .then(lists => res.json(lists))
+    .catch(next)
 })
 
 router.put('/:userId/checkout', (req, res, next) => {
@@ -96,7 +96,7 @@ router.put('/:userId/checkout', (req, res, next) => {
 })
 
 router.put('/place/:placeId', (req, res, next) => {
-  Place.update(req.body,  { where: { id: req.params.placeId }, returning: true })
-  .then(result => res.json(result[1][0]))
-  .catch(next)
+  Place.update(req.body, { where: { id: req.params.placeId }, returning: true })
+    .then(result => res.json(result[1][0]))
+    .catch(next)
 })

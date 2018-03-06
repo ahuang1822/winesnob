@@ -54,8 +54,6 @@ async function getCart(req, res, next) {
 }
 
 
-
-
 router.post('/cart', withCart, (req, res, next) => {
   List.create({
     wineId: req.body.id,
@@ -73,7 +71,7 @@ router.delete('/cart/:id', (req, res, next) => {
       id: req.params.id
     }
   }).then(() => res.sendStatus(204))
-  .catch(next)
+    .catch(next)
 })
 
 
@@ -107,7 +105,7 @@ router.put(`/cart/:id`, (req, res, next) => {
 
 router.delete(`/cart/:id`, (req, res, next) => {
   List.destroy({ where: { id: req.params.id } })
-  .catch(next)
+    .catch(next)
 })
 
 
@@ -124,10 +122,6 @@ router.put('/guestCart', (req, res, next) => {
       .catch(next)
   }
 })
-
-
-
-
 
 // router.put('/guestCart', (req, res, next) => {
 //   if (req.body.merging) {

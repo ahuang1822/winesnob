@@ -26,14 +26,14 @@ export const fetchOrder = () =>
       .catch(err => console.error(err))
 
 
-export const updateOrder = (id, orderInfo) => 
+export const updateOrder = (id, orderInfo) =>
   dispatch =>
     axios.put(`api/orders/${id}`, orderInfo)
       .then(res => {
         dispatch(editOrder(res.data))
       })
       .catch(err => console.error(err))
-      
+
 
 export const fetchSingleOrder = (id) =>
   dispatch =>
@@ -44,7 +44,6 @@ export const fetchSingleOrder = (id) =>
       .catch(err => console.error(err))
 
 
-
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_ORDERS:
@@ -52,7 +51,7 @@ export default function reducer(state = initialState, action) {
     case GET_SINGLE_ORDER:
       return Object.assign({}, state, { order: action.order });
     case UPDATE_ORDER:
-     return Object.assign({}, state, { order: action.order })
+      return Object.assign({}, state, { order: action.order })
     default:
       return state;
   }

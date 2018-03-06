@@ -8,16 +8,14 @@ export class Cart extends React.Component {
     constructor(props) {
         super(props)
 
-     this.state = {
-       isClicked: true
-     }
+        this.state = {
+            isClicked: true
+        }
     }
 
     componentDidMount() {
         this.props.loadCart(event)
     }
-
-
 
     render() {
         let winesInCart = this.props.winesInCart;
@@ -32,16 +30,16 @@ export class Cart extends React.Component {
                 <h1>Cart</h1>
                 {
                     loggedInUser.id && this.state.isClicked ?
-                        <h6>There have been items added to the shopping cart as a guest. Would you like to merge these items? <Link 
-                        to="/cart"
-                        onClick={(event) => {
-                            mergeCarts(event, { merging: true });
-                            loadCart(event)
-                            this.setState({isClicked: false});
-                        }}>Merge Carts</Link></h6>
+                        <h6>There have been items added to the shopping cart as a guest. Would you like to merge these items? <Link
+                            to="/cart"
+                            onClick={(event) => {
+                                mergeCarts(event, { merging: true });
+                                loadCart(event)
+                                this.setState({ isClicked: false });
+                            }}>Merge Carts</Link></h6>
                         : null
                 }
-                { 
+                {
                     winesInCart.map(wine => {
                         counter += wine.quantity * wine.wine.price
                         return (
@@ -52,11 +50,11 @@ export class Cart extends React.Component {
                                 }} >+</button><button onClick={(event) => {
                                     update(event, wine.id, --wine.quantity)
                                     loadCart(event)
-                                }} >-</button> <button onClick={(event) => { 
+                                }} >-</button> <button onClick={(event) => {
                                     remove(event, wine.id)
                                     loadCart(event)
-                                } }>Remove</button>
-                                ${wine.quantity * wine.wine.price}
+                                }}>Remove</button>
+                                    ${wine.quantity * wine.wine.price}
                                 </h2>
                             </div>
                         )
@@ -93,7 +91,7 @@ const mapDispatch = (dispatch) => {
                 dispatch(updateQuantity(id, { quantity: numItems }))
             }
         },
-        removeItem(event, id){
+        removeItem(event, id) {
             event.preventDefault()
             dispatch(removeItem(id))
         }

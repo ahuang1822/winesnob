@@ -62,13 +62,11 @@ export const edit = (userId, editInfo) =>
       .catch(err => console.error(err))
 
 
-      export const editUserPlace = (placeId, editInfo) =>
-      dispatch =>
-        axios.put(`/api/users/place/${placeId}`, editInfo)
-        .then(res => console.log(res.data) )
-          .catch(err => console.error(err))
-
-
+export const editUserPlace = (placeId, editInfo) =>
+  dispatch =>
+    axios.put(`/api/users/place/${placeId}`, editInfo)
+      .then(res => console.log(res.data))
+      .catch(err => console.error(err))
 
 
 export const logout = () =>
