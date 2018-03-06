@@ -113,7 +113,6 @@ router.put('/:userId/checkout', (req, res, next) => {
   })
 })
 
-<<<<<<< HEAD
 
 router.post('/payment/:id', (req, res, next) => {
   Payment.create(req.body)
@@ -151,12 +150,6 @@ router.put('/payment/:userId/:paymentId', (req, res, next) => {
       .then(user => res.json(user))
   })
   .catch(next)
-=======
-router.put('/place/:placeId', (req, res, next) => {
-  Place.update(req.body, { where: { id: req.params.placeId }, returning: true })
-    .then(result => res.json(result[1][0]))
-    .catch(next)
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
 })
 
 

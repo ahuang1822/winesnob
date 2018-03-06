@@ -24,10 +24,6 @@ export const fetchItems = () =>
             })
             .catch(err => console.error(err))
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
 export const postItem = (item) =>
     dispatch =>
         axios.post('/api/list/cart', item)
@@ -36,10 +32,6 @@ export const postItem = (item) =>
             })
             .catch(err => console.error(err))
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
 export const putItems = (body) =>
     dispatch =>
         axios.put('/api/list/guestCart', body)
@@ -53,7 +45,6 @@ export const updateQuantity = (id, quantity) =>
             .then(() => dispatch(fetchItems()))
             .catch(err => console.error(err))
 
-<<<<<<< HEAD
 
 export const removeItem = (id) =>
     dispatch =>
@@ -61,12 +52,6 @@ export const removeItem = (id) =>
             .then(() => dispatch(fetchItems()))
             .catch(err => console.error(err))
 
-=======
-export const removeItem = (id) =>
-    dispatch =>
-        axios.delete(`/api/list/cart/${id}`)
-            .catch(err => console.error(err))
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
 
 const reducer = function (state = initialState, action) {
     switch (action.type) {
@@ -79,8 +64,4 @@ const reducer = function (state = initialState, action) {
     }
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
 export default reducer

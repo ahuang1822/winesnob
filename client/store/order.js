@@ -63,13 +63,10 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, { order: action.order });
     case UPDATE_ORDER:
       return Object.assign({}, state, { order: action.order })
-<<<<<<< HEAD
     case ADD_ORDER_TO_ORDERS:
       return Object.assign({}, state, { orders: [...state.orders, action.order] })
     case REMOVE_ORDER:
       return Object.assign({}, state, { order: {} })
-=======
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
     default:
       return state;
   }

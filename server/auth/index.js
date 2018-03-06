@@ -57,7 +57,6 @@ router.post('/signup', (req, res, next) => {
           }
         })
     })
-<<<<<<< HEAD
     .then(result => {
       User.findById(result.id, {
         include: [{
@@ -80,9 +79,6 @@ router.post('/signup', (req, res, next) => {
       }
     })
   })
-=======
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
-})
 
 
 router.post('/logout', (req, res) => {
@@ -96,9 +92,4 @@ router.get('/me', (req, res) => {
   res.send(req.user)
 })
 
-<<<<<<< HEAD
-
 router.use('/google', require('./google'))
-=======
-router.use('/google', require('./google'))
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9

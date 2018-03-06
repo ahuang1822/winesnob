@@ -2,11 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-<<<<<<< HEAD
-import {Home, Login, WineList, AccountPage, Cart, Checkout, AddWine, EditWine, OrderDetails, OrderHistory, Review, SelectedWine, EditPayment, CreatePayment, CreateUserPlace, EditUserPlace, Signup, CompletedPurchase} from './components'
 import { fetchWineList, fetchItems, me } from './store'
-
-=======
 import {Home,
         Login,
         WineList,
@@ -19,14 +15,14 @@ import {Home,
         OrderHistory,
         Review,
         SelectedWine,
-        Payment,
-        UserPlace,
+        EditPayment, 
+        CreatePayment, 
+        CreateUserPlace, 
+        EditUserPlace, 
+        CompletedPurchase,
         Signup}
         from './components'
-import {me} from './store'
-import { fetchWineList } from './store/wine'
-import { fetchItems } from './store/cart'
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
+        
 
 class Routes extends Component {
   componentDidMount () {
