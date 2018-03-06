@@ -15,19 +15,12 @@ class WineList extends Component {
 	constructor(props) {
     super(props);
 
-    // this.state = {
-    //   varietal: '',
-    //   size: '',
-    //   place: '',
-    //   searchKey: ''
-    // }
-
     this.handleChange = this.handleChange.bind(this)
     this.onClickVarietal = this.onClickVarietal.bind(this)
     this.onClickSize = this.onClickSize.bind(this)
     this.onClickPlace = this.onClickPlace.bind(this)
+    this.onClickSort = this.onClickSort.bind(this)
   }
-
 
   componentDidMount() {
     this.props.fetchWineList()
@@ -37,49 +30,110 @@ class WineList extends Component {
   handleChange (event) {
     event.preventDefault();
     let wineList = this.props.wineListOnProps
-    let filteredList = wineList.filter(wine => {
+    let filterList = wineList.filter(wine => {
       return (wine.varietal.includes(this.props.filterVarietalOnProps) &&
         wine.size.includes(this.props.filterSizeOnProps) &&
         wine.place.city.includes(this.props.filterPlaceOnProps) &&
-        wine.name.toLowerCase().includes(event.target.value.toLowerCase()))
+        wine.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
+        (wine.tags.join("")).toLowerCase().includes(event.target.value.toLowerCase()))
     })
-    this.props.filterWineList(filteredList)
+    let filteredList = filterList.slice()
+    let sortBy = this.props.sortByOnProps
+    if (sortBy === "low-high") {
+      var sortedList = filteredList.sort(function(a,b) {
+        return parseInt(a.price) - parseFloat(b.price)
+      })
+    } else {
+      var sortedList = filteredList.sort(function(a,b) {
+        return parseInt(b.price) - parseFloat(a.price)
+    })
+  }
+    this.props.setSearchKey(event.target.value, filteredList)
   }
 
   onClickVarietal(event) {
     event.preventDefault();
     let wineList = this.props.wineListOnProps
-    let filteredList = wineList.filter(wine => {
+    let filterList = wineList.filter(wine => {
       return (wine.varietal.includes(event.target.value) &&
         wine.size.includes(this.props.filterSizeOnProps) &&
         wine.place.city.includes(this.props.filterPlaceOnProps) &&
         wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase()))
     })
+    let filteredList = filterList.slice()
+    let sortBy = this.props.sortByOnProps
+    if (sortBy === "low-high") {
+      var sortedList = filteredList.sort(function(a,b) {
+        return parseInt(a.price) - parseFloat(b.price)
+      })
+    } else {
+      var sortedList = filteredList.sort(function(a,b) {
+        return parseInt(b.price) - parseFloat(a.price)
+    })
+  }
     this.props.filterVarietal(event.target.value, filteredList)
   }
 
   onClickSize(event) {
     event.preventDefault();
     let wineList = this.props.wineListOnProps
-    let filteredList = wineList.filter(wine => {
+    let filterList = wineList.filter(wine => {
       return (wine.varietal.includes(this.props.filterVarietalOnProps) &&
         wine.size.includes(event.target.value) &&
         wine.place.city.includes(this.props.filterPlaceOnProps) &&
-        wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase()))
+        (wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase())))
+        
     })
+    let filteredList = filterList.slice()
+    let sortBy = this.props.sortByOnProps
+    if (sortBy === "low-high") {
+      var sortedList = filteredList.sort(function(a,b) {
+        return parseInt(a.price) - parseFloat(b.price)
+      })
+    } else {
+      var sortedList = filteredList.sort(function(a,b) {
+        return parseInt(b.price) - parseFloat(a.price)
+    })
+  }
     this.props.filterSize(event.target.value, filteredList)
   }
 
   onClickPlace(event) {
     event.preventDefault();
     let wineList = this.props.wineListOnProps
-    let filteredList = wineList.filter(wine => {
+    let filterList = wineList.filter(wine => {
       return (wine.varietal.includes(this.props.filterVarietalOnProps) &&
         wine.size.includes(this.props.filterSizeOnProps) &&
         wine.place.city.includes(event.target.value) &&
         wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase()))
     })
+    let filteredList = filterList.slice()
+    let sortBy = this.props.sortByOnProps
+    if (sortBy === "low-high") {
+      var sortedList = filteredList.sort(function(a,b) {
+        return parseInt(a.price) - parseFloat(b.price)
+      })
+    } else {
+      var sortedList = filteredList.sort(function(a,b) {
+        return parseInt(b.price) - parseFloat(a.price)
+    })
+  }
     this.props.filterPlace(event.target.value, filteredList)
+  }
+
+  onClickSort(event) {
+    event.preventDefault();
+    let wineList = this.props.filteredListOnProps.slice()
+    if (event.target.value === "low-high") {
+      var sortedList = wineList.sort(function(a,b) {
+        return parseInt(a.price) - parseFloat(b.price)
+      })
+    } else {
+      var sortedList = wineList.sort(function(a,b) {
+        return parseInt(b.price) - parseFloat(a.price)
+    })
+  }
+    this.props.filterWineList(event.target.value, sortedList) 
   }
 
 	render() {
@@ -143,27 +197,48 @@ class WineList extends Component {
 
     {listOfPlace.length > 1 ?
       <div className="filter">
-      <select id="place" className="filter-item" onChange={this.onClickPlace}>
+        <select id="place" className="filter-item" onChange={this.onClickPlace}>
           <option
             key="defaultSize"
             value="">
               Search By Vineyard Location
-            </option>
-        {listOfPlace.map(place => {
-          return (
-          <option
-            key={place.id}
-            value={place.city}>
-              {place.city}
-            </option>
+          </option>
+          {listOfPlace.map(place => {
+            return (
+            <option
+              key={place.id}
+              value={place.city}>
+                {place.city}
+              </option>
+            )}
           )}
-        )}
-        </select>
-      </div>
-       : <div />
-
+          </select>
+        </div>
+    : <div></div>
     }
+    
+    <div className="filter">
+    <select id="sort" className="filter-item" onChange={this.onClickSort}>
+      <option
+        key="defaultSort"
+        value="default">
+          Sort By 
+      </option>
+      <option
+        key="low-high-sort"
+        value="low-high">
+          Price: Low to High
+      </option>
+      <option
+        key="high-low-sort"
+        value="high-low">
+          Price: High to Low
+      </option>
+    </select>
     </div>
+  </div>
+    
+
 
   {this.props.filteredListOnProps.length ?
 			<ul id="wine-list">
@@ -218,6 +293,7 @@ const mapState = (state) => {
     filterPlaceOnProps: state.wine.filterPlace,
     filterSizeOnProps: state.wine.filterSize,
     searchKeyOnProps: state.wine.searchKey,
+    sortByOnProps: state.wine.sortBy
   }
 }
 
@@ -226,8 +302,8 @@ const mapDispatch = (dispatch) => {
         fetchWineList () {
           dispatch(fetchWineList())
         },
-        filterWineList(wines) {
-          dispatch(filterWineList(wines))
+        filterWineList(sort, wines) {
+          dispatch(filterWineList(sort, wines))
         },
         filterVarietal(varietal, filteredList) {
           dispatch(filterVarietal(varietal, filteredList))
@@ -238,7 +314,7 @@ const mapDispatch = (dispatch) => {
         filterSize(size, filteredList) {
           dispatch(filterSize(size, filteredList))
         },
-        setSearchKey(searchKey) {
+        setSearchKey(searchKey, filteredList) {
           dispatch(setSearchKey(searchKey, filteredList))
         }
     }
