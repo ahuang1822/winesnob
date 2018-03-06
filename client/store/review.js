@@ -28,7 +28,7 @@ export default function reducer(state = initialState, action) {
 
     case ADD_REVIEW:
     return Object.assign({}, state, {currentReview: action.review});
-    
+
     default:
       return state;
   }

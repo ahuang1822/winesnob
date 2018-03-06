@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addWine } from '../store/wine'
+import { addWine } from '../store'
 
 export const AddWine = (props) => {
-    console.log('test AddWine')
     const user = props.user
     return (
         <div>
@@ -74,7 +73,6 @@ class Loader extends React.Component {
 }
 
 const mapState = (state) => {
-    console.log('state user: ', state.user);
 
     return {
         user: state.user.loggedInUser,

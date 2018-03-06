@@ -5,6 +5,7 @@ import store from './index'
 
 const GET_WINE_LIST = 'GET_WINE_LIST'
 const SELECT_WINE = 'SELECT_WINE'
+const CREATE_WINE = 'CREATE_WINE'
 const FILTER_WINE = 'FILTER_WINE'
 const FETCH_VARIETAL = 'FETCH_VARIETAL'
 const FETCH_SIZE = 'FETCH_SIZE'
@@ -23,14 +24,14 @@ const initialState = {
 
 const getWineList = wineList => ({ type: GET_WINE_LIST, wineList })
 const selectWine = wine => ({ type: SELECT_WINE, wine })
-
+const createWine = wine => ({ type: CREATE_WINE, wine })
 const fetchVarietal = varietal => ({ type: FETCH_VARIETAL, varietal })
 
 const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
 
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
 
-const filterWineList = wines => ({ type: FILTER_WINE,	wines	})
+export const filterWineList = wines => ({ type: FILTER_WINE,	wines	})
 
 export const fetchWineList = () =>
 	dispatch =>
