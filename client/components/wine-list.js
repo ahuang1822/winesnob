@@ -37,8 +37,13 @@ class WineList extends Component {
   }
 
   handleChange (e) {
-    let filteredList = this.props.filteredListOnProps.filter(wine => {
-      return wine.name.toLowerCase().includes(e.target.value.toLowerCase())
+    this.state.searchKey = e.target.value
+    let wineList = this.props.wineListOnProps
+    let filteredList = wineList.filter(wine => {
+      return (wine.varietal.includes(this.state.varietal) &&
+        wine.size.includes(this.state.size) &&
+        wine.place.city.includes(this.state.place) &&
+        wine.name.toLowerCase().includes(e.target.value.toLowerCase()))
     })
     this.props.filterWineList(filteredList)
   }
@@ -49,7 +54,8 @@ class WineList extends Component {
     let filteredList = wineList.filter(wine => {
       return (wine.varietal.includes(this.state.varietal) &&
         wine.size.includes(this.state.size) &&
-        wine.place.city.includes(this.state.place))
+        wine.place.city.includes(this.state.place) &&
+        wine.name.toLowerCase().includes(this.state.searchKey.toLowerCase()))
     })
     this.props.filterWineList(filteredList)
   }
@@ -61,7 +67,8 @@ class WineList extends Component {
     let filteredList = wineList.filter(wine => {
       return (wine.varietal.includes(this.state.varietal) &&
         wine.size.includes(this.state.size) &&
-        wine.place.city.includes(this.state.place))
+        wine.place.city.includes(this.state.place) &&
+        wine.name.toLowerCase().includes(this.state.searchKey.toLowerCase()))
     })
     this.props.filterWineList(filteredList)
   }
@@ -72,7 +79,8 @@ class WineList extends Component {
     let filteredList = wineList.filter(wine => {
       return (wine.varietal.includes(this.state.varietal) &&
         wine.size.includes(this.state.size) &&
-        wine.place.city.includes(this.state.place))
+        wine.place.city.includes(this.state.place) &&
+        wine.name.toLowerCase().includes(this.state.searchKey.toLowerCase()))
     })
     this.props.filterWineList(filteredList)
   }
@@ -109,7 +117,7 @@ class WineList extends Component {
             </option>
         ))}
         </select>
-      </div> : <h2>Loading...</h2>
+      </div> : <div></div>
   }
 
   {listOfSize.length > 1 ?
@@ -128,7 +136,7 @@ class WineList extends Component {
           </option>
       ))}
       </select>
-    </div> : <h2>Loading...</h2>
+    </div> : <div></div>
 }
     
   {listOfPlace.length > 1 ?
@@ -147,7 +155,7 @@ class WineList extends Component {
           </option>
       ))}
       </select>
-    </div> : <h2>Loading...</h2>
+    </div> : <div></div>
   }
 
   {this.props.filteredListOnProps.length ?
@@ -182,7 +190,7 @@ class WineList extends Component {
 					</Link>
 				))}
       </ul>
-      : <h2>Loading...</h2>
+      : <h2>Can't find that</h2>
       }
 		</div>
   )}

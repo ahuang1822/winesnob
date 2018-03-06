@@ -102,13 +102,5 @@ const mapDispatch = (dispatch) => {
     }
 }
 
-const mapDispatch = (dispatch) => {
-	return {
-		loadCart() {
-			dispatch(fetchItems());
-		}
-	}
-};
-
 
 export default connect(mapState, mapDispatch)(Cart)
