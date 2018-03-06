@@ -36,12 +36,7 @@ const createWine = wine => ({ type: CREATE_WINE, wine })
 const fetchVarietal = varietal => ({ type: FETCH_VARIETAL, varietal })
 const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
-
 export const filterWineList = wines => ({ type: FILTER_WINE, wines })
-export const filterVarietal = varietal => ({ type: FILTER_VARIETAL, varietal})
-export const filterPlace = place => ({ type: FILTER_PLACE, place})
-export const filterSize = size => ({ type: FILTER_SIZE, size})
-export const setSearchKey = searchKey => ({ type: SEARCH_KEY, searchKey})
 
 export const fetchWineList = () =>
 	dispatch =>
@@ -58,6 +53,30 @@ export const fetchWineList = () =>
 				dispatch(getWineList(wines.data))
 			}))
 
+export const filterVarietal = (varietal, wines) =>
+	dispatch => {
+		dispatch({ type: FILTER_VARIETAL, varietal })
+		dispatch({ type: FILTER_WINE, wines })
+	}
+
+export const filterSize = (size, wines) =>
+	dispatch => {
+		dispatch({ type: FILTER_SIZE, size })
+		dispatch({ type: FILTER_WINE, wines })
+	}
+
+export const filterPlace = (place, wines) =>
+	dispatch => {
+		dispatch({ type: FILTER_PLACE, place })
+		dispatch({ type: FILTER_WINE, wines })
+	}
+
+export const setSearchKey = (searchKey) =>
+	dispatch => {
+		dispatch({ type: SEARCH_KEY, searchKey })
+		dispatch({ type: FILTER_WINE, wines })
+	}
+
 export const selectWineById = (id) =>
 	dispatch =>
 		axios.get(`/api/wines/${id}`)
@@ -67,14 +86,14 @@ export const selectWineById = (id) =>
 			.catch(err => console.log(err))
 
 export const addWine = (wineDetails) =>
-    dispatch => {
-        axios.post('/api/wines', wineDetails)
-            .then(res => {
-                dispatch(createWine(res.data))
-                history.push('/')
-            })
-            .catch(err => console.error(err))
-    }
+	dispatch => {
+		axios.post('/api/wines', wineDetails)
+			.then(res => {
+				dispatch(createWine(res.data))
+				history.push('/')
+			})
+			.catch(err => console.error(err))
+	}
 
 const reducer = function (state = initialState, action) {
 	switch (action.type) {
@@ -86,8 +105,8 @@ const reducer = function (state = initialState, action) {
 			})
 		case SELECT_WINE:
 			return Object.assign({}, state, { selectedWine: action.wine })
-    case CREATE_WINE:
-          return Object.assign({}, state, { wineList: [...state.wineList, action.wine] })
+		case CREATE_WINE:
+			return Object.assign({}, state, { wineList: [...state.wineList, action.wine] })
 		case FILTER_WINE:
 			return Object.assign({}, state, { filteredList: action.wines })
 		case FETCH_VARIETAL:
@@ -97,13 +116,13 @@ const reducer = function (state = initialState, action) {
 		case FETCH_PLACE:
 			return Object.assign({}, state, { places: action.places })
 		case FILTER_VARIETAL:
-			return Object.assign({}, state, { filterVarietal: action.varietal})
+			return Object.assign({}, state, { filterVarietal: action.varietal })
 		case FILTER_PLACE:
-			return Object.assign({}, state, { filterPlace: action.place})
+			return Object.assign({}, state, { filterPlace: action.place })
 		case FILTER_SIZE:
-			return Object.assign({}, state, { filterSize: action.size})
+			return Object.assign({}, state, { filterSize: action.size })
 		case SEARCH_KEY:
-			return Object.assign({}, state, { searchKey: action.searchKey})
+			return Object.assign({}, state, { searchKey: action.searchKey })
 		default: return state
 	}
 };
