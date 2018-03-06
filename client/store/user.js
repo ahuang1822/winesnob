@@ -61,9 +61,8 @@ export const edit = (userId, editInfo) =>
       })
       .catch(err => console.error(err))
 
-
 export const editUserPlace = (placeId, editInfo) =>
-  dispatch => 
+  dispatch =>
     axios.put(`/api/users/place/${placeId}`, editInfo)
       .then(res => console.log(res.data))
       .catch(err => console.error(err))
@@ -71,9 +70,16 @@ export const editUserPlace = (placeId, editInfo) =>
 export const addAdmin = (newAdmin) =>
   dispatch => {
     return axios.put('/api/users/add_admin', newAdmin)
-    .then(res => {history.push(`/`)})
-    .catch(err => console.error(err))
-    }
+      .then(res => { history.push(`/`) })
+      .catch(err => console.error(err))
+  }
+
+export const editPassword = (editedUserPass) =>
+  dispatch => {
+    return axios.put('/api/users/change_password', editedUserPass)
+      .then(res => { history.push('/') })
+      .catch(err => console.error(err))
+  }
 
 export const logout = () =>
   dispatch =>
@@ -84,7 +90,6 @@ export const logout = () =>
         history.push('/login')
       })
       .catch(err => console.error(err))
-
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {

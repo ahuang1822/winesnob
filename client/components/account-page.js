@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export const AccountPage = () => {
+export const AccountPage = (props) => {
+    const user = props.user
     return (
         <div>
             <h1>Account Page</h1>
@@ -12,8 +13,14 @@ export const AccountPage = () => {
             <div>
                 <Link to="/order-history">Order History</Link>
             </div>
+            {
+                user.isAdmin &&
+                <div>
+                    <Link to="/account-page/add-admin">Add Admin</Link>
+                </div>
+            }
             <div>
-                <Link to="/account-page/add-admin">Add Admin</Link>
+                <Link to="/account-page/change-password">Change Password</Link>
             </div>
         </div>
     )
@@ -22,7 +29,8 @@ export const AccountPage = () => {
 const mapState = (state) => {
 
     return {
-        wineListOnProps: state.wine.wineList
+        wineListOnProps: state.wine.wineList,
+        user: state.user.loggedInUser
     }
 }
 

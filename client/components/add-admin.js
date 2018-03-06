@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {addAdmin} from '../store/user'
+import { addAdmin } from '../store/user'
 
 export const AddAdmin = (props) => {
     console.log('test AddWine')
@@ -40,7 +40,6 @@ export const AddAdmin = (props) => {
 }
 
 class Loader extends React.Component {
-
     render() {
         const Render = this.props.Render
         return <Render handleSubmit={this.props.handleSubmit} user={this.props.user} />
@@ -48,7 +47,7 @@ class Loader extends React.Component {
 }
 
 const mapState = (state) => {
-    
+
 
     return {
         user: state.user.loggedInUser,

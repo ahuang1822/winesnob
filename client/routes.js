@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import {Home, WineList, AccountPage, AddAdmin, Cart, Checkout, AddWine, EditWine, Login, OrderDetails, OrderHistory, Review, SelectedWine, Payment, UserPlace, Signup} from './components'
+import {Home, WineList, AccountPage, AddAdmin, ChangePassword, Cart, Checkout, AddWine, EditWine, Login, OrderDetails, OrderHistory, Review, SelectedWine, Payment, UserPlace, Signup} from './components'
 import {me} from './store'
 import { fetchWineList } from './store/wine'
 import { fetchItems } from './store/cart'
@@ -30,6 +30,7 @@ class Routes extends Component {
         <Route exact path="/winelist/:id/edit" component={EditWine} />
         <Route exact path="/account-page" component={AccountPage} />
         <Route exact path="/account-page/add-admin" component={AddAdmin} />
+        <Route exact path="/account-page/change-password" component={ChangePassword} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/order-detail/:orderId" component={OrderDetails} />

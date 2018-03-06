@@ -15,7 +15,16 @@ router.post('/', (req, res, next) => {
 })
 
 router.put('/add_admin', (req, res, next) => {
-  User.update({isAdmin: true}, { where: { email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName }})
+  User.update({ isAdmin: true }, { where: { email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName } })
+    .then(result => res.json(result))
+    .catch(next)
+})
+
+router.put('/change_password', (req, res, next) => {
+  User.update({ password: req.body.password }, {
+    where: { email: req.body.email },
+    individualHooks: true,
+  })
     .then(result => res.json(result))
     .catch(next)
 })
@@ -106,5 +115,3 @@ router.put('/place/:placeId', (req, res, next) => {
     .then(result => res.json(result[1][0]))
     .catch(next)
 })
-
-
