@@ -91,6 +91,8 @@ img {
 .wine-list-items {
   flex: 1;
   margin: 20px;
+  height: 100%;
+  widows: 100%;
 }
 
 #wine-list {

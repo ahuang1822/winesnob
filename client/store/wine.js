@@ -10,6 +10,10 @@ const FILTER_WINE = 'FILTER_WINE'
 const FETCH_VARIETAL = 'FETCH_VARIETAL'
 const FETCH_SIZE = 'FETCH_SIZE'
 const FETCH_PLACE = 'FETCH_PLACE'
+const FILTER_VARIETAL = 'FILTER_VARIETAL'
+const FILTER_PLACE = 'FILTER_PLACE'
+const FILTER_SIZE = 'FILTER_SIZE'
+const SEARCH_KEY = 'SEARCH_KEY'
 
 
 const initialState = {
@@ -18,7 +22,11 @@ const initialState = {
 	filteredList: [],
 	varietal: [],
 	sizes: [],
-	places: []
+	places: [],
+	filterVarietal: "",
+	filterPlace: "",
+	filterSize: "",
+	searchKey: ""
 }
 
 
@@ -26,12 +34,14 @@ const getWineList = wineList => ({ type: GET_WINE_LIST, wineList })
 const selectWine = wine => ({ type: SELECT_WINE, wine })
 const createWine = wine => ({ type: CREATE_WINE, wine })
 const fetchVarietal = varietal => ({ type: FETCH_VARIETAL, varietal })
-
 const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
-
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
 
-export const filterWineList = wines => ({ type: FILTER_WINE,	wines	})
+export const filterWineList = wines => ({ type: FILTER_WINE, wines })
+export const filterVarietal = varietal => ({ type: FILTER_VARIETAL, varietal})
+export const filterPlace = place => ({ type: FILTER_PLACE, place})
+export const filterSize = size => ({ type: FILTER_SIZE, size})
+export const setSearchKey = searchKey => ({ type: SEARCH_KEY, searchKey})
 
 export const fetchWineList = () =>
 	dispatch =>
@@ -86,6 +96,14 @@ const reducer = function (state = initialState, action) {
 			return Object.assign({}, state, { sizes: action.sizes })
 		case FETCH_PLACE:
 			return Object.assign({}, state, { places: action.places })
+		case FILTER_VARIETAL:
+			return Object.assign({}, state, { filterVarietal: action.varietal})
+		case FILTER_PLACE:
+			return Object.assign({}, state, { filterPlace: action.place})
+		case FILTER_SIZE:
+			return Object.assign({}, state, { filterSize: action.size})
+		case SEARCH_KEY:
+			return Object.assign({}, state, { searchKey: action.searchKey})
 		default: return state
 	}
 };
