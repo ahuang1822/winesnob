@@ -40,7 +40,6 @@ class OrderHistory extends React.Component {
 
 
 const mapState = (state) => {
-  console.log('state: ', state);
     return {
         ordersOnProps: state.order.orders,
         userOnProps: state.user.loggedInUser.id

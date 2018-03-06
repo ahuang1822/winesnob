@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 export const SelectedWine = (props) => {
     const wine = props.data;
     const user = props.user;
-    console.log('wine: ', wine);
     return (
         <div>
             {

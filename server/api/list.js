@@ -49,7 +49,6 @@ async function getCart(req, res, next) {
   if (order) {
     req.session.order = order.dataValues;
   }
-  console.log(req.session)
   next()
 }
 
@@ -111,14 +110,13 @@ router.delete(`/cart/:id`, (req, res, next) => {
 
 router.put('/guestCart', (req, res, next) => {
   if (req.body.merging) {
-    console.log('SESSION IN VERY BEGGINNING PUT', req.session)
     List.update(
       { orderId: req.session.order.id },
       { where: { orderId: req.session.guestOrder.id } })
       .then(() => {
         Order.destroy({ where: { id: req.session.guestOrder.id } })
         req.session.guestOrder = null;
-      }).then(() => console.log('SESSION IN END PUT', req.session))
+      })
       .catch(next)
   }
 })

@@ -45,7 +45,6 @@ class OrderDetails extends React.Component {
 
 
 const mapState = (state) => {
-  console.log('state: ', state);
   return {
     orderOnProps: state.order.order
   }

@@ -48,7 +48,6 @@ export const Checkout = (props) => {
 }
 
 const mapState = (state) => {
-    console.log('state: ', state);
     return {
         winesInCart: state.cart.items,
         loggedInUser: state.user.loggedInUser
