@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export const SelectedWine = (props) => {
     const wine = props.data;
     const user = props.user;
-    console.log('user: ', user);
+    console.log('wine: ', wine);
     return (
         <div>
             {
@@ -44,11 +44,28 @@ export const SelectedWine = (props) => {
                 </h6>
             </div>
             <div>
-                <button onClick={(event) => {
-                    props.addToCart(event, wine)
-                }} > Add to Cart </button>
-            </div>
+                <h6>
+                    {
+                        wine.quantity
+                            ? <div>
+                                <h6>
+                                    {`quantity: ${wine.quantity} left`}
+                                </h6>
+                            </div>
+                            : <div>
+                                <h6>
+                                    sold out
+                                </h6>
+                            </div>
+                    }
 
+                </h6>
+            </div>
+            <div>
+                <button
+                    onClick={(event) => { props.addToCart(event, wine) }}
+                    disabled={!wine.quantity}> Add to Cart </button>
+            </div>
         </div>
     )
 }
