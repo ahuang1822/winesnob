@@ -22,32 +22,30 @@ export const Checkout = (props) => {
             <div>
                 Ship to
                 </div>
-                { loggedInUser.id ? 
+            {loggedInUser.id ?
+                <div>
+                    <h6>{loggedInUser.name}</h6>
+                    <h6>{loggedInUser.place.address}</h6>
+                    <h6>{loggedInUser.place.city}, {loggedInUser.place.state}</h6>
+                    <h6>{loggedInUser.place.country} {loggedInUser.place.zipcode}</h6>
+                    <h6>Shipping email: {loggedInUser.email}</h6>
+                    <h6>Phone Number: {loggedInUser.place.phone}</h6>
+                    <Link to={`/shipping/${loggedInUser.id}/${loggedInUser.placeId}`}>Edit</Link>
+                </div>
+                :
+
+                <div>
+                    <Link to={`/shipping/0`}>Add your shipping information </Link>
+                </div>
+            }
+
+
             <div>
-       <h6>{loggedInUser.name}</h6>
-       <h6>{loggedInUser.place.address}</h6>
-       <h6>{loggedInUser.place.city}, {loggedInUser.place.state}</h6>
-       <h6>{loggedInUser.place.country} {loggedInUser.place.zipcode}</h6>
-       <h6>Shipping email: {loggedInUser.email}</h6>
-       <h6>Phone Number: {loggedInUser.place.phone}</h6>
-       <Link to={`/shipping/${loggedInUser.id}/${loggedInUser.placeId}`}>Edit</Link>
-       </div>
-      :
-
-       <div> 
-       <Link to={`/shipping/0`}>Add your shipping information </Link>
-       </div>
-                }
-                
-
-<div>
-<Link to="/payment">Add Payment</Link>
-</div>
+                <Link to="/payment">Add Payment</Link>
+            </div>
         </div>
     )
 }
-
-
 
 const mapState = (state) => {
     console.log('state: ', state);

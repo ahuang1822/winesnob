@@ -11,8 +11,6 @@ router.get('/', (req, res, next) => {
 })
 
 
-
-
 router.post('/', (req, res, next) => {
   Order.create(req.body)
     .then(order => res.json(order))
@@ -53,9 +51,6 @@ router.put('/:orderId', (req, res, next) => {
     .then(wine => res.status(200).json(wine))
     .catch(next);
 });
-
-
-
 
 
 // router.delete('/:wineId', (req, res, next) => {

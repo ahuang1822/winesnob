@@ -6,7 +6,7 @@ import { selectWineById, editWine } from '../store/wine'
 export const EditWine = (props) => {
     const wine = props.data;
     const user = props.user;
-    let { name, description, img, vintage, varietal, size, price } = wine;
+    let { name, description, img, vintage, varietal, size, price, quantity, tags } = wine;
     return (
         <div>
             {
@@ -44,6 +44,14 @@ export const EditWine = (props) => {
                                     <div>
                                         <label>Price</label>
                                         <input name="price" type="text" defaultValue={price} />
+                                    </div>
+                                    <div>
+                                        <label>Quantity</label>
+                                        <input name="quantity" type="text" defaultValue={quantity} />
+                                    </div>
+                                    <div>
+                                        <label>Tags</label>
+                                        <input name="tags" type="text" defaultValue={tags} />
                                     </div>
                                     <button type="submit" >Submit Changes</button>
                                 </fieldset>
@@ -96,8 +104,9 @@ const mapDispatch = (dispatch) => {
                 price: event.target.price.value,
                 size: event.target.size.value,
                 img: event.target.image.value,
-                description: event.target.description.value
-
+                description: event.target.description.value,
+                quantity: event.target.quantity.value,
+                tags: event.target.tags.value.split(',')
             }
             dispatch(editWine(id, editedValues))
         }

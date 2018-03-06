@@ -4,9 +4,10 @@ const Place = require('../db/models/place')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  req.session.guestOrder= req.session.order;
+  req.session.guestOrder = req.session.order;
   req.session.order = null;
-  User.findOne({where: {email: req.body.email},
+  User.findOne({
+    where: { email: req.body.email },
     include: [{
       model: Place,
       as: 'place'
@@ -33,26 +34,26 @@ router.post('/signup', (req, res, next) => {
     country: req.body.country,
     phone: req.body.phone
   })
-  .then(place => {
-    User.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-      placeId: place.id,
+    .then(place => {
+      User.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        placeId: place.id,
+      })
+        .then(user => {
+          req.login(user, err => (err ? next(err) : res.json(user)))
+          req.session.passport = user;
+        })
+        .catch(err => {
+          if (err.name === 'SequelizeUniqueConstraintError') {
+            res.status(401).send('User already exists')
+          } else {
+            next(err)
+          }
+        })
     })
-    .then(user => {
-      req.login(user, err => (err ? next(err) : res.json(user)))
-      req.session.passport = user;
-    })
-    .catch(err => {
-      if (err.name === 'SequelizeUniqueConstraintError') {
-        res.status(401).send('User already exists')
-      } else {
-        next(err)
-      }
-    })
-  })
 })
 
 router.post('/logout', (req, res) => {

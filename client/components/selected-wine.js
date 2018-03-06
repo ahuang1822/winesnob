@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export const SelectedWine = (props) => {
     const wine = props.data;
     const user = props.user;
-    console.log('user: ', user);
+    console.log('wine: ', wine);
     return (
         <div>
             {
@@ -43,12 +43,29 @@ export const SelectedWine = (props) => {
                     price: ${wine.price}
                 </h6>
             </div>
-             <div>
-            <button onClick={(event) => {
-                props.addToCart(event, wine)
-            }} > Add to Cart </button>
-            </div>
+            <div>
+                <h6>
+                    {
+                        wine.quantity
+                            ? <div>
+                                <h6>
+                                    {`quantity: ${wine.quantity} left`}
+                                </h6>
+                            </div>
+                            : <div>
+                                <h6>
+                                    sold out
+                                </h6>
+                            </div>
+                    }
 
+                </h6>
+            </div>
+            <div>
+                <button
+                    onClick={(event) => { props.addToCart(event, wine) }}
+                    disabled={!wine.quantity}> Add to Cart </button>
+            </div>
         </div>
     )
 }
@@ -74,7 +91,7 @@ class Loader extends React.Component {
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
         const Render = this.props.Render
-        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user}/>
+        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user} />
     }
 }
 
@@ -95,9 +112,6 @@ const mapDispatch = (dispatch) => {
         addToCart(event, item) {
              event.preventDefault()
              dispatch(postItem(item))
-        },
-        loadCart () {
-          dispatch(fetchItems())
         }
     }
 }

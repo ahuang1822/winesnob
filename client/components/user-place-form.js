@@ -37,28 +37,28 @@ export const UserPlace = (props) => {
                         />
                     </div>
                     <div>
-                    <label>Address:</label>
-                    <input
-                        name="address"
-                        type="text"
-                        defaultValue={user.place.address}
-                    />
+                        <label>Address:</label>
+                        <input
+                            name="address"
+                            type="text"
+                            defaultValue={user.place.address}
+                        />
                     </div>
                     <div>
-                    <label>City:</label>
-                    <input
-                        name="city"
-                        type="text"
-                        defaultValue={user.place.city}
-                    />
+                        <label>City:</label>
+                        <input
+                            name="city"
+                            type="text"
+                            defaultValue={user.place.city}
+                        />
                     </div>
                     <div>
-                    <label>State:</label>
-                    <input
-                        name="state"
-                        type="text"
-                        defaultValue={user.place.state}
-                    />
+                        <label>State:</label>
+                        <input
+                            name="state"
+                            type="text"
+                            defaultValue={user.place.state}
+                        />
                     </div>
                     <div>
                         <label>Zip Code:</label>

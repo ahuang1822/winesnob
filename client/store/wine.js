@@ -30,6 +30,8 @@ const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
 
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
 
+const filterWineList = wines => ({ type: FILTER_WINE,	wines	})
+
 export const fetchWineList = () =>
 	dispatch =>
 		axios.all([
@@ -53,12 +55,15 @@ export const selectWineById = (id) =>
 			})
 			.catch(err => console.log(err))
 
-export const filterWineList = (wines) => {
-	return {
-		type: FILTER_WINE,
-		wines: wines
-	}
-}
+export const addWine = (wineDetails) =>
+    dispatch => {
+        axios.post('/api/wines', wineDetails)
+            .then(res => {
+                dispatch(createWine(res.data))
+                history.push('/')
+            })
+            .catch(err => console.error(err))
+    }
 
 const reducer = function (state = initialState, action) {
 	switch (action.type) {
@@ -70,6 +75,8 @@ const reducer = function (state = initialState, action) {
 			})
 		case SELECT_WINE:
 			return Object.assign({}, state, { selectedWine: action.wine })
+    case CREATE_WINE:
+          return Object.assign({}, state, { wineList: [...state.wineList, action.wine] })
 		case FILTER_WINE:
 			return Object.assign({}, state, { filteredList: action.wines })
 		case FETCH_VARIETAL:
