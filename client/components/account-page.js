@@ -16,7 +16,12 @@ export const AccountPage = (props) => {
             {
                 user.isAdmin &&
                 <div>
-                    <Link to="/account-page/add-admin">Add Admin</Link>
+                    <div>
+                        <Link to="/account-page/add-admin">Add Admin</Link>
+                    </div>
+                    <div>
+                        <Link to="/account-page/delete-user">Delete user</Link>
+                    </div>
                 </div>
             }
             <div>

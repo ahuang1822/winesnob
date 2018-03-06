@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addAdmin } from '../store/user'
+import { deleteUser } from '../store/user'
 
-export const AddAdmin = (props) => {
+export const DeleteUser = (props) => {
     const user = props.user
     return (
         <div>
@@ -10,10 +10,9 @@ export const AddAdmin = (props) => {
                 user.isAdmin
                     ? (
                         <div>
-                            <h3>{name}</h3>
                             <form onSubmit={(event) => props.handleSubmit(event)}>
                                 <fieldset>
-                                    <legend>Add Admin</legend>
+                                    <legend>Delete User</legend>
                                     <div>
                                         <label>Email</label>
                                         <input name="email" type="text" />
@@ -26,14 +25,13 @@ export const AddAdmin = (props) => {
                                         <label>Last Name</label>
                                         <input name="lastName" type="text" />
                                     </div>
-                                    <button type="submit">Add Admin</button>
+                                    <button type="submit">Delete User</button>
                                 </fieldset>
                             </form>
                         </div>
                     )
                     : <h3>404 Error</h3>
             }
-
         </div>
     )
 }
@@ -46,10 +44,9 @@ class Loader extends React.Component {
 }
 
 const mapState = (state) => {
-
     return {
         user: state.user.loggedInUser,
-        Render: AddAdmin
+        Render: DeleteUser
     }
 }
 
@@ -62,9 +59,7 @@ const mapDispatch = (dispatch) => {
                 firstName: event.target.firstName.value,
                 lastName: event.target.lastName.value
             }
-            // dispatch(addWine(newWine))
-            console.log(user)
-            dispatch(addAdmin(user))
+            dispatch(deleteUser(user))
         }
     }
 }

@@ -29,6 +29,18 @@ router.put('/change_password', (req, res, next) => {
     .catch(next)
 })
 
+router.put('/delete_user', (req, res, next) => {
+  User.destroy({
+    where: {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email
+    }
+  })
+  .then(result => res.json(result))
+  .catch(next)
+})
+
 router.param('userId', (req, res, next, id) => {
   User
     .findById(id, {

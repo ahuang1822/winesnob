@@ -77,10 +77,16 @@ export const addAdmin = (newAdmin) =>
 export const editPassword = (editedUserPass) =>
   dispatch => {
     return axios.put('/api/users/change_password', editedUserPass)
-      .then(res => { history.push('/') })
+      .then(res => { history.push('/account-page') })
       .catch(err => console.error(err))
   }
 
+export const deleteUser = (user) =>
+  dispatch => {
+    return axios.put('/api/users/delete_user', user)
+      .then(res => { history.push('/account-page') })
+      .catch(err => console.error(err))
+  }
 export const logout = () =>
   dispatch =>
     axios.post('/auth/logout')
