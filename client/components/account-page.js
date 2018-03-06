@@ -32,12 +32,10 @@ export const AccountPage = (props) => {
 }
 
 const mapState = (state) => {
-
     return {
         wineListOnProps: state.wine.wineList,
         user: state.user.loggedInUser
     }
 }
-
 
 export default connect(mapState)(AccountPage)

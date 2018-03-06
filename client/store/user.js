@@ -38,7 +38,6 @@ export const login = (email, password, order) =>
       })
       .catch(err => console.error(err))
 
-
 export const signup = (signUpInfo, order) =>
   dispatch =>
     axios.post('/auth/signup', signUpInfo)
@@ -50,7 +49,6 @@ export const signup = (signUpInfo, order) =>
         history.push('/')
       })
       .catch(err => console.error(err))
-
 
 export const edit = (userId, editInfo) =>
   dispatch =>
@@ -96,6 +94,7 @@ export const logout = () =>
         history.push('/login')
       })
       .catch(err => console.error(err))
+
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {

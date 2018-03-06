@@ -62,8 +62,6 @@ const mapDispatch = (dispatch) => {
                 firstName: event.target.firstName.value,
                 lastName: event.target.lastName.value
             }
-            // dispatch(addWine(newWine))
-            console.log(user)
             dispatch(addAdmin(user))
         }
     }

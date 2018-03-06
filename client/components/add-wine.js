@@ -66,7 +66,6 @@ export const AddWine = (props) => {
 }
 
 class Loader extends React.Component {
-
     render() {
         const Render = this.props.Render
         return <Render handleSubmit={this.props.handleSubmit} user={this.props.user} />
@@ -74,8 +73,6 @@ class Loader extends React.Component {
 }
 
 const mapState = (state) => {
-    console.log('state user: ', state.user);
-
     return {
         user: state.user.loggedInUser,
         Render: AddWine
