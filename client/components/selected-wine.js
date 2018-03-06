@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 export const SelectedWine = (props) => {
     const wine = props.data;
     const user = props.user;
-    console.log('wine: ', wine);
     return (
         <div>
             {
@@ -69,18 +68,6 @@ export const SelectedWine = (props) => {
         </div>
     )
 }
-
-// class SingleWineContainer extends React.Component {
-//     componentDidMount() {
-//         this.props.selectWineById(this.props.match.params.id)
-//     }
-
-//     render() {
-//         if (!this.props.selectedWine) return <h1>Loading...</h1>
-
-//         return <SelectedWine selectedWine={this.props.selectedWine} />
-//     }
-// }
 
 class Loader extends React.Component {
     componentDidMount() {

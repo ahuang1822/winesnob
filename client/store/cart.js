@@ -10,12 +10,10 @@ const initialState = {
 
 
 const GET_ITEMS = 'GET_ITEMS'
-//const ADD_ITEM = 'ADD_ITEM'
 const CLEAR_ITEMS = 'CLEAR_ITEMS'
 
 
 const getItems = items => ({ type: GET_ITEMS, items })
-//const addItem = item => ({ type: ADD_ITEM, item })
 export const clearItems = () => ({ type: CLEAR_ITEMS })
 
 export const fetchItems = () =>

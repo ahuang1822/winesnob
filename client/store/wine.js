@@ -1,6 +1,5 @@
 import axios from 'axios'
 import history from '../history'
-import socket from '../socket';
 
 const GET_WINE_LIST = 'GET_WINE_LIST'
 const SELECT_WINE = 'SELECT_WINE'
@@ -39,11 +38,9 @@ export const editWine = (id, editedDetails) =>
         axios.put(`/api/wines/${id}`, editedDetails)
             .then(res => res.data)
             .then(editedWine => {
-                socket.emit('update-wines')
                 history.push(`/winelist/${id}`)
             })
             .catch(err => console.error(err))
-
     }
 
 export const addWine = (wineDetails) =>
