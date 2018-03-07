@@ -23,8 +23,8 @@ class Review extends React.Component {
     const reviewInfo = {
       comment: event.target.review.value,
       rating: event.target.rating.value,
-      userId: this.props.currentUser.id,
-      wineId: this.props.selectedWine.id
+      userId: this.props.user.id,
+      wineId: this.props.wine.id
     }
     this.props.addReview(reviewInfo)
   }

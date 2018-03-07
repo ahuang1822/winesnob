@@ -7,9 +7,7 @@ import { fetchItems, putItems, updateQuantity, removeItem } from '../store'
 export class Cart extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            isClicked: true
-        }
+        
     }
     componentDidMount() {
         this.props.loadCart(event)
@@ -21,17 +19,17 @@ export class Cart extends React.Component {
         const loadCart = this.props.loadCart;
         const update = this.props.update;
         const remove = this.props.removeItem;
+        const isClicked= this.props.isClicked
         let counter = 0;
         return (
             <div>
                 <h1>Cart</h1>
                 {
-                    loggedInUser.id && this.state.isClicked ?
+                    loggedInUser.id && isClicked ?
                         <h6>There have been items added to the shopping cart as a guest. Would you like to merge these items? <Link
                             to="/cart"
                             onClick={(event) => {
                                 mergeCarts(event, { merging: true });
-                                this.setState({ isClicked: false });
                             }}>Merge Carts</Link></h6>
                         : null
                 }
@@ -64,7 +62,8 @@ export class Cart extends React.Component {
 const mapState = (state) => {
     return {
         winesInCart: state.cart.items,
-        loggedInUser: state.user.loggedInUser
+        loggedInUser: state.user.loggedInUser,
+        isClicked: state.wine.isClicked
     }
 }
 

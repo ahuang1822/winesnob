@@ -7,11 +7,13 @@ const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
-const sessionStore = new SequelizeStore({db})
+const sessionStore = new SequelizeStore({ db })
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
 const { Place, Payment } = require('./db/models')
+const nodemailer = require('nodemailer');
+
 module.exports = app
 
 /**
@@ -21,7 +23,9 @@ module.exports = app
  * or show up on Github. On your production server, you can add these
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
+ * 
  */
+
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
@@ -30,9 +34,10 @@ passport.deserializeUser((id, done) =>
   db.models.user.findById(id, {
     include: [{
       model: Place,
-      as: 'place' }, {
-        model: Payment, as: 'payment'
-      }]
+      as: 'place'
+    }, {
+      model: Payment, as: 'payment'
+    }]
   })
     .then(user => done(null, user))
     .catch(done))

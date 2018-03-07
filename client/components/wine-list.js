@@ -13,7 +13,7 @@ import {
 } from '../store'
 
 
-class WineList extends Component {
+class WineList extends React.Component {
   constructor(props) {
     super(props);
 
