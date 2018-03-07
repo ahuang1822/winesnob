@@ -6,9 +6,9 @@ import { fetchItems, putItems, updateQuantity, removeItem, clearGuestAddress, cl
 
 
 export const Checkout = (props) => {
-    const loggedInUser= props.loggedInUser || {}
+    const loggedInUser = props.loggedInUser || {}
     let { winesInCart } = props;
-    const { 
+    const {
         guestPayment,
         guestAddress,
         mergeCarts,

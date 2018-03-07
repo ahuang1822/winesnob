@@ -37,11 +37,11 @@ class WineList extends React.Component {
         wine.size.includes(this.props.filterSizeOnProps) &&
         wine.place.city.includes(this.props.filterPlaceOnProps) &&
         (wine.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
-          (wine.tags.join("")).toLowerCase().includes(event.target.value.toLowerCase())))
+          (wine.tags.join('')).toLowerCase().includes(event.target.value.toLowerCase())))
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
-    if (sortBy === "low-high") {
+    if (sortBy === 'low-high') {
       var sortedList = filteredList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -64,7 +64,7 @@ class WineList extends React.Component {
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
-    if (sortBy === "low-high") {
+    if (sortBy === 'low-high') {
       var sortedList = filteredList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -88,7 +88,7 @@ class WineList extends React.Component {
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
-    if (sortBy === "low-high") {
+    if (sortBy === 'low-high') {
       var sortedList = filteredList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -111,7 +111,7 @@ class WineList extends React.Component {
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
-    if (sortBy === "low-high") {
+    if (sortBy === 'low-high') {
       var sortedList = filteredList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -126,7 +126,7 @@ class WineList extends React.Component {
   onClickSort(event) {
     event.preventDefault();
     let wineList = this.props.filteredListOnProps.slice()
-    if (event.target.value === "low-high") {
+    if (event.target.value === 'low-high') {
       var sortedList = wineList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -220,7 +220,7 @@ class WineList extends React.Component {
                 )}
               </select>
             </div>
-            : <div></div>
+            : <div />
           }
 
           <div className="filter">

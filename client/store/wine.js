@@ -13,8 +13,7 @@ const SET_VARIETAL = 'SET_VARIETAL'
 const SET_PLACE = 'SET_PLACE'
 const SET_SIZE = 'SET_SIZE'
 const SEARCH_KEY = 'SEARCH_KEY'
-const SORT_BY ='SORT_BY'
-
+const SORT_BY = 'SORT_BY'
 
 
 const initialState = {
@@ -24,11 +23,11 @@ const initialState = {
 	varietal: [],
 	sizes: [],
 	places: [],
-	setVarietal: "",
-	setPlace: "",
-	setSize: "",
-	searchKey: "",
-	sortBy: "default"
+	setVarietal: '',
+	setPlace: '',
+	setSize: '',
+	searchKey: '',
+	sortBy: 'default'
 }
 
 
@@ -38,7 +37,6 @@ const createWine = wine => ({ type: CREATE_WINE, wine })
 const fetchVarietal = varietal => ({ type: FETCH_VARIETAL, varietal })
 const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
-
 
 
 export const fetchWineList = () =>
@@ -81,12 +79,12 @@ export const setSearchKey = (searchKey, wines) =>
 		dispatch({ type: FILTER_WINE, wines })
 	}
 
-export const filterWineList = (sortBy, wines) => 
-	dispatch => { 
+export const filterWineList = (sortBy, wines) =>
+	dispatch => {
 		dispatch({ type: SORT_BY, sortBy})
 		dispatch({ type: FILTER_WINE, wines })
 	}
-	
+
 export const selectWineById = (id) =>
 
     dispatch =>

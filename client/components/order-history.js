@@ -15,15 +15,14 @@ class OrderHistory extends React.Component {
     else {
       return (
         <div>
-          <h1>Order History</h1>
+          <h3>Order History</h3>
           <div>
             {
               myOrders && myOrders.map(order => {
                 return (
                   <div key={order.id}>
-                    <h2>Date Ordered: {order.updatedAt}</h2>
-                    <h2>Status: {order.status}</h2>
-                    <h2>Total: fix this </h2>
+                    <h5>Date Ordered: {order.updatedAt}</h5>
+                    <h5>Status: {order.status}</h5>
                     <Link to={`/order-detail/${order.id}`}>Order Details</Link>
                   </div>
                 )
