@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
 
 router.param('orderId', (req, res, next, id) => {
   Order
-    .findById(req.params.orderId, {
+    .findById(id, {
       include: [{
         model: List,
         as: 'lists', include: [{
@@ -86,7 +86,6 @@ router.put('/:orderId', (req, res, next) => {
             // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
             // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
         });
-    });
     })
     .catch(next);
 });

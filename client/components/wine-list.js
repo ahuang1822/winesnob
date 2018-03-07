@@ -37,11 +37,11 @@ class WineList extends React.Component {
         wine.size.includes(this.props.filterSizeOnProps) &&
         wine.place.city.includes(this.props.filterPlaceOnProps) &&
         (wine.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
-          (wine.tags.join("")).toLowerCase().includes(event.target.value.toLowerCase())))
+          (wine.tags.join('')).toLowerCase().includes(event.target.value.toLowerCase())))
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
-    if (sortBy === "low-high") {
+    if (sortBy === 'low-high') {
       var sortedList = filteredList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -64,7 +64,7 @@ class WineList extends React.Component {
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
-    if (sortBy === "low-high") {
+    if (sortBy === 'low-high') {
       var sortedList = filteredList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -88,7 +88,7 @@ class WineList extends React.Component {
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
-    if (sortBy === "low-high") {
+    if (sortBy === 'low-high') {
       var sortedList = filteredList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -111,7 +111,7 @@ class WineList extends React.Component {
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
-    if (sortBy === "low-high") {
+    if (sortBy === 'low-high') {
       var sortedList = filteredList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -126,7 +126,7 @@ class WineList extends React.Component {
   onClickSort(event) {
     event.preventDefault();
     let wineList = this.props.filteredListOnProps.slice()
-    if (event.target.value === "low-high") {
+    if (event.target.value === 'low-high') {
       var sortedList = wineList.sort(function (a, b) {
         return parseInt(a.price) - parseFloat(b.price)
       })
@@ -150,7 +150,7 @@ class WineList extends React.Component {
           <div className="filter">
             <input
               type="text"
-              placeholder="Wine Name"
+              placeholder="Search by name/tags"
               className="filter-item"
               onChange={this.handleChange}
             />
@@ -220,7 +220,7 @@ class WineList extends React.Component {
                 )}
               </select>
             </div>
-            : <div></div>
+            : <div />
           }
 
           <div className="filter">
@@ -247,32 +247,34 @@ class WineList extends React.Component {
         {(user.isAdmin && this.props.filteredListOnProps.length) ?
           <div>
             <Link to={'/winelist/add-wine'}>Add Wine</Link>
-            <ul id="wine-list">
+            <div id="wine-list">
               {this.props.filteredListOnProps.map(wine => {
                 if (wine.quantity) {
                   return (
-                    <div>
-                      <Link to={`/winelist/${wine.id}`} key={wine.id}>
+                    <div className="wine-list-items">
+                      <Link to={`/winelist/${wine.id}`} key={wine.id} className="wine-list-items">
                         <img src={wine.img} />
                       </Link>
                       <div className="wine-list-items">
-                        <div><h3>{wine.name}</h3></div>
-                        <div>
+                        <div className="wine-list-items">
+                          <h3>{wine.name}</h3>
+                        </div>
+                        <div className="wine-list-items">
                           <h5>
                             {`${wine.vintage} ${wine.varietal}`}
                           </h5>
                         </div>
-                        <div>
+                        <div className="wine-list-items">
                           <h5>
                             {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
                           </h5>
                         </div>
-                        <div>
+                        <div className="wine-list-items">
                           <h6>
                             size: {wine.size}
                           </h6>
                         </div>
-                        <div>
+                        <div className="wine-list-items">
                           <h6>
                             price: ${wine.price}
                           </h6>
@@ -282,60 +284,71 @@ class WineList extends React.Component {
                   )
                 } else {
                   return (
-                    <div>
-                    <Link to={`/winelist/${wine.id}`} key={wine.id}>
-                      <div>
-                        <img src={wine.img} />
-                      </div>
-                    </Link>
-
-                    <div>
-                      <h3>{wine.name}</h3>
-                    </div>
-                    <div>
-                      <h5>
-                        {`${wine.vintage} ${wine.varietal}`}
-                      </h5>
-                    </div>
-                    <div>
-                      <h5>
-                        {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
-                      </h5>
-                    </div>
-                    <h4>Sold Out</h4>
-                    </div> 
-              )
-                }
-              })}
-            </ul>
-          </div>
-          :
-          <ul id="wine-list">
-            {this.props.filteredListOnProps.map(wine => {
-              if (wine.quantity) {
-                return (
-                  <div>
-                    <Link to={`/winelist/${wine.id}`} key={wine.id}>
-                      <img src={wine.img} />
-                    </Link>
                     <div className="wine-list-items">
-                      <div><h3>{wine.name}</h3></div>
-                      <div>
+                      <Link to={`/winelist/${wine.id}`} key={wine.id} className="wine-list-items">
+                          <img src={wine.img} />
+                      </Link>
+                      <div className="wine-list-items">
+                        <h3>{wine.name}</h3>
+                      </div>
+                      <div className="wine-list-items">
                         <h5>
                           {`${wine.vintage} ${wine.varietal}`}
                         </h5>
                       </div>
-                      <div>
+                      <div className="wine-list-items">
                         <h5>
                           {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
                         </h5>
                       </div>
-                      <div>
+                      <div className="wine-list-items">
                         <h6>
                           size: {wine.size}
                         </h6>
                       </div>
-                      <div>
+                      <div className="wine-list-items">
+                        <h6>
+                          price: ${wine.price}
+                        </h6>
+                      </div>
+                      <div className="wine-list-items">
+                      <h4>Sold Out</h4>
+                      </div>
+                    </div>
+                  )
+                }
+              })}
+            </div>
+          </div>
+          :
+          <div id="wine-list">
+            {this.props.filteredListOnProps.map(wine => {
+              if (wine.quantity) {
+                return (
+                  <div className="wine-list-items">
+                    <Link to={`/winelist/${wine.id}`} key={wine.id} className="wine-list-items">
+                      <img src={wine.img} />
+                    </Link>
+                    <div className="wine-list-items">
+                      <div className="wine-list-items">
+                        <h3>{wine.name}</h3>
+                      </div>
+                      <div className="wine-list-items">
+                        <h5>
+                          {`${wine.vintage} ${wine.varietal}`}
+                        </h5>
+                      </div>
+                      <div className="wine-list-items">
+                        <h5>
+                          {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
+                        </h5>
+                      </div>
+                      <div className="wine-list-items">
+                        <h6>
+                          size: {wine.size}
+                        </h6>
+                      </div>
+                      <div className="wine-list-items">
                         <h6>
                           price: ${wine.price}
                         </h6>
@@ -345,29 +358,41 @@ class WineList extends React.Component {
                 )
               } else {
                 return (
-                  <div>
-                    <div>
-                      <h3>{wine.name}</h3>
-                    </div>
-                    <div>
+                  <div className="wine-list-items">
+                    <Link to={`/winelist/${wine.id}`} key={wine.id} className="wine-list-items">
                       <img src={wine.img} />
+                    </Link>
+                    <div className="wine-list-items">
+                      <h3>{wine.name}</h3>
+                      </div>
+                      <div className="wine-list-items">
+                        <h5>
+                          {`${wine.vintage} ${wine.varietal}`}
+                        </h5>
+                      </div>
+                      <div className="wine-list-items">
+                        <h5>
+                          {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
+                        </h5>
+                      </div>
+                      <div className="wine-list-items">
+                        <h6>
+                          size: {wine.size}
+                        </h6>
+                      </div>
+                      <div className="wine-list-items">
+                        <h6>
+                          price: ${wine.price}
+                        </h6>
+                      </div>
+                      <div className="wine-list-items">
+                      <h4>Sold Out</h4>
+                      </div>
                     </div>
-                    <div>
-                      <h5>
-                        {`${wine.vintage} ${wine.varietal}`}
-                      </h5>
-                    </div>
-                    <div>
-                      <h5>
-                        {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
-                      </h5>
-                    </div>
-                    <h4>Sold Out</h4>
-                  </div>
                 )
               }
             })}
-          </ul>
+          </div>
         }
       </div>
     )
