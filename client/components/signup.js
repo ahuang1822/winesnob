@@ -65,6 +65,13 @@ export const Signup = (props) => {
           />
         </div>
         <div>
+          <label>Zipcode:</label>
+          <input
+            name="zipcode"
+            type="number"
+          />
+        </div>
+        <div>
           <label>Phone:</label>
           <input
             name="phone"
@@ -75,12 +82,12 @@ export const Signup = (props) => {
       </form>
 
       <div>
-         <h5>OR</h5>
+        <h5>OR</h5>
       </div>
       <div>
-         <p>
-           <a target="_self" href="/auth/google"> Sign up with Google </a>
-         </p>
+        <p>
+          <a target="_self" href="/auth/google"> Sign up with Google </a>
+        </p>
       </div>
     </div>
   );
@@ -89,22 +96,25 @@ export const Signup = (props) => {
 
 const mapState = ({ loggedInUser, order }) => ({ loggedInUser, order })
 
+
 const mapDispatch = (dispatch) => ({
-  signupSubmit(event, order){
-   event.preventDefault()
-   const userInfo = {
-    firstName: event.target.firstName.value,
-    lastName: event.target.lastName.value,
-    email: event.target.email.value,
-    password: event.target.password.value,
-    address: event.target.address.value,
-    city: event.target.city.value,
-    state: event.target.state.value,
-    country: event.target.country.value,
-    phone: event.target.phone.value,
-  }
+  signupSubmit(event, order) {
+    event.preventDefault()
+    const userInfo = {
+      firstName: event.target.firstName.value,
+      lastName: event.target.lastName.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
+      address: event.target.address.value,
+      city: event.target.city.value,
+      state: event.target.state.value,
+      country: event.target.country.value,
+      zipcode: event.target.zipcode.value,
+      phone: event.target.phone.value,
+    }
     dispatch(signup(userInfo, order))
   }
 })
+
 
 export default connect(mapState, mapDispatch)(Signup)

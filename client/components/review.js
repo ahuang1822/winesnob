@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 import { SelectedWine } from './selected-wine'
 import { selectWineById, postReview } from '../store'
 
+
+
 class Review extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.onSubmit = this.onSubmit.bind(this)
@@ -44,7 +46,7 @@ class Review extends React.Component {
           <h1>Review this bottle!</h1>
           <form onSubmit={this.onSubmit}>
             <div>
-                <input
+              <input
                 name="review"
                 width="200"
                 height="200" />
@@ -52,10 +54,10 @@ class Review extends React.Component {
             <div>
               Rating (1 - 5)
               <div>
-              <input
-              name="rating"
-              width="200"
-              height="200" />
+                <input
+                  name="rating"
+                  width="200"
+                  height="200" />
               </div>
             </div>
             <button type="submit">Submit Revew</button>
@@ -66,13 +68,15 @@ class Review extends React.Component {
   }
 }
 
+
 const mapState = (state) => {
 
-    return {
-        selectedWine: state.wine.selectedWine.wine,
-        currentUser: state.user.loggedInUser
-    }
+  return {
+    selectedWine: state.wine.selectedWine.wine,
+    currentUser: state.user.loggedInUser
+  }
 }
+
 
 const mapDispatch = (dispatch) => {
   return {
@@ -80,10 +84,10 @@ const mapDispatch = (dispatch) => {
       dispatch(selectWineById(id))
     },
     addReview: (reviewInfo) => {
-      console.log(reviewInfo)
       dispatch(postReview(reviewInfo))
     }
   }
 }
+
 
 export default connect(mapState, mapDispatch)(Review)

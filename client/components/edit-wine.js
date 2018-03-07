@@ -65,19 +65,19 @@ export const EditWine = (props) => {
     )
 }
 
-class Loader extends React.Component {
 
+class Loader extends React.Component {
     componentDidMount() {
         this.props.load(this.props.match.params.id)
             .catch(console.error)
     }
-
     render() {
         if (!this.props.data) return <h1>Loading...</h1>
         const Render = this.props.Render
         return <Render user={this.props.user} data={this.props.data} handleSubmit={this.props.handleSubmit} />
     }
 }
+
 
 const mapState = (state) => {
     return {
@@ -86,6 +86,7 @@ const mapState = (state) => {
         Render: EditWine
     }
 }
+
 
 const mapDispatch = (dispatch) => {
     return {
@@ -109,6 +110,7 @@ const mapDispatch = (dispatch) => {
         }
     }
 }
+
 
 export default connect(mapState, mapDispatch)(Loader)
 

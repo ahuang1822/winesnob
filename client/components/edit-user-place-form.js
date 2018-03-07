@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { edit, editUserPlace } from '../store'
+import { edit, updateUserPlace } from '../store'
 
 
-export const UserPlace = (props) => {
-    const user = props.loggedInUser;
+export const EditUserPlace = (props) => {
+    const user = props.loggedInUser || {};
     return (
         <div>
             <form onSubmit={(event) => {
@@ -115,6 +115,7 @@ const mapDispatch = (dispatch, ownProps) => ({
     handleSubmitPlace(event) {
         event.preventDefault()
         const placeId = ownProps.match.params.placeId
+        const userId = ownProps.match.params.id
         const placeInfo = {
             address: event.target.address.value,
             city: event.target.city.value,
@@ -122,8 +123,9 @@ const mapDispatch = (dispatch, ownProps) => ({
             country: event.target.country.value,
             phone: event.target.phone.value,
         }
-        dispatch(editUserPlace(placeId, placeInfo))
+        dispatch(updateUserPlace(placeId, userId, placeInfo))
     }
 })
 
-export default connect(mapState, mapDispatch)(UserPlace)
+
+export default connect(mapState, mapDispatch)(EditUserPlace)

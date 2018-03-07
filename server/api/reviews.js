@@ -2,11 +2,13 @@ const router = require('express').Router()
 const { Review } = require('../db/models')
 module.exports = router
 
+
 router.post('/', (req, res, next) => {
   Review.create(req.body)
     .then(review => res.json(review))
     .catch(next)
 })
+
 
 router.param('reviewId', (req, res, next, id) => {
   Review
@@ -24,9 +26,11 @@ router.param('reviewId', (req, res, next, id) => {
     .catch(next);
 });
 
+
 router.get('/:reviewId', (req, res) => {
   res.json(req.review);
 });
+
 
 router.put('/:reviewId', (req, res, next) => {
   req.review
@@ -34,6 +38,7 @@ router.put('/:reviewId', (req, res, next) => {
     .then(review => res.status(200).json(review))
     .catch(next);
 });
+
 
 router.delete('/:reviewId', (req, res, next) => {
   req.review

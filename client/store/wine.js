@@ -17,6 +17,7 @@ const SEARCH_KEY = 'SEARCH_KEY'
 const SORT_BY ='SORT_BY'
 
 
+
 const initialState = {
 	wineList: [],
 	selectedWine: {},
@@ -39,6 +40,8 @@ const fetchVarietal = varietal => ({ type: FETCH_VARIETAL, varietal })
 const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
 
+
+
 export const fetchWineList = () =>
 	dispatch =>
 		axios.all([
@@ -53,6 +56,7 @@ export const fetchWineList = () =>
 				dispatch(fetchPlace(place.data))
 				dispatch(getWineList(wines.data))
 			}))
+
 
 export const filterVarietal = (varietal, wines) =>
 	dispatch => {
@@ -84,7 +88,6 @@ export const filterWineList = (sortBy, wines) =>
 		dispatch({ type: FILTER_WINE, wines })
 	}
 	
-
 export const selectWineById = (id) =>
 	dispatch =>
 		axios.get(`/api/wines/${id}`)
@@ -93,6 +96,7 @@ export const selectWineById = (id) =>
 			})
 			.catch(err => console.error(err))
 
+            
 export const addWine = (wineDetails) =>
 	dispatch => {
 		axios.post('/api/wines', wineDetails)
@@ -102,6 +106,7 @@ export const addWine = (wineDetails) =>
 			})
 			.catch(err => console.error(err))
 	}
+
 
 const reducer = function (state = initialState, action) {
 	switch (action.type) {
