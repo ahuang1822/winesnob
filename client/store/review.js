@@ -16,7 +16,7 @@ export const postReview = (review) =>
     axios.post('/api/reviews', review)
     .then(res => {
       dispatch(addReview(res.data))
-      history.push('/home')
+      history.push('/')
     })
       .catch(err => console.log(err))
   }

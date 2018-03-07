@@ -36,23 +36,30 @@ async function getCart(req, res, next) {
 
 
 router.post('/cart', withCart, (req, res, next) => {
-  List.create({
+  List.findOne({
+    where: {
     wineId: req.body.id,
     quantity: 1,
     orderId: req.session.order.id,
     price: req.body.price
-  })
-    .then((list) => res.send(list))
-    .catch(next)
-})
-
-
-router.delete('/cart/:id', (req, res, next) => {
-  List.destroy({
-    where: {
-      id: req.params.id
     }
-  }).then(() => res.sendStatus(204))
+  })
+    .then((foundList) => {
+      if (foundList) {
+        foundList.update({
+          quantity: ++foundList.quantity
+        }, { returning: true })
+          .then(updatedList => res.send(updatedList))
+      } else {
+        List.create({
+          wineId: req.body.id,
+          quantity: 1,
+          orderId: req.session.order.id,
+          price: req.body.price
+        })
+          .then(list => res.send(list))
+      }
+    })
     .catch(next)
 })
 
@@ -87,12 +94,12 @@ router.put(`/cart/:id`, (req, res, next) => {
     .catch(next)
 })
 
-
-router.delete(`/cart/:id`, (req, res, next) => {
-  List.destroy({ where: { id: req.params.id } })
-    .then(() => {
-      res.sendStatus(204)
-    })
+router.delete('/cart/:id', (req, res, next) => {
+  List.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(() => res.sendStatus(204))
     .catch(next)
 })
 

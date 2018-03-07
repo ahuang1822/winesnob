@@ -4,7 +4,6 @@ import { SelectedWine } from './selected-wine'
 import { selectWineById, postReview } from '../store'
 
 
-
 class Review extends React.Component {
 
   constructor(props) {
@@ -23,9 +22,10 @@ class Review extends React.Component {
     const reviewInfo = {
       comment: event.target.review.value,
       rating: event.target.rating.value,
-      userId: this.props.currentUser.id,
-      wineId: this.props.selectedWine.id
+      userId: this.props.user.id,
+      wineId: this.props.wine.id
     }
+    console.log('reviewInfo: ', reviewInfo);
     this.props.addReview(reviewInfo)
   }
 

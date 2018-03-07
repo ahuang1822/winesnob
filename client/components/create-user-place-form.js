@@ -6,7 +6,7 @@ import { updateGuestAddress } from '../store'
 
 export const CreateUserPlace = (props) => {
     const loggedInUser = props.loggedInUser || { place: {} };
-    const { handleSubmitUser, 
+    const { handleSubmitUser,
             handleSubmitPlace } = props;
     return (
         <div>

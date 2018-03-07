@@ -4,7 +4,6 @@ module.exports = router
 const Sequelize = require('sequelize')
 
 
-
 router.get('/', (req, res, next) => {
   Wine.findAll({
     include: [{

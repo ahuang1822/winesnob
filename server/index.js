@@ -31,7 +31,8 @@ passport.deserializeUser((id, done) =>
     include: [{
       model: Place,
       as: 'place' }, {
-        model: Payment, as: 'payment'
+        model: Payment,
+        as: 'payment'
       }]
   })
     .then(user => done(null, user))
