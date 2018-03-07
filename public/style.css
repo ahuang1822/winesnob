@@ -1,6 +1,4 @@
-/* /* body {
-  background: maroon;opacity: 0.8; */
-} */
+
 
 a {
   text-decoration: none;
@@ -15,10 +13,10 @@ nav a {
   margin: 1em;
 }
 
-form div {
+/* form div {
   margin: 1em;
   display: inline-block;
-} */
+}  */
 
 img {
   height: 100px;
@@ -48,6 +46,9 @@ h1 {
   color :maroon;
 }
 
+h3 {
+  text-align: left;
+}
 #filter-varietal.dropdown {
   height: 5px;
   width: auto;
@@ -89,13 +90,15 @@ img {
 }
 
 .wine-list-items {
-  flex: 1;
+  /* flex: 1; */
   margin: 20px;
+  align-content: center;
+  
 }
 
 #wine-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 #wine-filters {
@@ -115,4 +118,5 @@ img {
   width: 100%;
   vertical-align: middle;
   align-content: center;
+  align-self: center;
 }
