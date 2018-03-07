@@ -39,7 +39,6 @@ const fetchVarietal = varietal => ({ type: FETCH_VARIETAL, varietal })
 const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
 const isClickedTrue= () => ({ type: CLICKED_TRUE })
-const isClickedTrue= () => ({ type: CLICKED_FALSE })
 
 export const fetchWineList = () =>
 	dispatch =>

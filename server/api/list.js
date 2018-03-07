@@ -39,7 +39,6 @@ router.post('/cart', withCart, (req, res, next) => {
   List.findOne({
     where: {
     wineId: req.body.id,
-    quantity: 1,
     orderId: req.session.order.id,
     price: req.body.price
     }

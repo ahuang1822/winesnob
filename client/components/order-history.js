@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import { fetchOrder } from '../store'
 
-class OrderHistory extends React.Component {
+export class OrderHistory extends React.Component {
   componentDidMount() {
     this.props.fetchOrder();
   }
@@ -22,7 +22,7 @@ class OrderHistory extends React.Component {
                 return (
                   <div key={order.id}>
                     <h5>Date Ordered: {order.updatedAt}</h5>
-                    <h5>Status: {order.status}</h5>
+                    <h6>Status: {order.status}</h6>
                     <Link to={`/order-detail/${order.id}`}>Order Details</Link>
                   </div>
                 )
