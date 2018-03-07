@@ -1,7 +1,6 @@
 import axios from 'axios'
 import history from '../history'
 import { fetchSingleOrder } from './order'
-import { clickedFalse } from './wine'
 
 
 const initialState = {
@@ -36,11 +35,7 @@ export const postItem = (item) =>
 export const putItems = (body) =>
     dispatch =>
         axios.put('/api/list/guestCart', body)
-            .then(() => {
-                dispatch(fetchItems())
-                dispatch(clickedFalse())
-            })
-
+            .then(() => dispatch(fetchItems()))
             .catch(err => console.error(err))
 
 

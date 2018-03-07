@@ -2,7 +2,6 @@ import axios from 'axios'
 import history from '../history'
 import store from './index'
 
-
 const GET_WINE_LIST = 'GET_WINE_LIST'
 const SELECT_WINE = 'SELECT_WINE'
 const CREATE_WINE = 'CREATE_WINE'
@@ -14,10 +13,9 @@ const SET_VARIETAL = 'SET_VARIETAL'
 const SET_PLACE = 'SET_PLACE'
 const SET_SIZE = 'SET_SIZE'
 const SEARCH_KEY = 'SEARCH_KEY'
-const SORT_BY = 'SORT_BY'
-const CLICKED_TRUE = 'CLICKED_TRUE'
-const CLICKED_FALSE = 'CLICKED_FALSE'
-
+const SORT_BY ='SORT_BY'
+const CLICKED_TRUE= 'CLICKED_TRUE'
+const CLICKED_FALSE= 'CLICKED_FALSE'
 
 const initialState = {
 	wineList: [],
@@ -30,8 +28,7 @@ const initialState = {
 	setPlace: "",
 	setSize: "",
 	searchKey: "",
-	sortBy: "default",
-	isClicked: true
+	sortBy: "default"
 }
 
 
@@ -41,12 +38,9 @@ const createWine = wine => ({ type: CREATE_WINE, wine })
 const fetchVarietal = varietal => ({ type: FETCH_VARIETAL, varietal })
 const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
-export const clickedTrue = () => ({ type: CLICKED_TRUE })
-export const clicked = () => ({ type: CLICKED_FALSE })
+const isClickedTrue= () => ({ type: CLICKED_TRUE })
+const isClickedTrue= () => ({ type: CLICKED_FALSE })
 
-export const clickedFalse= () =>
-  dispatch =>
-  dispatch(clicked())
 
 export const fetchWineList = () =>
 	dispatch =>
@@ -88,31 +82,31 @@ export const setSearchKey = (searchKey, wines) =>
 		dispatch({ type: FILTER_WINE, wines })
 	}
 
-export const filterWineList = (sortBy, wines) =>
-	dispatch => {
-		dispatch({ type: SORT_BY, sortBy })
+export const filterWineList = (sortBy, wines) => 
+	dispatch => { 
+		dispatch({ type: SORT_BY, sortBy})
 		dispatch({ type: FILTER_WINE, wines })
 	}
-
+	
 export const selectWineById = (id) =>
 
-	dispatch =>
-		axios.get(`/api/wines/${id}`)
-			.then(res => {
-				dispatch(selectWine(res.data))
-			})
-			.catch(err => console.error(err))
+    dispatch =>
+        axios.get(`/api/wines/${id}`)
+            .then(res => {
+                dispatch(selectWine(res.data))
+            })
+            .catch(err => console.error(err))
 
 export const editWine = (id, editedDetails) =>
-	dispatch => {
-		console.log(editedDetails);
-		axios.put(`/api/wines/${id}`, editedDetails)
-			.then(res => res.data)
-			.then(editedWine => {
-				history.push(`/winelist/${id}`)
-			})
-			.catch(err => console.error(err))
-	}
+    dispatch => {
+        console.log(editedDetails);
+        axios.put(`/api/wines/${id}`, editedDetails)
+            .then(res => res.data)
+            .then(editedWine => {
+                history.push(`/winelist/${id}`)
+            })
+            .catch(err => console.error(err))
+    }
 
 export const addWine = (wineDetails) =>
 	dispatch => {
@@ -154,10 +148,6 @@ const reducer = function (state = initialState, action) {
 			return Object.assign({}, state, { searchKey: action.searchKey })
 		case SORT_BY:
 			return Object.assign({}, state, { sortBy: action.sortBy })
-		case CLICKED_TRUE:
-			return Object.assign({}, state, { isClicked: true })
-		case CLICKED_FALSE:
-			return Object.assign({}, state, { isClicked: false })
 		default: return state
 	}
 };
