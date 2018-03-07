@@ -302,9 +302,17 @@ class WineList extends React.Component {
                         </h5>
                       </div>
                       <div className="wine-list-items">
+                        <h6>
+                          size: {wine.size}
+                        </h6>
+                      </div>
+                      <div className="wine-list-items">
+                        <h6>
+                          price: ${wine.price}
+                        </h6>
+                      </div>
                       <div className="wine-list-items">
                       <h4>Sold Out</h4>
-                      </div>
                       </div>
                     </div>
                   )
@@ -366,6 +374,16 @@ class WineList extends React.Component {
                         <h5>
                           {`${wine.place.city}, ${wine.place.state} ${wine.place.country}`}
                         </h5>
+                      </div>
+                      <div className="wine-list-items">
+                        <h6>
+                          size: {wine.size}
+                        </h6>
+                      </div>
+                      <div className="wine-list-items">
+                        <h6>
+                          price: ${wine.price}
+                        </h6>
                       </div>
                       <div className="wine-list-items">
                       <h4>Sold Out</h4>
