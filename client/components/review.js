@@ -31,9 +31,10 @@ class Review extends React.Component {
 
 
   render() {
-    const wine = this.props.selectedWine;
-    if (!this.props.selectedWine) {
-      if (this.props.currentUser.id === null) {
+    const wine = this.props.wine;
+    const user = this.props.user;
+    if (!wine) {
+      if (user.id === null) {
         return <h1>You do not have permission to write a review</h1>
       } else {
         return <h1>Loading...</h1>
@@ -42,7 +43,7 @@ class Review extends React.Component {
     else {
       return (
         <div>
-          <SelectedWine selectedWine={wine} />
+          <SelectedWine wine={wine} user={user} />
           <h1>Review this bottle!</h1>
           <form onSubmit={this.onSubmit}>
             <div>
@@ -60,7 +61,7 @@ class Review extends React.Component {
                   height="200" />
               </div>
             </div>
-            <button type="submit">Submit Revew</button>
+            <button type="submit">Submit Review</button>
           </form>
         </div>
       )
@@ -72,8 +73,8 @@ class Review extends React.Component {
 const mapState = (state) => {
 
   return {
-    selectedWine: state.wine.selectedWine.wine,
-    currentUser: state.user.loggedInUser
+    wine: state.wine.selectedWine.wine,
+    user: state.user.loggedInUser
   }
 }
 

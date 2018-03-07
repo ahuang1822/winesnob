@@ -5,7 +5,7 @@ import { selectWineById } from '../store/wine'
 import { Link } from 'react-router-dom'
 
 export const SelectedWine = (props) => {
-    const wine = props.data;
+    const wine = props.wine;
     const user = props.user;
     return (
         <div>
@@ -77,16 +77,16 @@ class Loader extends React.Component {
     }
 
     render() {
-        if (!this.props.data) return <h1>Loading...</h1>
+        if (!this.props.wine) return <h1>Loading...</h1>
         const Render = this.props.Render
-        return <Render data={this.props.data} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user} />
+        return <Render wine={this.props.wine} addToCart={this.props.addToCart} fetchOrder={this.props.fetchOrder} user={this.props.user} />
     }
 }
 
 
 const mapState = (state) => {
     return {
-        data: state.wine.selectedWine.wine,
+        wine: state.wine.selectedWine.wine,
         user: state.user.loggedInUser,
         Render: SelectedWine
     }

@@ -23,12 +23,12 @@ class OrderDetails extends React.Component {
                   <div key={list.id}>
                     <img src={list.wine.img} />
                     <Link to={`/winelist/${list.wine.id}`}>{list.wine.name}</Link>
-                    <h2>Wine Name: {list.wine.name}</h2>
-                    <h2>Vintage: {list.wine.vintage}</h2>
-                    <h2>Varietal: {list.wine.varietal}</h2>
-                    <h2>Size: {list.wine.size}</h2>
-                    <h2>Bottles Ordered: {list.quantity}</h2>
-                    <h2>Price: {list.wine.price}</h2>
+                    <h5>Wine Name: {list.wine.name}</h5>
+                    <h5>Vintage: {list.wine.vintage}</h5>
+                    <h5>Varietal: {list.wine.varietal}</h5>
+                    <h5>Size: {list.wine.size}</h5>
+                    <h5>Bottles Ordered: {list.quantity}</h5>
+                    <h5>Price: {list.wine.price}</h5>
                     <Link to={`/reviews/${list.wine.id}`}>Write a Review for {list.wine.name}</Link>
                   </div>
                 )
