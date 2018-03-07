@@ -9,70 +9,70 @@ export const Signup = (props) => {
     <div>
       <form onSubmit={(event) => props.signupSubmit(event, order.order)}>
         <div>
-          <label>First Name:</label>
+          <label className="form-labels">First Name:</label>
           <input
             name="firstName"
             type="text"
           />
         </div>
         <div>
-          <label>Last Name:</label>
+          <label className="form-labels">Last Name:</label>
           <input
             name="lastName"
             type="text"
           />
         </div>
         <div>
-          <label>Email:</label>
+          <label className="form-labels">Email:</label>
           <input
             name="email"
             type="email"
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label className="form-labels">Password:</label>
           <input
             name="password"
             type="password"
           />
         </div>
         <div>
-          <label>Address:</label>
+          <label className="form-labels">Address:</label>
           <input
             name="address"
             type="text"
           />
         </div>
         <div>
-          <label>City:</label>
+          <label className="form-labels">City:</label>
           <input
             name="city"
             type="text"
           />
         </div>
         <div>
-          <label>State:</label>
+          <label className="form-labels">State:</label>
           <input
             name="state"
             type="text"
           />
         </div>
         <div>
-          <label>Country:</label>
+          <label className="form-labels">Country:</label>
           <input
             name="country"
             type="text"
           />
         </div>
         <div>
-          <label>Zipcode:</label>
+          <label className="form-labels">Zipcode:</label>
           <input
             name="zipcode"
             type="number"
           />
         </div>
         <div>
-          <label>Phone:</label>
+          <label className="form-labels">Phone:</label>
           <input
             name="phone"
             type="tel"

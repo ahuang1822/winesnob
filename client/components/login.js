@@ -12,11 +12,11 @@ const Login = (props) => {
           <div>
             <form onSubmit={(event) => props.loginSubmit(event, order.order)}>
               <div>
-                <label>Email :</label>
+                <label className="form-labels">Email :</label>
                 <input name="email" type="email" />
               </div>
               <div>
-                <label>Password :</label>
+                <label className="form-labels">Password :</label>
                 <input name="password" type="password" />
               </div>
               <button type="submit">Login</button>

@@ -9,9 +9,11 @@ export const CreatePayment = (props) => {
         <div>
             <form onSubmit={(event) => props.handleSubmit(event, props.loggedInUser)}>
                 <div>
-                    <div><h6>Creditcard Information</h6></div>
+                    <div><h3>Credit Card Information</h3></div>
                     <div>
-                        <label>Creditcard Type:</label>
+                        <label className="form-labels">
+                            Creditcard Type:
+                        </label>
                         <input
                             name="type"
                             type="text"
@@ -19,7 +21,9 @@ export const CreatePayment = (props) => {
                         />
                     </div>
                     <div>
-                        <label>Creditcard Number:</label>
+                        <label className="form-labels">
+                            Creditcard Number:
+                        </label>
                         <input
                             name="cc"
                             type="text"
@@ -27,14 +31,18 @@ export const CreatePayment = (props) => {
                         />
                     </div>
                     <div>
-                        <label>Expiration Date:</label>
+                        <label className="form-labels">
+                            Expiration Date:
+                        </label>
                         <input
                             name="exp"
                             type="text"
                             defaultValue={user.expiration}
                         />
                         <div>
-                            <label>Security Number:</label>
+                            <label className="form-labels">
+                                Security Number:
+                            </label>
                             <input
                                 name="security"
                                 type="integer"
@@ -43,9 +51,11 @@ export const CreatePayment = (props) => {
                         </div>
                     </div>
                 </div>
-                <div><h6>Billing Information</h6></div>
+                <div><h3>Billing Address</h3></div>
                 <div>
-                    <label>Address:</label>
+                    <label className="form-labels">
+                        Address:
+                    </label>
                     <input
                         name="address"
                         type="text"
@@ -53,7 +63,9 @@ export const CreatePayment = (props) => {
                     />
                 </div>
                 <div>
-                    <label>City:</label>
+                    <label className="form-labels">
+                        City:
+                    </label>
                     <input
                         name="city"
                         type="text"
@@ -61,14 +73,18 @@ export const CreatePayment = (props) => {
                     />
                 </div>
                 <div>
-                    <label>State:</label>
+                    <label className="form-labels">
+                        State:
+                    </label>
                     <input
                         name="state"
                         type="text"
                         defaultValue={user.state}
                     />
                     <div>
-                        <label>Zip Code:</label>
+                        <label className="form-labels">
+                            Zip Code:
+                        </label>
                         <input
                             name="zipcode"
                             type="number"
@@ -76,7 +92,9 @@ export const CreatePayment = (props) => {
                         />
                     </div>
                     <div>
-                        <label>Country:</label>
+                        <label className="form-labels">
+                            Country:
+                        </label>
                         <input
                             name="country"
                             type="text"
