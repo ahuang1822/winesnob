@@ -10,9 +10,9 @@ const FILTER_WINE = 'FILTER_WINE'
 const FETCH_VARIETAL = 'FETCH_VARIETAL'
 const FETCH_SIZE = 'FETCH_SIZE'
 const FETCH_PLACE = 'FETCH_PLACE'
-const FILTER_VARIETAL = 'FILTER_VARIETAL'
-const FILTER_PLACE = 'FILTER_PLACE'
-const FILTER_SIZE = 'FILTER_SIZE'
+const SET_VARIETAL = 'SET_VARIETAL'
+const SET_PLACE = 'SET_PLACE'
+const SET_SIZE = 'SET_SIZE'
 const SEARCH_KEY = 'SEARCH_KEY'
 const SORT_BY ='SORT_BY'
 
@@ -24,9 +24,9 @@ const initialState = {
 	varietal: [],
 	sizes: [],
 	places: [],
-	filterVarietal: "",
-	filterPlace: "",
-	filterSize: "",
+	setVarietal: "",
+	setPlace: "",
+	setSize: "",
 	searchKey: "",
 	sortBy: "default"
 }
@@ -56,19 +56,19 @@ export const fetchWineList = () =>
 
 export const filterVarietal = (varietal, wines) =>
 	dispatch => {
-		dispatch({ type: FILTER_VARIETAL, varietal })
+		dispatch({ type: SET_VARIETAL, varietal })
 		dispatch({ type: FILTER_WINE, wines })
 	}
 
 export const filterSize = (size, wines) =>
 	dispatch => {
-		dispatch({ type: FILTER_SIZE, size })
+		dispatch({ type: SET_SIZE, size })
 		dispatch({ type: FILTER_WINE, wines })
 	}
 
 export const filterPlace = (place, wines) =>
 	dispatch => {
-		dispatch({ type: FILTER_PLACE, place })
+		dispatch({ type: SET_PLACE, place })
 		dispatch({ type: FILTER_WINE, wines })
 	}
 
@@ -122,12 +122,12 @@ const reducer = function (state = initialState, action) {
 			return Object.assign({}, state, { sizes: action.sizes })
 		case FETCH_PLACE:
 			return Object.assign({}, state, { places: action.places })
-		case FILTER_VARIETAL:
-			return Object.assign({}, state, { filterVarietal: action.varietal })
-		case FILTER_PLACE:
-			return Object.assign({}, state, { filterPlace: action.place })
-		case FILTER_SIZE:
-			return Object.assign({}, state, { filterSize: action.size })
+		case SET_VARIETAL:
+			return Object.assign({}, state, { setVarietal: action.varietal })
+		case SET_PLACE:
+			return Object.assign({}, state, { setPlace: action.place })
+		case SET_SIZE:
+			return Object.assign({}, state, { setSize: action.size })
 		case SEARCH_KEY:
 			return Object.assign({}, state, { searchKey: action.searchKey })
 		case SORT_BY:
