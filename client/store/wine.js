@@ -24,11 +24,11 @@ const initialState = {
 	varietal: [],
 	sizes: [],
 	places: [],
-	setVarietal: "",
-	setPlace: "",
-	setSize: "",
-	searchKey: "",
-	sortBy: "default"
+	setVarietal: '',
+	setPlace: '',
+	setSize: '',
+	searchKey: '',
+	sortBy: 'default'
 }
 
 
@@ -40,7 +40,6 @@ const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
 const isClickedTrue= () => ({ type: CLICKED_TRUE })
 const isClickedTrue= () => ({ type: CLICKED_FALSE })
-
 
 export const fetchWineList = () =>
 	dispatch =>
@@ -82,12 +81,12 @@ export const setSearchKey = (searchKey, wines) =>
 		dispatch({ type: FILTER_WINE, wines })
 	}
 
-export const filterWineList = (sortBy, wines) => 
-	dispatch => { 
+export const filterWineList = (sortBy, wines) =>
+	dispatch => {
 		dispatch({ type: SORT_BY, sortBy})
 		dispatch({ type: FILTER_WINE, wines })
 	}
-	
+
 export const selectWineById = (id) =>
 
     dispatch =>

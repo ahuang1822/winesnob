@@ -12,8 +12,9 @@ export const EditUserPlace = (props) => {
                 props.handleSubmitPlace(event)
             }}>
                 <div>
+                <h3>Shipping Info:</h3>
                     <div>
-                        <label>First Name:</label>
+                        <label className="form-labels">First Name:</label>
                         <input
                             name="firstName"
                             type="text"
@@ -21,7 +22,7 @@ export const EditUserPlace = (props) => {
                         />
                     </div>
                     <div>
-                        <label>Last Name:</label>
+                        <label className="form-labels">Last Name:</label>
                         <input
                             name="lastName"
                             type="text"
@@ -29,7 +30,7 @@ export const EditUserPlace = (props) => {
                         />
                     </div>
                     <div>
-                        <label>Email:</label>
+                        <label className="form-labels">Email:</label>
                         <input
                             name="email"
                             type="email"
@@ -37,7 +38,7 @@ export const EditUserPlace = (props) => {
                         />
                     </div>
                     <div>
-                        <label>Address:</label>
+                        <label className="form-labels">Address:</label>
                         <input
                             name="address"
                             type="text"
@@ -45,7 +46,7 @@ export const EditUserPlace = (props) => {
                         />
                     </div>
                     <div>
-                        <label>City:</label>
+                        <label className="form-labels">City:</label>
                         <input
                             name="city"
                             type="text"
@@ -53,7 +54,7 @@ export const EditUserPlace = (props) => {
                         />
                     </div>
                     <div>
-                        <label>State:</label>
+                        <label className="form-labels">State:</label>
                         <input
                             name="state"
                             type="text"
@@ -61,7 +62,7 @@ export const EditUserPlace = (props) => {
                         />
                     </div>
                     <div>
-                        <label>Zip Code:</label>
+                        <label className="form-labels">Zip Code:</label>
                         <input
                             name="zipcode"
                             type="number"
@@ -69,7 +70,7 @@ export const EditUserPlace = (props) => {
                         />
                     </div>
                     <div>
-                        <label>Country:</label>
+                        <label className="form-labels">Country:</label>
                         <input
                             name="country"
                             type="text"
@@ -77,7 +78,7 @@ export const EditUserPlace = (props) => {
                         />
                     </div>
                     <div>
-                        <label>Phone:</label>
+                        <label className="form-labels">Phone:</label>
                         <input
                             name="phone"
                             type="tel"

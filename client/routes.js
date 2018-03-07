@@ -7,8 +7,8 @@ import {Home,
         Login,
         WineList,
         AccountPage,
-        AddAdmin, 
-        ChangePassword, 
+        AddAdmin,
+        ChangePassword,
         DeleteUser,
         Cart,
         Checkout,
@@ -18,14 +18,14 @@ import {Home,
         OrderHistory,
         Review,
         SelectedWine,
-        EditPayment, 
-        CreatePayment, 
-        CreateUserPlace, 
-        EditUserPlace, 
+        EditPayment,
+        CreatePayment,
+        CreateUserPlace,
+        EditUserPlace,
         CompletedPurchase,
         Signup}
         from './components'
-        
+
 /**
  * COMPONENT
  */

@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
 
 router.param('orderId', (req, res, next, id) => {
   Order
-    .findById(req.params.orderId, {
+    .findById(id, {
       include: [{
         model: List,
         as: 'lists', include: [{

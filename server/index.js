@@ -34,10 +34,10 @@ passport.deserializeUser((id, done) =>
   db.models.user.findById(id, {
     include: [{
       model: Place,
-      as: 'place'
-    }, {
-      model: Payment, as: 'payment'
-    }]
+      as: 'place' }, {
+        model: Payment,
+        as: 'payment'
+      }]
   })
     .then(user => done(null, user))
     .catch(done))
