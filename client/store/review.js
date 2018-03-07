@@ -13,7 +13,6 @@ const initialState = {
 
 export const postReview = (review) =>
   dispatch => {
-    console.log('review: ', { review })
     axios.post('/api/reviews', review)
     .then(res => {
       dispatch(addReview(res.data))

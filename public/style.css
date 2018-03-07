@@ -1,6 +1,6 @@
-/* body {
+/* /* body {
   background: maroon;opacity: 0.8; */
-}
+} */
 
 a {
   text-decoration: none;
@@ -106,4 +106,13 @@ img {
 .filter {
   flex: 1;
   margin: 20px;
+  vertical-align: middle;
+  align-content: center;
+}
+
+.filter-item {
+  height: 100%;
+  width: 100%;
+  vertical-align: middle;
+  align-content: center;
 }

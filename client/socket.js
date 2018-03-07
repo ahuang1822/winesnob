@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import store, {fetchWineList} from './store/wine'
 
 const socket = io(window.location.origin)
 
