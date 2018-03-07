@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 import { fetchSingleOrder } from './order'
 
 
@@ -27,8 +26,8 @@ export const fetchItems = () =>
 export const postItem = (item) =>
     dispatch =>
         axios.post('/api/list/cart', item)
-            .then(list => {
-                dispatch(fetchSingleOrder(list.data.orderId))
+            .then(res => {
+              dispatch(fetchSingleOrder(res.data.orderId))
             })
             .catch(err => console.error(err))
 

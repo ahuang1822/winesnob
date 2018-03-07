@@ -13,7 +13,7 @@ import {
 } from '../store'
 
 
-class WineList extends Component {
+class WineList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -303,7 +303,7 @@ class WineList extends Component {
                       </h5>
                     </div>
                     <h4>Sold Out</h4>
-                    </div> 
+                    </div>
               )
                 }
               })}

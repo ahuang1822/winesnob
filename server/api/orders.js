@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
 
 router.param('orderId', (req, res, next, id) => {
   Order
-    .findById(req.params.orderId, {
+    .findById(id, {
       include: [{
         model: List,
         as: 'lists', include: [{
@@ -50,7 +50,7 @@ router.put('/:orderId', (req, res, next) => {
   req.order
     .update(req.body, { returning: true })
     .then((wine) => {
-      req.session.order=null;
+      req.session.order = null;
       res.status(200).json(wine)
     })
     .catch(next);
