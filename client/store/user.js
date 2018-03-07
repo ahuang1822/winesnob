@@ -2,6 +2,8 @@ import axios from 'axios'
 import history from '../history'
 import { clearItems } from './cart'
 import { updateOrder } from './order'
+import { clickedTrue } from './wine'
+
 
 
 const GET_USER = 'GET_USER'
@@ -138,6 +140,7 @@ export const logout = () =>
       .then(() => {
         dispatch(removeUser())
         dispatch(clearItems())
+        dispatch(clickedTrue())
         history.push('/login')
       })
       .catch(err => console.error(err))
