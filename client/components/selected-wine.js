@@ -105,9 +105,5 @@ const mapDispatch = (dispatch) => {
     }
 }
 
-<<<<<<< HEAD
 
 export default connect(mapState, mapDispatch)(Loader)
-=======
-export default connect(mapState, mapDispatch)(Loader)
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
