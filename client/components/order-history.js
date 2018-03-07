@@ -4,11 +4,9 @@ import {Link} from 'react-router-dom'
 import { fetchOrder } from '../store'
 
 class OrderHistory extends React.Component {
-
   componentDidMount() {
     this.props.fetchOrder();
   }
-
   render() {
     const myOrders = this.props.ordersOnProps;
     if (!this.props.ordersOnProps) {
@@ -40,12 +38,12 @@ class OrderHistory extends React.Component {
 
 
 const mapState = (state) => {
-  console.log('state: ', state);
     return {
         ordersOnProps: state.order.orders,
         userOnProps: state.user.loggedInUser.id
     }
 }
+
 
 const mapDispatch = (dispatch) => (
   {

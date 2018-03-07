@@ -12,6 +12,7 @@ const FETCH_SIZE = 'FETCH_SIZE'
 const FETCH_PLACE = 'FETCH_PLACE'
 
 
+
 const initialState = {
 	wineList: [],
 	selectedWine: {},
@@ -26,12 +27,10 @@ const getWineList = wineList => ({ type: GET_WINE_LIST, wineList })
 const selectWine = wine => ({ type: SELECT_WINE, wine })
 const createWine = wine => ({ type: CREATE_WINE, wine })
 const fetchVarietal = varietal => ({ type: FETCH_VARIETAL, varietal })
-
 const fetchSizes = sizes => ({ type: FETCH_SIZE, sizes })
-
 const fetchPlace = places => ({ type: FETCH_PLACE, places })
-
 export const filterWineList = wines => ({ type: FILTER_WINE,	wines	})
+
 
 export const fetchWineList = () =>
 	dispatch =>
@@ -48,6 +47,7 @@ export const fetchWineList = () =>
 				dispatch(getWineList(wines.data))
 			}))
 
+
 export const selectWineById = (id) =>
 	dispatch =>
 		axios.get(`/api/wines/${id}`)
@@ -56,6 +56,7 @@ export const selectWineById = (id) =>
 			})
 			.catch(err => console.log(err))
 
+            
 export const addWine = (wineDetails) =>
     dispatch => {
         axios.post('/api/wines', wineDetails)
@@ -65,6 +66,7 @@ export const addWine = (wineDetails) =>
             })
             .catch(err => console.error(err))
     }
+
 
 const reducer = function (state = initialState, action) {
 	switch (action.type) {

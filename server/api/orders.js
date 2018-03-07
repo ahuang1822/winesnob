@@ -17,6 +17,7 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
+
 router.param('orderId', (req, res, next, id) => {
   Order
     .findById(req.params.orderId, {
@@ -40,6 +41,7 @@ router.param('orderId', (req, res, next, id) => {
     .catch(next);
 });
 
+
 router.get('/:orderId', (req, res, next) => {
   res.json(req.order);
 })
@@ -48,7 +50,10 @@ router.get('/:orderId', (req, res, next) => {
 router.put('/:orderId', (req, res, next) => {
   req.order
     .update(req.body, { returning: true })
-    .then(wine => res.status(200).json(wine))
+    .then((wine) => {
+      req.session.order=null;
+      res.status(200).json(wine)
+    })
     .catch(next);
 });
 

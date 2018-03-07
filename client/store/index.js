@@ -9,12 +9,15 @@ import order from './order'
 import review from './review'
 
 
-const reducer = combineReducers({user, wine, cart, order})
+const reducer = combineReducers({user, wine, cart, order, review})
+
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
 ))
+
 const store = createStore(reducer, middleware)
+
 
 export default store
 export * from './user'

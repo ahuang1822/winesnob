@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 export const SelectedWine = (props) => {
     const wine = props.data;
     const user = props.user;
-    console.log('wine: ', wine);
     return (
         <div>
             {
@@ -70,17 +69,6 @@ export const SelectedWine = (props) => {
     )
 }
 
-// class SingleWineContainer extends React.Component {
-//     componentDidMount() {
-//         this.props.selectWineById(this.props.match.params.id)
-//     }
-
-//     render() {
-//         if (!this.props.selectedWine) return <h1>Loading...</h1>
-
-//         return <SelectedWine selectedWine={this.props.selectedWine} />
-//     }
-// }
 
 class Loader extends React.Component {
     componentDidMount() {
@@ -95,6 +83,7 @@ class Loader extends React.Component {
     }
 }
 
+
 const mapState = (state) => {
     return {
         data: state.wine.selectedWine.wine,
@@ -103,16 +92,18 @@ const mapState = (state) => {
     }
 }
 
+
 const mapDispatch = (dispatch) => {
     return {
         load(id) {
             return dispatch(selectWineById(id))
         },
         addToCart(event, item) {
-             event.preventDefault()
-             dispatch(postItem(item))
+            event.preventDefault()
+            dispatch(postItem(item))
         }
     }
 }
+
 
 export default connect(mapState, mapDispatch)(Loader)

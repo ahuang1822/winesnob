@@ -7,16 +7,13 @@ import { fetchItems, putItems, updateQuantity, removeItem } from '../store'
 export class Cart extends React.Component {
     constructor(props) {
         super(props)
-
         this.state = {
             isClicked: true
         }
     }
-
     componentDidMount() {
         this.props.loadCart(event)
     }
-
     render() {
         let winesInCart = this.props.winesInCart;
         const loggedInUser = this.props.loggedInUser;
@@ -34,7 +31,6 @@ export class Cart extends React.Component {
                             to="/cart"
                             onClick={(event) => {
                                 mergeCarts(event, { merging: true });
-                                loadCart(event)
                                 this.setState({ isClicked: false });
                             }}>Merge Carts</Link></h6>
                         : null
@@ -46,13 +42,10 @@ export class Cart extends React.Component {
                             <div key={wine.id}>
                                 <h2>{wine.wine.vintage} {wine.wine.name} {wine.wine.varietal} quantity: {wine.quantity} <button onClick={(event) => {
                                     update(event, wine.id, ++wine.quantity)
-                                    loadCart(event)
                                 }} >+</button><button onClick={(event) => {
                                     update(event, wine.id, --wine.quantity)
-                                    loadCart(event)
                                 }} >-</button> <button onClick={(event) => {
                                     remove(event, wine.id)
-                                    loadCart(event)
                                 }}>Remove</button>
                                     ${wine.quantity * wine.wine.price}
                                 </h2>
