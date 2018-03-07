@@ -46,21 +46,12 @@ router.get('/:userId', (req, res) => {
     }
   })
     .then(
-<<<<<<< HEAD
     orders => {
       res.json({
         user: req.user,
         orders
       })
     });
-=======
-      orders => {
-        res.json({
-          user: req.user,
-          orders
-        })
-      });
->>>>>>> f09788aa7f823d4ca30c81df50cfb500bbb0a3f9
 })
 
 

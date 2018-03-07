@@ -4,7 +4,10 @@ import { SelectedWine } from './selected-wine'
 import { selectWineById, postReview } from '../store'
 
 
-  constructor (props) {
+
+class Review extends React.Component {
+
+  constructor(props) {
     super(props)
 
     this.onSubmit = this.onSubmit.bind(this)
@@ -43,7 +46,7 @@ import { selectWineById, postReview } from '../store'
           <h1>Review this bottle!</h1>
           <form onSubmit={this.onSubmit}>
             <div>
-                <input
+              <input
                 name="review"
                 width="200"
                 height="200" />
@@ -51,10 +54,10 @@ import { selectWineById, postReview } from '../store'
             <div>
               Rating (1 - 5)
               <div>
-              <input
-              name="rating"
-              width="200"
-              height="200" />
+                <input
+                  name="rating"
+                  width="200"
+                  height="200" />
               </div>
             </div>
             <button type="submit">Submit Revew</button>
@@ -68,10 +71,10 @@ import { selectWineById, postReview } from '../store'
 
 const mapState = (state) => {
 
-    return {
-        selectedWine: state.wine.selectedWine.wine,
-        currentUser: state.user.loggedInUser
-    }
+  return {
+    selectedWine: state.wine.selectedWine.wine,
+    currentUser: state.user.loggedInUser
+  }
 }
 
 
