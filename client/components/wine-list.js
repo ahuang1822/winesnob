@@ -60,7 +60,8 @@ class WineList extends React.Component {
       return (wine.varietal.includes(event.target.value) &&
         wine.size.includes(this.props.filterSizeOnProps) &&
         wine.place.city.includes(this.props.filterPlaceOnProps) &&
-        wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase()))
+        (wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase()) ||
+          (wine.tags.join('')).toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase())))
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
@@ -83,7 +84,8 @@ class WineList extends React.Component {
       return (wine.varietal.includes(this.props.filterVarietalOnProps) &&
         wine.size.includes(event.target.value) &&
         wine.place.city.includes(this.props.filterPlaceOnProps) &&
-        (wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase())))
+        (wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase()) ||
+          (wine.tags.join('')).toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase())))
 
     })
     let filteredList = filterList.slice()
@@ -107,7 +109,8 @@ class WineList extends React.Component {
       return (wine.varietal.includes(this.props.filterVarietalOnProps) &&
         wine.size.includes(this.props.filterSizeOnProps) &&
         wine.place.city.includes(event.target.value) &&
-        wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase()))
+        (wine.name.toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase()) ||
+          (wine.tags.join('')).toLowerCase().includes(this.props.searchKeyOnProps.toLowerCase())))
     })
     let filteredList = filterList.slice()
     let sortBy = this.props.sortByOnProps
