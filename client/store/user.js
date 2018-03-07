@@ -140,7 +140,7 @@ export const logout = () =>
       .then(() => {
         dispatch(removeUser())
         dispatch(clearItems())
-        dispatch(clickedTrue())
+       // dispatch(clickedTrue())
         history.push('/login')
       })
       .catch(err => console.error(err))
