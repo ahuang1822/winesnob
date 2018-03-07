@@ -50,27 +50,23 @@ const User = db.define('user', {
   }
 })
 
-
 module.exports = User
-
 
 User.prototype.correctPassword = function (candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
-
 User.hook('beforeBulkDestroy', (user) => {
   Order.destroy({
     where: {
       userId: user.id
-  }})
+    }
+  })
 })
-
 
 User.generateSalt = function () {
   return crypto.randomBytes(16).toString('base64')
 }
-
 
 User.encryptPassword = function (plainText, salt) {
   return crypto
@@ -80,7 +76,6 @@ User.encryptPassword = function (plainText, salt) {
     .digest('hex')
 }
 
-
 const setSaltAndPassword = user => {
   if (user.changed('password')) {
     user.salt = User.generateSalt()
@@ -88,6 +83,6 @@ const setSaltAndPassword = user => {
   }
 }
 
-
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
+

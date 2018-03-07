@@ -51,7 +51,6 @@ export const login = (email, password, order) =>
       })
       .catch(err => console.error(err))
 
-
 export const signup = (signUpInfo, order) =>
   dispatch =>
     axios.post('/auth/signup', signUpInfo)
@@ -63,7 +62,6 @@ export const signup = (signUpInfo, order) =>
         history.push('/')
       })
       .catch(err => console.error(err))
-
 
 export const edit = (userId, editInfo) =>
   dispatch =>
@@ -100,7 +98,26 @@ export const updatePayment = (paymentInfo, userId, paymentId) =>
       })
       .catch(err => console.error(err))
 
+export const addAdmin = (newAdmin) =>
+  dispatch => {
+    return axios.put('/api/users/add_admin', newAdmin)
+      .then(res => { history.push(`/`) })
+      .catch(err => console.error(err))
+  }
 
+export const editPassword = (editedUserPass) =>
+  dispatch => {
+    return axios.put('/api/users/change_password', editedUserPass)
+      .then(res => { history.push('/account-page') })
+      .catch(err => console.error(err))
+  }
+
+export const deleteUser = (user) =>
+  dispatch => {
+    return axios.put('/api/users/delete_user', user)
+      .then(res => { history.push('/account-page') })
+      .catch(err => console.error(err))
+  }
 export const updateGuestAddress = address =>
   dispatch => {
     dispatch(addGuestAddress(address))

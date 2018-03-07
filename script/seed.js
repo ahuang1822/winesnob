@@ -19,7 +19,9 @@ var data = {
       }, email: 'whirleyt@outlook.com', password: 'Cowboys22'
     },
     {
-      firstName: 'Kaci', lastName: 'Whirley', place: {
+      firstName: 'Kaci', lastName: 'Whirley',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -29,7 +31,9 @@ var data = {
       }, email: 'kaciw@aol.com', password: 'dog'
     },
     {
-      firstName: 'Susan', lastName: 'King', place: {
+      firstName: 'Susan', lastName: 'King',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -39,7 +43,9 @@ var data = {
       }, email: 'allstart@gmail.com', password: 'dallas'
     },
     {
-      firstName: 'Anne', lastName: 'Jones', place: {
+      firstName: 'Anne', lastName: 'Jones',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -49,7 +55,9 @@ var data = {
       }, email: 'nicks23t@oaol.com', password: 'gangsta'
     },
     {
-      firstName: 'Kyle', lastName: 'Wright', place: {
+      firstName: 'Kyle', lastName: 'Wright',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -59,7 +67,9 @@ var data = {
       }, email: 'wrightkyle@outlook.com', password: 'secret'
     },
     {
-      firstName: 'Max', lastName: 'Allen', place: {
+      firstName: 'Max', lastName: 'Allen',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -69,7 +79,9 @@ var data = {
       }, email: 'max123@yahoo.com', password: 'password'
     },
     {
-      firstName: 'Alex', lastName: 'Weis', place: {
+      firstName: 'Alex', lastName: 'Weis',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -79,7 +91,9 @@ var data = {
       }, email: 'alex5mavs@outlook.com', password: 'cat'
     },
     {
-      firstName: 'Micah', lastName: 'Friedman', place: {
+      firstName: 'Micah', lastName: 'Friedman',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -89,7 +103,9 @@ var data = {
       }, email: 'fried22@aol.com', password: 'diamonds'
     },
     {
-      firstName: 'Joe', lastName: 'Doe', place: {
+      firstName: 'Joe', lastName: 'Doe',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -99,7 +115,9 @@ var data = {
       }, email: 'joetgarcias@aol.com', password: 'wishes'
     },
     {
-      firstName: 'Katie', lastName: 'Riley', place: {
+      firstName: 'Katie', lastName: 'Riley',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -109,7 +127,9 @@ var data = {
       }, email: 'katieriley2@outlook.com', password: 'yes'
     },
     {
-      firstName: 'Riley', lastName: 'Wilson', place: {
+      firstName: 'Riley', lastName: 'Wilson',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -119,7 +139,9 @@ var data = {
       }, email: 'wilsonriley@gmail.com', password: 'today'
     },
     {
-      firstName: 'Max', lastName: 'Joyner', place: {
+      firstName: 'Max', lastName: 'Joyner',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -129,7 +151,9 @@ var data = {
       }, email: 'max34@aol.com', password: 'passpass'
     },
     {
-      firstName: 'Sally', lastName: 'Jones', place: {
+      firstName: 'Sally', lastName: 'Jones',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -139,7 +163,9 @@ var data = {
       }, email: 'jonessally5@outlook.com', password: 'horse'
     },
     {
-      firstName: 'Amy', lastName: 'Mane', place: {
+      firstName: 'Amy', lastName: 'Mane',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -149,7 +175,9 @@ var data = {
       }, email: 'amymane2@yahoo.com', password: 'star'
     },
     {
-      firstName: 'Will', lastName: 'Gilmore', place: {
+      firstName: 'Will', lastName: 'Gilmore',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -159,7 +187,9 @@ var data = {
       }, email: 'williamgilmore06@outlook.com', password: 'moon'
     },
     {
-      firstName: 'Beth', lastName: 'Barnes', place: {
+      firstName: 'Beth', lastName: 'Barnes',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -169,7 +199,9 @@ var data = {
       }, email: 'bthbrn44@oaol.com', password: 'what', campusId: 1
     },
     {
-      firstName: 'Julie', lastName: 'Killarney', place: {
+      firstName: 'Julie', lastName: 'Killarney',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -179,7 +211,9 @@ var data = {
       }, email: 'juliejay88@outlook.com', password: 'sosecret'
     },
     {
-      firstName: 'Sheng', lastName: 'Yang', place: {
+      firstName: 'Sheng', lastName: 'Yang',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -189,7 +223,9 @@ var data = {
       }, email: 'yizzyyang@yahoo.com', password: 'yelrihw'
     },
     {
-      firstName: 'Marcus', lastName: 'Latomore', place: {
+      firstName: 'Marcus', lastName: 'Latomore',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',
@@ -199,7 +235,9 @@ var data = {
       }, email: 'marcusme@outlook.com', password: 'whirl2'
     },
     {
-      firstName: 'Chris', lastName: 'Gun', place: {
+      firstName: 'Chris', lastName: 'Gun',
+      isAdmin: false,
+      place: {
         address: 'Union Sq & W 14th St',
         city: 'New York',
         state: 'NY',

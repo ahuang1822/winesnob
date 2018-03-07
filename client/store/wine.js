@@ -2,7 +2,6 @@ import axios from 'axios'
 import history from '../history'
 import store from './index'
 
-
 const GET_WINE_LIST = 'GET_WINE_LIST'
 const SELECT_WINE = 'SELECT_WINE'
 const CREATE_WINE = 'CREATE_WINE'
@@ -89,14 +88,25 @@ export const filterWineList = (sortBy, wines) =>
 	}
 	
 export const selectWineById = (id) =>
-	dispatch =>
-		axios.get(`/api/wines/${id}`)
-			.then(res => {
-				dispatch(selectWine(res.data))
-			})
-			.catch(err => console.error(err))
 
-            
+    dispatch =>
+        axios.get(`/api/wines/${id}`)
+            .then(res => {
+                dispatch(selectWine(res.data))
+            })
+            .catch(err => console.error(err))
+
+export const editWine = (id, editedDetails) =>
+    dispatch => {
+        console.log(editedDetails);
+        axios.put(`/api/wines/${id}`, editedDetails)
+            .then(res => res.data)
+            .then(editedWine => {
+                history.push(`/winelist/${id}`)
+            })
+            .catch(err => console.error(err))
+    }
+
 export const addWine = (wineDetails) =>
 	dispatch => {
 		axios.post('/api/wines', wineDetails)

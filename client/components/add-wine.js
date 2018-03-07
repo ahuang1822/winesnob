@@ -64,14 +64,12 @@ export const AddWine = (props) => {
     )
 }
 
-
 class Loader extends React.Component {
     render() {
         const Render = this.props.Render
         return <Render handleSubmit={this.props.handleSubmit} user={this.props.user} />
     }
 }
-
 
 const mapState = (state) => {
     return {
@@ -96,7 +94,8 @@ const mapDispatch = (dispatch) => {
                 quantity: event.target.quantity.value,
                 city: event.target.city.value,
                 state: event.target.state.value,
-                country: event.target.country.value
+                country: event.target.country.value,
+                type: "vineyard"
             }
             dispatch(addWine(newWine))
         }

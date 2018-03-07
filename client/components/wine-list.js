@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
+import { selectWineById } from '../store'
 import { Link } from 'react-router-dom'
+
 import {
   fetchWineList,
   filterWineList,
@@ -372,8 +374,8 @@ class WineList extends Component {
   }
 }
 
-
 const mapState = (state) => {
+
   return {
     wineListOnProps: state.wine.wineList,
     filteredListOnProps: state.wine.filteredList,
@@ -412,5 +414,5 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-
 export default connect(mapState, mapDispatch)(WineList)
+

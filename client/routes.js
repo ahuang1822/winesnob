@@ -7,6 +7,9 @@ import {Home,
         Login,
         WineList,
         AccountPage,
+        AddAdmin, 
+        ChangePassword, 
+        DeleteUser,
         Cart,
         Checkout,
         AddWine,
@@ -23,7 +26,9 @@ import {Home,
         Signup}
         from './components'
         
-
+/**
+ * COMPONENT
+ */
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
@@ -41,6 +46,9 @@ class Routes extends Component {
         <Route exact path="/winelist/:id" component={SelectedWine} />
         <Route exact path="/winelist/:id/edit" component={EditWine} />
         <Route exact path="/account-page" component={AccountPage} />
+        <Route exact path="/account-page/add-admin" component={AddAdmin} />
+        <Route exact path="/account-page/change-password" component={ChangePassword} />
+        <Route exact path="/account-page/delete-user" component={DeleteUser} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/order-detail/:orderId" component={OrderDetails} />

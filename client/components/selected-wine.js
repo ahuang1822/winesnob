@@ -69,7 +69,6 @@ export const SelectedWine = (props) => {
     )
 }
 
-
 class Loader extends React.Component {
     componentDidMount() {
         this.props.load(this.props.match.params.id)

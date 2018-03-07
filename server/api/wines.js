@@ -20,9 +20,13 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  Wine.create(req.body)
-    .then(wine => res.json(wine))
-    .catch(next)
+  let { city, state, country, name, vintage, varietal, price, size, img, description, quantity, type } = req.body
+  Place.create({ city, state, country, type })
+    .then(place => {
+      Wine.create({ name, vintage, varietal, price, size, img, description, quantity, placeId: place.id })
+        .then(wine => res.json(wine))
+        .catch(next)
+    })
 })
 
 router.get('/varietal', (req, res, next) => {

@@ -16,6 +16,32 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
+router.put('/add_admin', (req, res, next) => {
+  User.update({ isAdmin: true }, { where: { email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName } })
+    .then(result => res.json(result))
+    .catch(next)
+})
+
+router.put('/change_password', (req, res, next) => {
+  User.update({ password: req.body.password }, {
+    where: { email: req.body.email },
+    individualHooks: true,
+  })
+    .then(result => res.json(result))
+    .catch(next)
+})
+
+router.put('/delete_user', (req, res, next) => {
+  User.destroy({
+    where: {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email
+    }
+  })
+  .then(result => res.json(result))
+  .catch(next)
+})
 
 router.param('userId', (req, res, next, id) => {
   User

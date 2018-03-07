@@ -17,6 +17,7 @@ router.post('/login', (req, res, next) => {
     }]
   })
     .then(user => {
+      console.log('login test-------', user)
       if (!user) {
         res.status(401).send('User not found')
       } else if (!user.correctPassword(req.body.password)) {

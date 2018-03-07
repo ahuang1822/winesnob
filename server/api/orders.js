@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { List, Order, Wine } = require('../db/models')
 module.exports = router
 
+
 router.get('/', (req, res, next) => {
   Order.findAll()
     .then(orders => {
@@ -9,7 +10,6 @@ router.get('/', (req, res, next) => {
     })
     .catch(next)
 })
-
 
 router.post('/', (req, res, next) => {
   Order.create(req.body)
@@ -46,7 +46,6 @@ router.get('/:orderId', (req, res, next) => {
   res.json(req.order);
 })
 
-
 router.put('/:orderId', (req, res, next) => {
   req.order
     .update(req.body, { returning: true })
@@ -57,10 +56,3 @@ router.put('/:orderId', (req, res, next) => {
     .catch(next);
 });
 
-
-// router.delete('/:wineId', (req, res, next) => {
-//   req.wine
-//     .destroy({ force: true })
-//     .then(() => res.status(204).end())
-//     .catch(next);
-// });
