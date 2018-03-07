@@ -69,7 +69,6 @@ export const EditWine = (props) => {
 class Loader extends React.Component {
     componentDidMount() {
         this.props.load(this.props.match.params.id)
-            .then(console.log)
             .catch(console.error)
     }
     render() {
