@@ -92,8 +92,7 @@ img {
 .wine-list-items {
   /* flex: 1; */
   margin: 20px;
-  align-content: center;
-  
+  align-content: center; 
 }
 
 #wine-list {
@@ -119,4 +118,8 @@ img {
   vertical-align: middle;
   align-content: center;
   align-self: center;
+}
+
+.form-labels {
+  margin: 5px;
 }
