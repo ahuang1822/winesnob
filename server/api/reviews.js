@@ -4,7 +4,6 @@ module.exports = router
 
 
 router.post('/', (req, res, next) => {
-  console.log('hey')
   Review.create(req.body)
     .then(review => res.json(review))
     .catch(next)
