@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
-const Place = require('../db/models/place')
+const { User, Place, Order, List, Payment } = require('../db/models')
 module.exports = router
+
 
 router.post('/login', (req, res, next) => {
   req.session.guestOrder = req.session.order;
@@ -11,6 +11,9 @@ router.post('/login', (req, res, next) => {
     include: [{
       model: Place,
       as: 'place'
+    }, {
+      model: Payment,
+      as: 'payment'
     }]
   })
     .then(user => {
@@ -25,6 +28,7 @@ router.post('/login', (req, res, next) => {
     })
     .catch(next)
 })
+
 
 router.post('/signup', (req, res, next) => {
   Place.create({
@@ -54,7 +58,29 @@ router.post('/signup', (req, res, next) => {
           }
         })
     })
-})
+    .then(result => {
+      User.findById(result.id, {
+        include: [{
+          model: Place,
+          as: 'place'
+        }, {
+          model: Payment, as: 'payment'
+        }]
+      })
+      .then(user => {
+        req.login(user, err => (err ? next(err) : res.json(user)))
+        req.session.passport = user;
+      })
+    })
+    .catch(err => {
+      if (err.name === 'SequelizeUniqueConstraintError') {
+        res.status(401).send('User already exists')
+      } else {
+        next(err)
+      }
+    })
+  })
+
 
 router.post('/logout', (req, res) => {
   req.logout()
@@ -62,8 +88,9 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
+
 router.get('/me', (req, res) => {
-  res.json(req.user)
+  res.send(req.user)
 })
 
 router.use('/google', require('./google'))

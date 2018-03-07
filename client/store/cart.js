@@ -4,8 +4,7 @@ import { fetchSingleOrder } from './order'
 
 
 const initialState = {
-    items: [],
-    userItems: []
+    items: []
 }
 
 
@@ -15,6 +14,7 @@ const CLEAR_ITEMS = 'CLEAR_ITEMS'
 
 const getItems = items => ({ type: GET_ITEMS, items })
 export const clearItems = () => ({ type: CLEAR_ITEMS })
+
 
 export const fetchItems = () =>
     dispatch =>
@@ -35,18 +35,23 @@ export const postItem = (item) =>
 export const putItems = (body) =>
     dispatch =>
         axios.put('/api/list/guestCart', body)
+            .then(() => dispatch(fetchItems()))
             .catch(err => console.error(err))
 
 
 export const updateQuantity = (id, quantity) =>
     dispatch =>
         axios.put(`/api/list/cart/${id}`, quantity)
+            .then(() => dispatch(fetchItems()))
             .catch(err => console.error(err))
+
 
 export const removeItem = (id) =>
     dispatch =>
         axios.delete(`/api/list/cart/${id}`)
+            .then(() => dispatch(fetchItems()))
             .catch(err => console.error(err))
+
 
 const reducer = function (state = initialState, action) {
     switch (action.type) {

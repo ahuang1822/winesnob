@@ -4,8 +4,11 @@ const db = require('../db')
 
 
 const Payment = db.define('payment', {
+    cardCompany: {
+     type: Sequelize.STRING
+    },
     cardNumber: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
     },
     expiration: {
         type: Sequelize.STRING
@@ -15,7 +18,7 @@ const Payment = db.define('payment', {
     },
     address: {
         type: Sequelize.STRING
-    }, 
+    },
     city: {
         type: Sequelize.STRING
     },
@@ -27,9 +30,6 @@ const Payment = db.define('payment', {
     },
     zipcode: {
         type: Sequelize.INTEGER
-    },
-    phone: {
-        type: Sequelize.STRING
     }
 })
 

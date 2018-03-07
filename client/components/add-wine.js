@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addWine } from '../store/wine'
+import { addWine } from '../store'
+
 
 export const AddWine = (props) => {
-    console.log('test AddWine')
     const user = props.user
     return (
         <div>
@@ -60,7 +60,6 @@ export const AddWine = (props) => {
                     )
                     : <h3>404 Error</h3>
             }
-
         </div>
     )
 }
@@ -78,6 +77,7 @@ const mapState = (state) => {
         Render: AddWine
     }
 }
+
 
 const mapDispatch = (dispatch) => {
     return {
@@ -101,5 +101,6 @@ const mapDispatch = (dispatch) => {
         }
     }
 }
+
 
 export default connect(mapState, mapDispatch)(Loader)

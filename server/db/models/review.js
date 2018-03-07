@@ -5,11 +5,7 @@ const db = require('../db')
 const Review = db.define('review', {
     comment: {
         type: Sequelize.TEXT,
-        allowNull: false,
-        validate: {
-            min: 10,
-            msg: 'Please insert at least 10 characters.'
-        }
+        allowNull: false
     },
     rating: {
         type: Sequelize.INTEGER,
